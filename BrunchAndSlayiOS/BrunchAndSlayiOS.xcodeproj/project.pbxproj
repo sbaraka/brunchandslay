@@ -16,6 +16,7 @@
 		4F54FDA2224148FE00C7C043 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F54FDA0224148FE00C7C043 /* LaunchScreen.storyboard */; };
 		4F54FDAD224148FF00C7C043 /* BrunchAndSlayiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54FDAC224148FF00C7C043 /* BrunchAndSlayiOSTests.swift */; };
 		4F54FDB82241490000C7C043 /* BrunchAndSlayiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F54FDB72241490000C7C043 /* BrunchAndSlayiOSUITests.swift */; };
+		4F6EC3E4224EE1620027C740 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6EC3E3224EE1620027C740 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		4F54FDB32241490000C7C043 /* BrunchAndSlayiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrunchAndSlayiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F54FDB72241490000C7C043 /* BrunchAndSlayiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrunchAndSlayiOSUITests.swift; sourceTree = "<group>"; };
 		4F54FDB92241490000C7C043 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F6EC3E3224EE1620027C740 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				4F54FD93224148F300C7C043 /* AppDelegate.swift */,
+				4F6EC3E3224EE1620027C740 /* User.swift */,
 				4F54FD95224148F300C7C043 /* RootViewController.swift */,
 				4F54FD97224148F300C7C043 /* DataViewController.swift */,
 				4F54FD99224148F300C7C043 /* ModelController.swift */,
@@ -265,6 +268,7 @@
 				4F54FD96224148F300C7C043 /* RootViewController.swift in Sources */,
 				4F54FD9A224148F300C7C043 /* ModelController.swift in Sources */,
 				4F54FD98224148F300C7C043 /* DataViewController.swift in Sources */,
+				4F6EC3E4224EE1620027C740 /* User.swift in Sources */,
 				4F54FD94224148F300C7C043 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
