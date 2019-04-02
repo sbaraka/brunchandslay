@@ -1,15 +1,15 @@
 //
-//  BrunchAndSlayiOSTests.swift
-//  BrunchAndSlayiOSTests
+//  Brunch_and_SlayTests.swift
+//  Brunch and SlayTests
 //
-//  Created by Noah on 3/19/19.
+//  Created by Noah on 3/31/19.
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
 import XCTest
-@testable import BrunchAndSlayiOS
+@testable import Brunch_and_Slay
 
-class BrunchAndSlayiOSTests: XCTestCase {
+class Brunch_and_SlayTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.

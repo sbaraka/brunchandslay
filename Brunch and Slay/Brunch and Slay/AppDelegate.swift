@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  BrunchAndSlayiOS
+//  Brunch and Slay
 //
-//  Created by Noah on 3/19/19.
+//  Created by Noah on 3/31/19.
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
