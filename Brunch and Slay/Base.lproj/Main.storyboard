@@ -21,7 +21,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Events" image="first" springLoaded="YES" id="acW-dT-cKf">
+                    <tabBarItem key="tabBarItem" title="Events" image="events" selectedImage="events" springLoaded="YES" id="acW-dT-cKf">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                 </viewController>
@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="-1383" y="798"/>
         </scene>
-        <!--Blog-->
+        <!--Podcasts-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" userLabel="Blog" customClass="PodcastsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="PodcastsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,7 +40,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Podcasts" image="second" springLoaded="YES" id="cPa-gy-q4n">
+                    <tabBarItem key="tabBarItem" title="Podcasts" image="podcasts" selectedImage="podcasts" springLoaded="YES" id="cPa-gy-q4n">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                 </viewController>
@@ -59,7 +59,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8Rg-Db-rsW"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Classes" image="second" springLoaded="YES" id="ffJ-hT-adx">
+                    <tabBarItem key="tabBarItem" title="Classes" image="classes" selectedImage="classes" springLoaded="YES" id="ffJ-hT-adx">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -79,7 +79,7 @@
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VjR-2r-ZbC"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Shop" image="second" springLoaded="YES" id="Ahg-ln-mDt">
+                    <tabBarItem key="tabBarItem" title="Shop" image="shop" selectedImage="shop" springLoaded="YES" id="Ahg-ln-mDt">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -133,7 +133,7 @@
                             <outlet property="delegate" destination="FVM-Vr-ZrB" id="TMc-aQ-ze3"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="second" springLoaded="YES" id="i3F-ti-iPc">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" selectedImage="settings" springLoaded="YES" id="i3F-ti-iPc">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -203,7 +203,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <switch opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Gs-fI-4WF">
-                                <rect key="frame" x="179" y="401" width="49" height="31"/>
+                                <rect key="frame" x="179" y="401" width="51" height="31"/>
                                 <viewLayoutGuide key="safeArea" id="7tR-ha-Cbn"/>
                                 <color key="onTintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="thumbTintColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -321,7 +321,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="classes" width="38" height="38"/>
+        <image name="events" width="38" height="38"/>
+        <image name="podcasts" width="38" height="38"/>
+        <image name="settings" width="38" height="38"/>
+        <image name="shop" width="38" height="38"/>
     </resources>
 </document>

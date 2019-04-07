@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F95BE68225A95C800064122 /* icons-2 in Resources */ = {isa = PBXBuildFile; fileRef = 4F95BE67225A95C800064122 /* icons-2 */; };
 		4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DBE225129CC002B3117 /* AppDelegate.swift */; };
 		4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DC0225129CC002B3117 /* EventsViewController.swift */; };
 		4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DC2225129CC002B3117 /* PodcastsViewController.swift */; };
@@ -43,12 +44,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F95BE67225A95C800064122 /* icons-2 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "icons-2"; sourceTree = "<group>"; };
 		4F971DBB225129CC002B3117 /* Brunch and Slay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brunch and Slay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F971DBE225129CC002B3117 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F971DC0225129CC002B3117 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		4F971DC2225129CC002B3117 /* PodcastsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastsViewController.swift; sourceTree = "<group>"; };
 		4F971DC5225129CC002B3117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4F971DC7225129D0002B3117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4F971DC7225129D0002B3117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Brunch and Slay/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
 		4F971DCA225129D0002B3117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F971DCC225129D0002B3117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F971DD1225129D1002B3117 /* Brunch and SlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Brunch and SlayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 		4F971DBD225129CC002B3117 /* Brunch and Slay */ = {
 			isa = PBXGroup;
 			children = (
+				4F95BE67225A95C800064122 /* icons-2 */,
 				4F971DEE22513F69002B3117 /* User.swift */,
 				4F971DBE225129CC002B3117 /* AppDelegate.swift */,
 				4F971DC0225129CC002B3117 /* EventsViewController.swift */,
@@ -258,6 +261,7 @@
 			files = (
 				4F971DCB225129D0002B3117 /* LaunchScreen.storyboard in Resources */,
 				4F971DC8225129D0002B3117 /* Assets.xcassets in Resources */,
+				4F95BE68225A95C800064122 /* icons-2 in Resources */,
 				4F971DC6225129CC002B3117 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
