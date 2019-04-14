@@ -17,6 +17,7 @@
 		4F971DD6225129D1002B3117 /* Brunch_and_SlayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DD5225129D1002B3117 /* Brunch_and_SlayTests.swift */; };
 		4F971DE1225129D1002B3117 /* Brunch_and_SlayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DE0225129D1002B3117 /* Brunch_and_SlayUITests.swift */; };
 		4F971DEF22513F69002B3117 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DEE22513F69002B3117 /* User.swift */; };
+		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
 		4FF318BC2253CED20079B1D3 /* ClassesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* ClassesViewController.swift */; };
@@ -60,6 +61,7 @@
 		4F971DE0225129D1002B3117 /* Brunch_and_SlayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brunch_and_SlayUITests.swift; sourceTree = "<group>"; };
 		4F971DE2225129D1002B3117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F971DEE22513F69002B3117 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		4FF318BB2253CED20079B1D3 /* ClassesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				4FF318C32253D3D40079B1D3 /* CartViewController.swift */,
 				4FE6E4372256AFB00090EE41 /* TabController.swift */,
 				4FE6E4392256B14B0090EE41 /* NavigationController.swift */,
+				4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */,
+				4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */,
 				4F971DEF22513F69002B3117 /* User.swift in Sources */,
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
 				4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */,

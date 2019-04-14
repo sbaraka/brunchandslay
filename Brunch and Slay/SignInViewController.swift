@@ -10,10 +10,17 @@ import UIKit
 
 class SignInViewController: UIViewController {
     
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    //MARK: Actions
     
+    
+    @IBAction func switchChanged(_ sender: Any) {
+        passwordTextField.isSecureTextEntry.toggle()
+    }
 }

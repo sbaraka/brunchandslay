@@ -8,11 +8,49 @@
 
 import UIKit
 
-class EventsViewController: UIViewController {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return eventsTableData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = eventsTable.dequeueReusableCell(withIdentifier: "protoCell") as! EventTableCell
+        cell.nameLabel.text = eventsTableData[indexPath.row].name
+        
+        cell.locationLabel.text = eventsTableData[indexPath.row].location
+        
+        cell.dateLabel.text = eventsTableData[indexPath.row].date
+        
+        let backGroundView = UIView()
+        
+        backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
+        
+        cell.selectedBackgroundView = backGroundView
+        
+        return cell
+    }
+    
 
+    @IBOutlet weak var eventsTable: UITableView!
+    
+    struct EventData {
+        var name:String
+        var location:String
+        var date:String
+    }
+    
+    var eventsTableData: [EventData] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        eventsTableData = [
+            EventData(name: "Test 1", location: "Here", date: "Today"),
+            EventData(name: "Test 2", location: "Here", date: "Today")
+        ]
+        
     }
 
 
