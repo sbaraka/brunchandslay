@@ -19,6 +19,8 @@
 		4F971DEF22513F69002B3117 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DEE22513F69002B3117 /* User.swift */; };
 		4F99367C226556D600878C3E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99367B226556D600878C3E /* EventDetailViewController.swift */; };
 		4F99367E226559B900878C3E /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99367D226559B900878C3E /* EventData.swift */; };
+		4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA270012266529400C834AE /* PodcastDetailViewController.swift */; };
+		4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA27003226653A700C834AE /* ShopDetailViewController.swift */; };
 		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
@@ -65,6 +67,8 @@
 		4F971DEE22513F69002B3117 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4F99367B226556D600878C3E /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		4F99367D226559B900878C3E /* EventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventData.swift; sourceTree = "<group>"; };
+		4FA270012266529400C834AE /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
+		4FA27003226653A700C834AE /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
 		4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -142,6 +146,8 @@
 				4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */,
 				4F99367B226556D600878C3E /* EventDetailViewController.swift */,
 				4F99367D226559B900878C3E /* EventData.swift */,
+				4FA270012266529400C834AE /* PodcastDetailViewController.swift */,
+				4FA27003226653A700C834AE /* ShopDetailViewController.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				4F971DEF22513F69002B3117 /* User.swift in Sources */,
 				4F99367C226556D600878C3E /* EventDetailViewController.swift in Sources */,
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
+				4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */,
 				4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */,
 				4FF318BE2253CF920079B1D3 /* ShopViewController.swift in Sources */,
 				4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */,
@@ -309,6 +316,7 @@
 				4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */,
 				4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */,
 				4F99367E226559B900878C3E /* EventData.swift in Sources */,
+				4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */,
 				4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
