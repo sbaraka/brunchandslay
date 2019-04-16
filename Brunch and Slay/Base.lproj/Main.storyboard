@@ -103,16 +103,62 @@
             </objects>
             <point key="canvasLocation" x="-1383.2" y="797.45127436281871"/>
         </scene>
-        <!--View Controller-->
+        <!--Event Detail View Controller-->
         <scene sceneID="Vf3-KK-DIy">
             <objects>
-                <viewController id="Clj-ff-QZe" sceneMemberID="viewController">
+                <viewController id="Clj-ff-QZe" customClass="EventDetailViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H0o-k5-CNb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcx-r0-GeX">
+                                <rect key="frame" x="16" y="73" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-h8-De7">
+                                <rect key="frame" x="16" y="102" width="36" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4j-WL-jeW">
+                                <rect key="frame" x="16" y="131" width="66" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sf2-LP-N31">
+                                <rect key="frame" x="16" y="160" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aAw-h8-De7" firstAttribute="top" secondItem="hcx-r0-GeX" secondAttribute="bottom" constant="22" id="E3z-Xh-rf5"/>
+                            <constraint firstItem="N4j-WL-jeW" firstAttribute="centerX" secondItem="H0o-k5-CNb" secondAttribute="centerX" id="IwH-zQ-PVI"/>
+                            <constraint firstItem="N4j-WL-jeW" firstAttribute="leading" secondItem="IgO-Vh-cL0" secondAttribute="leading" constant="154" id="NKK-c0-5Mj"/>
+                            <constraint firstItem="aAw-h8-De7" firstAttribute="centerX" secondItem="Sf2-LP-N31" secondAttribute="centerX" id="NhL-04-ub0"/>
+                            <constraint firstItem="hcx-r0-GeX" firstAttribute="centerX" secondItem="aAw-h8-De7" secondAttribute="centerX" id="WlJ-c1-Ukp"/>
+                            <constraint firstItem="hcx-r0-GeX" firstAttribute="leading" secondItem="IgO-Vh-cL0" secondAttribute="leading" constant="166" id="aJg-Oz-D7k"/>
+                            <constraint firstItem="N4j-WL-jeW" firstAttribute="top" secondItem="aAw-h8-De7" secondAttribute="bottom" constant="22" id="ilK-RT-UVQ"/>
+                            <constraint firstItem="hcx-r0-GeX" firstAttribute="top" secondItem="IgO-Vh-cL0" secondAttribute="top" constant="8" id="oLj-Fc-CG6"/>
+                            <constraint firstItem="aAw-h8-De7" firstAttribute="leading" secondItem="IgO-Vh-cL0" secondAttribute="leading" constant="170" id="oli-Pg-22K"/>
+                            <constraint firstItem="Sf2-LP-N31" firstAttribute="leading" secondItem="IgO-Vh-cL0" secondAttribute="leading" constant="144" id="qdZ-TW-qse"/>
+                            <constraint firstItem="Sf2-LP-N31" firstAttribute="top" secondItem="N4j-WL-jeW" secondAttribute="bottom" constant="22" id="uky-vK-tgn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="IgO-Vh-cL0"/>
                     </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="aAw-h8-De7" id="s2Y-T3-6EQ"/>
+                        <outlet property="descriptionLabel" destination="Sf2-LP-N31" id="pBZ-WU-pTY"/>
+                        <outlet property="locationLabel" destination="N4j-WL-jeW" id="qaT-fo-WdB"/>
+                        <outlet property="nameLabel" destination="hcx-r0-GeX" id="2mg-oD-b2j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jhA-ab-xpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

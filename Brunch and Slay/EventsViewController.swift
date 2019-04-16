@@ -10,6 +10,16 @@ import UIKit
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is EventDetailViewController
+        {
+            let vc = segue.destination as? EventDetailViewController
+            vc?.eventData = eventsTableData[(eventsTable.indexPathForSelectedRow?.row)!]
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return eventsTableData.count
     }
@@ -34,11 +44,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var eventsTable: UITableView!
     
-    struct EventData {
-        var name:String
-        var location:String
-        var date:String
-    }
     
     var eventsTableData: [EventData] = []
     
@@ -47,8 +52,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view, typically from a nib.
         
         eventsTableData = [
-            EventData(name: "Test 1", location: "Here", date: "Today"),
-            EventData(name: "Test 2", location: "Here", date: "Today")
+            EventData(name: "Test 1", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. The quick brown fox jumps over the lazy dog"),
+            EventData(name: "Test 2", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. The quick brown fox jumps over the lazy dog")
         ]
         
     }
