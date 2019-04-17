@@ -8,7 +8,22 @@
 
 import UIKit
 
-class ClassesViewController: UIViewController {
+class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var classesTable: UITableView!
+    
+    var classesTableData: [ClassData] = []
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

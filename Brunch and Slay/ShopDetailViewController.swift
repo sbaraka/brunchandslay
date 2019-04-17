@@ -9,11 +9,32 @@
 import UIKit
 
 class ShopDetailViewController: UIViewController {
-
+    
+    var shopData:ShopData?
+    
+    @IBOutlet weak var previewImage: UIImageView!
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var quantityBox: UITextField!
+    
+    @IBOutlet weak var quantityStepper: UIStepper!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        previewImage.image = shopData?.preview
+        nameLabel.text = shopData?.name
+        priceLabel.text = "Price: " + String(format:"%.2f", (shopData?.price)!)
+        descriptionLabel.text = shopData?.description
+        
     }
     
 

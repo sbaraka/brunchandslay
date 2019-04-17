@@ -10,6 +10,10 @@ import UIKit
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    @IBOutlet weak var eventsTable: UITableView!
+    
+    var eventsTableData: [EventData] = []
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is EventDetailViewController
@@ -42,10 +46,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
 
-    @IBOutlet weak var eventsTable: UITableView!
     
-    
-    var eventsTableData: [EventData] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

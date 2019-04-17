@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1250226774E600F68C87 /* PodcastCell.swift */; };
+		4F6D1253226778C000F68C87 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1252226778C000F68C87 /* ShopCell.swift */; };
+		4F6D125522677AEE00F68C87 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125422677AEE00F68C87 /* CartCell.swift */; };
+		4F6D125722677D9100F68C87 /* PodcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125622677D9100F68C87 /* PodcastData.swift */; };
+		4F6D1259226782E500F68C87 /* ClassData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1258226782E500F68C87 /* ClassData.swift */; };
+		4F6D125B2267836100F68C87 /* ShopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125A2267836100F68C87 /* ShopData.swift */; };
 		4F95BE68225A95C800064122 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 4F95BE67225A95C800064122 /* icons */; };
 		4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DBE225129CC002B3117 /* AppDelegate.swift */; };
 		4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DC0225129CC002B3117 /* EventsViewController.swift */; };
@@ -49,6 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F6D1250226774E600F68C87 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
+		4F6D1252226778C000F68C87 /* ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
+		4F6D125422677AEE00F68C87 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
+		4F6D125622677D9100F68C87 /* PodcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastData.swift; sourceTree = "<group>"; };
+		4F6D1258226782E500F68C87 /* ClassData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassData.swift; sourceTree = "<group>"; };
+		4F6D125A2267836100F68C87 /* ShopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopData.swift; sourceTree = "<group>"; };
 		4F95BE67225A95C800064122 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
 		4F971DBB225129CC002B3117 /* Brunch and Slay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brunch and Slay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F971DBE225129CC002B3117 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,8 +144,8 @@
 				4F971DBE225129CC002B3117 /* AppDelegate.swift */,
 				4F971DC0225129CC002B3117 /* EventsViewController.swift */,
 				4F971DC2225129CC002B3117 /* PodcastsViewController.swift */,
-				4F971DC4225129CC002B3117 /* Main.storyboard */,
 				4F971DC7225129D0002B3117 /* Assets.xcassets */,
+				4F971DC4225129CC002B3117 /* Main.storyboard */,
 				4F971DC9225129D0002B3117 /* LaunchScreen.storyboard */,
 				4F971DCC225129D0002B3117 /* Info.plist */,
 				4FF318BB2253CED20079B1D3 /* ClassesViewController.swift */,
@@ -148,6 +160,12 @@
 				4F99367D226559B900878C3E /* EventData.swift */,
 				4FA270012266529400C834AE /* PodcastDetailViewController.swift */,
 				4FA27003226653A700C834AE /* ShopDetailViewController.swift */,
+				4F6D1250226774E600F68C87 /* PodcastCell.swift */,
+				4F6D1252226778C000F68C87 /* ShopCell.swift */,
+				4F6D125422677AEE00F68C87 /* CartCell.swift */,
+				4F6D125622677D9100F68C87 /* PodcastData.swift */,
+				4F6D1258226782E500F68C87 /* ClassData.swift */,
+				4F6D125A2267836100F68C87 /* ShopData.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -303,7 +321,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */,
+				4F6D125522677AEE00F68C87 /* CartCell.swift in Sources */,
+				4F6D1253226778C000F68C87 /* ShopCell.swift in Sources */,
 				4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */,
+				4F6D1259226782E500F68C87 /* ClassData.swift in Sources */,
 				4F971DEF22513F69002B3117 /* User.swift in Sources */,
 				4F99367C226556D600878C3E /* EventDetailViewController.swift in Sources */,
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
@@ -312,10 +333,13 @@
 				4FF318BE2253CF920079B1D3 /* ShopViewController.swift in Sources */,
 				4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */,
 				4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */,
+				4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */,
 				4FF318BC2253CED20079B1D3 /* ClassesViewController.swift in Sources */,
 				4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */,
 				4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */,
+				4F6D125722677D9100F68C87 /* PodcastData.swift in Sources */,
 				4F99367E226559B900878C3E /* EventData.swift in Sources */,
+				4F6D125B2267836100F68C87 /* ShopData.swift in Sources */,
 				4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */,
 				4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */,
 			);

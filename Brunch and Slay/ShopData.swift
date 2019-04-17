@@ -1,19 +1,18 @@
 //
-//  EventData.swift
+//  ShopData.swift
 //  Brunch and Slay
 //
-//  Created by Noah on 4/15/19.
+//  Created by Noah on 4/17/19.
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
 import UIKit
 import Foundation
 
-struct EventData {
+struct ShopData
+{
     var name:String
-    var location:String
-    var date:String
+    var price:Double
     var description:String
-    var image:UIImage
+    var preview:UIImage
 }
-

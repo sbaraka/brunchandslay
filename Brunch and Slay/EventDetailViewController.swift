@@ -12,6 +12,9 @@ class EventDetailViewController: UIViewController {
 
     var eventData:EventData?
     
+    @IBOutlet weak var eventImage: UIImageView!
+    
+    
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!

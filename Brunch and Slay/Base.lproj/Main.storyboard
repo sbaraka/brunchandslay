@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home-->
+        <!--Events-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" userLabel="Home" customClass="EventsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="9pv-A4-QxB" customClass="EventsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1383.2" y="797.45127436281871"/>
+            <point key="canvasLocation" x="-1383" y="798"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="Vf3-KK-DIy">
@@ -132,7 +132,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sf2-LP-N31">
-                                <rect key="frame" x="16" y="477" width="88" height="21"/>
+                                <rect key="frame" x="16" y="477" width="88" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -162,6 +162,7 @@
                     <connections>
                         <outlet property="dateLabel" destination="aAw-h8-De7" id="s2Y-T3-6EQ"/>
                         <outlet property="descriptionLabel" destination="Sf2-LP-N31" id="pBZ-WU-pTY"/>
+                        <outlet property="eventImage" destination="UXE-wy-hw3" id="G0K-Nb-7aI"/>
                         <outlet property="locationLabel" destination="N4j-WL-jeW" id="qaT-fo-WdB"/>
                         <outlet property="nameLabel" destination="hcx-r0-GeX" id="2mg-oD-b2j"/>
                     </connections>
@@ -227,6 +228,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="A7T-gK-f1a"/>
                     </view>
+                    <connections>
+                        <outlet property="album" destination="9UZ-MH-age" id="zHh-AE-R3T"/>
+                        <outlet property="nextButton" destination="yXV-Nn-Id5" id="1Tz-ju-Ipw"/>
+                        <outlet property="playButton" destination="NlU-CF-8zh" id="QQ4-ke-dYa"/>
+                        <outlet property="playSlider" destination="12T-Yf-vZE" id="fa3-dN-tkB"/>
+                        <outlet property="previousButton" destination="cgh-dc-o2B" id="hHL-i2-hIo"/>
+                        <outlet property="titleView" destination="kMa-cn-57y" id="NPB-8N-Z7d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cb-mx-USb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,10 +346,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LmN-DJ-JGR"/>
                     </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="p7f-ec-1pF" id="i6A-Kg-XCe"/>
+                        <outlet property="nameLabel" destination="n1z-5N-AIa" id="dvv-yO-ngI"/>
+                        <outlet property="previewImage" destination="Wqb-b7-zdS" id="ekU-ff-DNa"/>
+                        <outlet property="priceLabel" destination="G3a-S6-leF" id="Oe5-f2-mmg"/>
+                        <outlet property="quantityBox" destination="MFE-Jg-aAO" id="Jis-xV-4fo"/>
+                        <outlet property="quantityStepper" destination="5Ym-VV-n6s" id="iam-93-R7x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z4S-4B-JfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="1584.5577211394304"/>
+            <point key="canvasLocation" x="588" y="1585"/>
         </scene>
         <!--Podcasts-->
         <scene sceneID="wg7-f3-ORb">
@@ -358,7 +375,7 @@
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="podcastCell" rowHeight="75" id="uMh-hc-DZ4">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="podcastCell" rowHeight="75" id="uMh-hc-DZ4" customClass="PodcastCell" customModule="Brunch_and_Slay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uMh-hc-DZ4" id="8oQ-fX-ByH">
@@ -399,6 +416,12 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="album" destination="fUj-M9-zJm" id="yy2-ga-4XA"/>
+                                            <outlet property="image" destination="fUj-M9-zJm" id="6LA-9w-IGN"/>
+                                            <outlet property="playingLabel" destination="pRg-x3-mQx" id="C9Y-F4-hoB"/>
+                                            <outlet property="titleLabel" destination="PSj-kR-AIO" id="QyP-Vs-hA1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -423,9 +446,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-sZ-JhO">
-                                <rect key="frame" x="54" y="527" width="267" height="30"/>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgJ-RC-42B">
                                 <rect key="frame" x="319" y="572" width="40" height="30"/>
                                 <state key="normal" title="Detail"/>
@@ -433,6 +453,9 @@
                                     <segue destination="JHd-dD-Vpj" kind="show" id="8Zq-JA-oRt"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-sZ-JhO">
+                                <rect key="frame" x="54" y="527" width="267" height="30"/>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -466,6 +489,14 @@
                     <tabBarItem key="tabBarItem" title="Podcasts" image="podcasts" selectedImage="podcasts" springLoaded="YES" id="cPa-gy-q4n">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="currentTitle" destination="0gN-si-d7r" id="sda-cm-Hhy"/>
+                        <outlet property="nextButton" destination="DhS-S8-Kic" id="AUC-hR-0wc"/>
+                        <outlet property="playButton" destination="75Z-0B-pbU" id="e55-0I-8ua"/>
+                        <outlet property="playSlider" destination="8Ww-sZ-JhO" id="n9U-xL-DAw"/>
+                        <outlet property="podcastsTable" destination="6Qx-TH-Jxu" id="rPc-ND-QPA"/>
+                        <outlet property="previousButton" destination="6aY-oG-zch" id="NSb-8S-SHS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -532,6 +563,9 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="classesTable" destination="tVY-O5-GZU" id="LOO-E0-yUQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3re-sP-YaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,7 +585,7 @@
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="merchandiseCell" rowHeight="70" id="8Y9-8C-E5O">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="merchandiseCell" rowHeight="70" id="8Y9-8C-E5O" customClass="ShopCell" customModule="Brunch_and_Slay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Y9-8C-E5O" id="hdm-7Y-2DM">
@@ -600,6 +634,9 @@
                                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="nameLabel" destination="YJW-H8-X9I" id="e9P-qO-wQU"/>
+                                            <outlet property="previewImage" destination="a9k-Ja-Ygj" id="RZI-QN-Wzy"/>
+                                            <outlet property="priceLabel" destination="odY-xx-o9d" id="0kk-2Q-uPk"/>
                                             <segue destination="Uwk-dU-nB9" kind="show" id="lUU-rZ-WoF"/>
                                         </connections>
                                     </tableViewCell>
@@ -620,15 +657,18 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="shopTable" destination="P6R-eb-IB7" id="W2K-ZB-3Se"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W99-Ih-vTn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="588" y="798.35082458770626"/>
         </scene>
-        <!--More-->
+        <!--Settings-->
         <scene sceneID="Dro-9P-sXq">
             <objects>
-                <tableViewController id="FVM-Vr-ZrB" userLabel="More" customClass="SettingsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="FVM-Vr-ZrB" customClass="SettingsViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RK3-Qt-9NE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -870,7 +910,7 @@
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkOutCell" rowHeight="75" id="ECO-EC-HVh">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkOutCell" rowHeight="75" id="ECO-EC-HVh" customClass="CartCell" customModule="Brunch_and_Slay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ECO-EC-HVh" id="LqV-nw-qbE">
@@ -932,6 +972,11 @@
                                                 <constraint firstItem="Y52-Pg-o7w" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eC8-9z-68y" secondAttribute="trailing" constant="8" symbolic="YES" id="z8C-gs-NgK"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="eC8-9z-68y" id="mcY-gy-KYr"/>
+                                            <outlet property="previewImage" destination="40v-fl-Qfo" id="8cc-sG-jPM"/>
+                                            <outlet property="priceLabel" destination="xq3-yn-mod" id="ZNn-oX-6wq"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -959,6 +1004,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PbQ-Tu-UBL"/>
                     </view>
+                    <connections>
+                        <outlet property="checkoutButton" destination="EHx-jN-0Yy" id="N2Z-mY-Cu9"/>
+                        <outlet property="clearCartButton" destination="1a1-UR-2JJ" id="4cm-o2-eVk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CLX-Bz-squ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

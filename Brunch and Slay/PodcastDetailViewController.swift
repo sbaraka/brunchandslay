@@ -9,11 +9,32 @@
 import UIKit
 
 class PodcastDetailViewController: UIViewController {
-
+    
+    var podcastData:PodcastData?
+    
+    @IBOutlet weak var titleView: UILabel!
+    
+    @IBOutlet weak var album: UIImageView!
+    
+    @IBOutlet weak var playSlider: UISlider!
+    
+    
+    @IBOutlet weak var previousButton: UIButton!
+    
+    
+    @IBOutlet weak var playButton: UIButton!
+    
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        titleView.text = podcastData?.title
+        album.image = podcastData?.image
+        
     }
     
 
