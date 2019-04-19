@@ -48,8 +48,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         else
         {
             
-            
-            if((podcastsTable.indexPathsForSelectedRows?.count)! > 0)
+            let path:IndexPath? = podcastsTable!.indexPathForSelectedRow
+            if(path != nil)
             {
                 let asset = NSDataAsset(name: podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURL)
                 do
@@ -77,7 +77,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
     
-        if((podcastsTable.indexPathsForSelectedRows?.count)! > 0)
+        if(podcastsTable.indexPathForSelectedRow != nil)
             {
         
         
@@ -122,11 +122,13 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        playButton.setImage(UIImage(named: "pause"), for: .normal)
+        
         
         let asset = NSDataAsset(name: podcastsTableData[(indexPath.row)].audioURL)
         do
         {
+            playButton.setImage(UIImage(named: "pause"), for: .normal)
+            
             audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
                 
             currentTitle.text = podcastsTableData[(indexPath.row)].title

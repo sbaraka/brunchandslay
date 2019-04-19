@@ -54,6 +54,12 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        shopTableData = [
+            ShopData(name: "Test item 1", price: 10.00, description: "A cool item", preview: UIImage(named: "its_azizy_as_that")!),
+            ShopData(name: "Test item 2", price: 10.00, description: "A cool item", preview: UIImage(named: "sammys_secrets")!)
+            
+        ]
     }
     
     
