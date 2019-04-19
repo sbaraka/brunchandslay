@@ -39,6 +39,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.priceLabel.text = "Price: " + String(format:"%.2f",shopTableData[indexPath.row].price)
     
+        cell.previewImage.image = shopTableData[indexPath.row].preview
         
         let backGroundView = UIView()
         

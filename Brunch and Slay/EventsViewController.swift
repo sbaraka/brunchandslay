@@ -53,8 +53,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view, typically from a nib.
         
         eventsTableData = [
-            EventData(name: "Test 1", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. The quick brown fox jumps over the lazy dog"),
-            EventData(name: "Test 2", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. The quick brown fox jumps over the lazy dog")
+            EventData(name: "Test 1", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. \nThe quick brown fox jumps over the lazy dog", image: UIImage(named: "baking_with_noah")!),
+            EventData(name: "Test 2", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. \nThe quick brown fox jumps over the lazy dog", image: UIImage(named: "baking_with_noah")!)
         ]
         
     }

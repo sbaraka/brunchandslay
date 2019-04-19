@@ -6,13 +6,13 @@
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
+//import AVFoundation
 import UIKit
 import Foundation
 
 struct PodcastData
 {
     var title:String
-    var playPoint:Int
-    var playing:Bool
     var image:UIImage
+    var audioURL:String
 }

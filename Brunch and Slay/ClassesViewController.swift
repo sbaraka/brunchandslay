@@ -17,11 +17,24 @@ class ClassesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return classesTableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = classesTable.dequeueReusableCell(withIdentifier: "classCell") as! ClassCell
+        
+        cell.classImage.image = classesTableData[indexPath.row].image
+        
+        cell.classTitle.text = classesTableData[indexPath.row].title
+        
+        
+        let backGroundView = UIView()
+        
+        backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
+        
+        cell.selectedBackgroundView = backGroundView
+        
+        return cell
     }
     
     

@@ -30,7 +30,7 @@ class EventDetailViewController: UIViewController {
         dateLabel.text = eventData?.date
         locationLabel.text = eventData?.location
         descriptionLabel.text = eventData?.description
-        
+        eventImage.image = eventData?.image
         // Do any additional setup after loading the view.
     }
     
