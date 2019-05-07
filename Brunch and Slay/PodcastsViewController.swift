@@ -32,6 +32,12 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var podcastsTable: UITableView!
     
     @IBAction func previousAction(_ sender: Any) {
+        if(podcastsTable.indexPathForSelectedRow!.row > 0)
+        {
+            let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row - 1, section: 0 )
+            podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            self.tableView(self.podcastsTable, didSelectRowAt: indexPath)
+        }
     }
     
     
@@ -95,7 +101,16 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func nextAction(_ sender: Any) {
+        if(podcastsTable.indexPathForSelectedRow!.row < podcastsTableData.count - 1)
+        {
+            let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row + 1, section: 0 )
+            podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            self.tableView(self.podcastsTable, didSelectRowAt: indexPath)
+        }
+        
     }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return podcastsTableData.count
@@ -122,16 +137,17 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        
+        let cell = tableView.cellForRow(at: indexPath) as! PodcastCell
         
         let asset = NSDataAsset(name: podcastsTableData[(indexPath.row)].audioURL)
         do
         {
             playButton.setImage(UIImage(named: "pause"), for: .normal)
             
-            audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
+            audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
                 
-            currentTitle.text = podcastsTableData[(indexPath.row)].title
+            currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
+            currentTitle.text = cell.titleLabel.text
                 
             audioPlayer.prepareToPlay()
             audioPlayer.play()

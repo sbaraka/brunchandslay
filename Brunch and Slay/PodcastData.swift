@@ -15,4 +15,5 @@ struct PodcastData
     var title:String
     var image:UIImage
     var audioURL:String
+    
 }
