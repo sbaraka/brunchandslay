@@ -465,6 +465,9 @@
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-sZ-JhO">
                                 <rect key="frame" x="54" y="527" width="267" height="30"/>
+                                <connections>
+                                    <action selector="scrubAudio:" destination="8rJ-Kc-sve" eventType="touchDragExit" id="2Wc-bm-Jdo"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>

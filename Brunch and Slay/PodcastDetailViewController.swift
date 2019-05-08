@@ -9,15 +9,17 @@
 import AVFoundation
 import UIKit
 
-class PodcastDetailViewController: UIViewController {
+class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
+    
+    var podcastsTableData:[PodcastData]?
     
     var podcastData:PodcastData?
-    
-    var playerTime:TimeInterval?
     
     var playerIsPlaying:Bool?
     
     var audioPlayer:AVAudioPlayer?
+    
+    var rowIndex:Int?
     
     @IBOutlet weak var titleView: UILabel!
     
@@ -39,11 +41,16 @@ class PodcastDetailViewController: UIViewController {
     
     
     @IBAction func playAction(_ sender: Any) {
+        audioPlayer!.delegate = self
+        
         if(playerIsPlaying!)
         {
             playButton.setImage(UIImage(named: "play"), for: .normal)
             
             audioPlayer!.pause()
+            playerIsPlaying = false
+            
+            titleView.text = "None Selected"
         }
         else
         {
@@ -53,10 +60,15 @@ class PodcastDetailViewController: UIViewController {
             do
             {
                 audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
+                
+                titleView.text = podcastsTableData![rowIndex!].title
+                
+                playSlider.maximumValue = Float((audioPlayer?.duration)!)
                     
                 audioPlayer!.prepareToPlay()
                 audioPlayer!.play()
                 playerIsPlaying = true
+                playButton.setImage(UIImage(named: "pause"), for: .normal)
             }
             catch let error as NSError
             {

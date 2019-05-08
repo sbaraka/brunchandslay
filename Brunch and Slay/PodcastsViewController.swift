@@ -9,7 +9,9 @@
 import AVFoundation
 import UIKit
 
-class PodcastsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PodcastsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate {
+    
+    var timer: Timer!
     
     var podcastsTableData: [PodcastData] = []
     
@@ -42,6 +44,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func playAction(_ sender: Any) {
+        audioPlayer.delegate = self
+        
         if(playerIsPlaying)
         {
             playButton.setImage(UIImage(named: "play"), for: .normal)
@@ -63,6 +67,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
                     
                     currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
+                    
+                    playSlider.maximumValue = Float(audioPlayer.duration)
                     
                     audioPlayer.prepareToPlay()
                     audioPlayer.play()
@@ -93,8 +99,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     vc?.podcastData = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!]
                     vc?.audioPlayer = audioPlayer
                     vc?.playerIsPlaying = playerIsPlaying
-                    vc?.playerTime = playerTime
-            
+                    vc?.podcastsTableData = podcastsTableData
+                    vc?.rowIndex = (podcastsTable.indexPathForSelectedRow?.row)!
                 }
             }
     }
@@ -110,6 +116,26 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    @IBAction func scrubAudio(_ sender: Any) {
+        
+        if(playerIsPlaying)
+        {
+            audioPlayer.stop()
+            audioPlayer.currentTime = TimeInterval(playSlider.value)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        }
+        else
+        {
+            audioPlayer.currentTime = TimeInterval(playSlider.value)
+        }
+    }
+    
+    
+    
+    func updateSlider() {
+        playSlider.value = Float(audioPlayer.currentTime)
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,6 +161,12 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        playButton.setImage(UIImage(named: "playf"), for: .normal)
+        
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         let cell = tableView.cellForRow(at: indexPath) as! PodcastCell
@@ -148,7 +180,10 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 
             currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
             currentTitle.text = cell.titleLabel.text
-                
+            
+            playSlider.maximumValue = Float(audioPlayer.duration)
+            
+            audioPlayer.delegate = self
             audioPlayer.prepareToPlay()
             audioPlayer.play()
             playerIsPlaying = true
@@ -162,6 +197,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: Selector(("updateSlider")), userInfo: nil, repeats: true)
         
         currentTitle.text = "None Selected"
         
