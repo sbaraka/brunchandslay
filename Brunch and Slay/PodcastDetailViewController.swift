@@ -11,6 +11,8 @@ import UIKit
 
 class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     
+    var timer: Timer!
+    
     var podcastsTableData:[PodcastData]?
     
     var podcastData:PodcastData?
@@ -37,11 +39,35 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var nextButton: UIButton!
     
     @IBAction func previousAction(_ sender: Any) {
+        if(rowIndex! > 0)
+        {
+            rowIndex = rowIndex! - 1
+            let asset = NSDataAsset(name: podcastsTableData![rowIndex!].audioURL)
+            do
+            {
+                audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
+                
+                titleView.text = podcastsTableData![rowIndex!].title
+                
+                album.image = podcastsTableData![rowIndex!].image
+                
+                playSlider.maximumValue = Float((audioPlayer?.duration)!)
+                
+                audioPlayer?.delegate = self
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+                playerIsPlaying = true
+            }
+            catch let error as NSError
+            {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     
     @IBAction func playAction(_ sender: Any) {
-        audioPlayer!.delegate = self
+        
         
         if(playerIsPlaying!)
         {
@@ -54,12 +80,12 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         }
         else
         {
-            playButton.setImage(UIImage(named: "pause"), for: .normal)
             
             let asset = NSDataAsset(name: podcastData!.audioURL)
             do
             {
                 audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
+                audioPlayer!.delegate = self
                 
                 titleView.text = podcastsTableData![rowIndex!].title
                 
@@ -80,13 +106,75 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func nextAction(_ sender: Any) {
+        
+        if(rowIndex! < (podcastsTableData?.count)! - 1)
+        {
+            rowIndex = rowIndex! + 1
+            let asset = NSDataAsset(name: podcastsTableData![rowIndex!].audioURL)
+            do
+            {
+                audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
+                
+                titleView.text = podcastsTableData![rowIndex!].title
+                
+                album.image = podcastsTableData![rowIndex!].image
+                
+                playSlider.maximumValue = Float((audioPlayer?.duration)!)
+                
+                audioPlayer?.delegate = self
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+                playerIsPlaying = true
+            }
+            catch let error as NSError
+            {
+                print(error.localizedDescription)
+            }
+        }
+        
+    }
+    @IBAction func startScrub(_ sender: Any) {
+        if(playerIsPlaying!)
+        {
+           audioPlayer!.stop()
+        }
     }
     
+    @IBAction func scrubAudio(_ sender: Any) {
+       
+        if(playerIsPlaying!)
+        {
+            
+            audioPlayer!.currentTime = TimeInterval(playSlider.value)
+            audioPlayer!.prepareToPlay()
+            audioPlayer!.play()
+        }
+        else
+        {
+            audioPlayer!.currentTime = TimeInterval(playSlider.value)
+        }
+        
+    }
+    
+    @objc func updateSlider() {
+        if(playerIsPlaying! && (audioPlayer?.isPlaying)!)
+        {
+            playSlider.value = Float(audioPlayer!.currentTime)
+        }
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        playButton.setImage(UIImage(named: "play"), for: .normal)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        
         
         titleView.text = podcastData?.title
         album.image = podcastData?.image

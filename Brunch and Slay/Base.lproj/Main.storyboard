@@ -220,6 +220,10 @@
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="12T-Yf-vZE">
                                 <rect key="frame" x="40" y="487" width="287" height="31"/>
+                                <connections>
+                                    <action selector="scrubAudio:" destination="JHd-dD-Vpj" eventType="touchDragExit" id="OWC-1s-8ob"/>
+                                    <action selector="startScrub:" destination="JHd-dD-Vpj" eventType="touchDragEnter" id="Hit-xD-APL"/>
+                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -467,6 +471,7 @@
                                 <rect key="frame" x="54" y="527" width="267" height="30"/>
                                 <connections>
                                     <action selector="scrubAudio:" destination="8rJ-Kc-sve" eventType="touchDragExit" id="2Wc-bm-Jdo"/>
+                                    <action selector="startScrub:" destination="8rJ-Kc-sve" eventType="touchDragEnter" id="ji7-jN-spa"/>
                                 </connections>
                             </slider>
                         </subviews>
