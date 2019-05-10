@@ -118,7 +118,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func startScrub(_ sender: Any) {
         if(playerIsPlaying)
         {
-            audioPlayer.stop()
+            audioPlayer.pause()
         }
     }
     
@@ -126,9 +126,9 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if(playerIsPlaying)
         {
-            
-            audioPlayer.currentTime = TimeInterval(playSlider.value)
+        
             audioPlayer.prepareToPlay()
+            audioPlayer.currentTime = TimeInterval(playSlider.value)
             audioPlayer.play()
         }
         else

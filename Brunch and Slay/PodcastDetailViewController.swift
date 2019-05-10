@@ -136,7 +136,7 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     @IBAction func startScrub(_ sender: Any) {
         if(playerIsPlaying!)
         {
-           audioPlayer!.stop()
+           audioPlayer!.pause()
         }
     }
     
@@ -144,9 +144,8 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
        
         if(playerIsPlaying!)
         {
-            
-            audioPlayer!.currentTime = TimeInterval(playSlider.value)
             audioPlayer!.prepareToPlay()
+            audioPlayer!.currentTime = TimeInterval(playSlider.value)
             audioPlayer!.play()
         }
         else
