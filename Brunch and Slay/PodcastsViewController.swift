@@ -95,6 +95,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 if segue.destination is PodcastDetailViewController
                 {
                     let vc = segue.destination as? PodcastDetailViewController
+                    vc?.delegate = self
                     vc?.podcastData = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!]
                     vc?.audioPlayer = audioPlayer
                     vc?.playerIsPlaying = playerIsPlaying

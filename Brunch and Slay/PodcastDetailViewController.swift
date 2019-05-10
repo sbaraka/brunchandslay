@@ -23,6 +23,8 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     
     var rowIndex:Int?
     
+    weak var delegate: PodcastsViewController!
+    
     @IBOutlet weak var titleView: UILabel!
     
     @IBOutlet weak var album: UIImageView!
@@ -160,6 +162,20 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         if(playerIsPlaying! && (audioPlayer?.isPlaying)!)
         {
             playSlider.value = Float(audioPlayer!.currentTime)
+        }
+    }
+    
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        
+        if (parent != nil)
+        {
+            let indexPath = IndexPath(row: rowIndex!, section: 0)
+            let castParent = parent as! PodcastsViewController
+            castParent.audioPlayer = audioPlayer!
+            castParent.currentTitle.text = titleView.text
+            castParent.playerIsPlaying = playerIsPlaying!
+            castParent.podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
         }
     }
     
