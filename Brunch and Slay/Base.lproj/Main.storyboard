@@ -221,8 +221,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="12T-Yf-vZE">
                                 <rect key="frame" x="40" y="487" width="287" height="31"/>
                                 <connections>
-                                    <action selector="scrubAudio:" destination="JHd-dD-Vpj" eventType="touchDragExit" id="OWC-1s-8ob"/>
-                                    <action selector="startScrub:" destination="JHd-dD-Vpj" eventType="touchDragEnter" id="Hit-xD-APL"/>
+                                    <action selector="scrubAudio:" destination="JHd-dD-Vpj" eventType="touchUpInside" id="JI6-f5-WVJ"/>
+                                    <action selector="startScrub:" destination="JHd-dD-Vpj" eventType="touchDown" id="2jj-l2-Zrf"/>
                                 </connections>
                             </slider>
                         </subviews>
@@ -441,7 +441,7 @@
                                 <rect key="frame" x="236" y="568" width="38" height="38"/>
                                 <state key="normal" image="next"/>
                                 <connections>
-                                    <action selector="nextAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="GeE-B5-s6U"/>
+                                    <action selector="nextAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ArD-fd-7dE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aY-oG-zch">
@@ -470,8 +470,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-sZ-JhO">
                                 <rect key="frame" x="54" y="527" width="267" height="30"/>
                                 <connections>
-                                    <action selector="scrubAudio:" destination="8rJ-Kc-sve" eventType="touchDragExit" id="2Wc-bm-Jdo"/>
-                                    <action selector="startScrub:" destination="8rJ-Kc-sve" eventType="touchDragEnter" id="ji7-jN-spa"/>
+                                    <action selector="scrubAudio:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="K1m-bY-WNQ"/>
+                                    <action selector="startScrub:" destination="8rJ-Kc-sve" eventType="touchDown" id="jrr-be-4hS"/>
                                 </connections>
                             </slider>
                         </subviews>
