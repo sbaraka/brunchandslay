@@ -89,9 +89,10 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
                 
                 titleView.text = podcastsTableData![rowIndex!].title
                 
-                playSlider.maximumValue = Float((audioPlayer?.duration)!)
+            
                     
                 audioPlayer!.prepareToPlay()
+                audioPlayer!.currentTime = TimeInterval(playSlider.value)
                 audioPlayer!.play()
                 playerIsPlaying = true
                 playButton.setImage(UIImage(named: "pause"), for: .normal)
