@@ -56,7 +56,8 @@ class PodcastDetailViewController: UIViewController{
             let imageURL = URL(string: podcastsTableData![rowIndex!].imageURLString)
             
             album.kf.setImage(with: imageURL)
-                
+            
+            playSlider.minimumValue = 0.0
             playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
                 
             audioPlayer?.play()
@@ -117,7 +118,8 @@ class PodcastDetailViewController: UIViewController{
             let imageURL = URL(string: imageURLString)
             
             album.kf.setImage(with: imageURL)
-                
+            
+            playSlider.minimumValue = 0.0
             playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
             
             audioPlayer?.play()

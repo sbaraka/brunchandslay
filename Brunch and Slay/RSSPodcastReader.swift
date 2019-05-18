@@ -16,26 +16,29 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     private var podcastDataElement: PodcastData = PodcastData(title: "", imageURLString: "", audioURLString: "", author: "")
     private var foundCharacters: String = ""
     
+    var isParserDone: Bool = false
     
     
     func fetchPodcastsDataFromURL(url: URL) -> [PodcastData]
     {
-        let semaphore = DispatchSemaphore(value: 0)
+        isParserDone = false
         podcastDataList = [PodcastData]()
         let task = URLSession.shared.dataTask(with: url) { data, response, error in guard let data = data, error == nil else {
                 print (error ?? "Unknown error")
                 return
             }
-            semaphore.wait()
             let parser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
-            semaphore.signal()
         }
         
         task.resume()
         
-        semaphore.wait()
+        while(!isParserDone)
+        {
+            
+        }
+        
         
         return podcastDataList
     }
@@ -43,8 +46,9 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if ( elementName == "enclosure" )
         {
-            if let url = attributeDict["url"]
+            if var url = attributeDict["url"]
             {
+                url.insert("s", at: url.index(url.startIndex, offsetBy: 4))
                 self.podcastDataElement.audioURLString = url
             }
             
@@ -53,8 +57,8 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
         {
             if let imageURLString = attributeDict["href"]
             {
+                //imageURLString.insert("s", at: imageURLString.index(imageURLString.startIndex, offsetBy: 4))
                 self.podcastDataElement.imageURLString = imageURLString
-                
             }
         }
     }
@@ -81,6 +85,6 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        //Add end of file handling
+        isParserDone = true
     }
 }

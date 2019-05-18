@@ -41,7 +41,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func previousAction(_ sender: Any) {
-        if(podcastsTable.indexPathForSelectedRow!.row > 0)
+        if(podcastsTable.indexPathForSelectedRow! != nil && podcastsTable.indexPathForSelectedRow!.row > 0)
         {
             let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row - 1, section: 0 )
             podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
@@ -112,7 +112,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func nextAction(_ sender: Any) {
-        if(podcastsTable.indexPathForSelectedRow!.row < podcastsTableData.count - 1)
+        if(podcastsTable.indexPathForSelectedRow! != nil && podcastsTable.indexPathForSelectedRow!.row < podcastsTableData.count - 1)
         {
             let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row + 1, section: 0 )
             podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
@@ -200,7 +200,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         audioPlayer = AVPlayer(playerItem: playerItem)
         
         currentTitle.text = cell.titleLabel.text
-            
+        
+        playSlider.minimumValue = 0.0
         playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
             
         audioPlayer.play()
