@@ -38,6 +38,7 @@
 		4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */; };
 		4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C12253D2E60079B1D3 /* SignInViewController.swift */; };
 		4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C32253D3D40079B1D3 /* CartViewController.swift */; };
+		AED82FF62290A09B00CDD1E9 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED82FF52290A09B00CDD1E9 /* WebKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4FF318C12253D2E60079B1D3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4FF318C32253D3D40079B1D3 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		AED82FF52290A09B00CDD1E9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AED82FF62290A09B00CDD1E9 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +132,7 @@
 				4F971DD4225129D1002B3117 /* Brunch and SlayTests */,
 				4F971DDF225129D1002B3117 /* Brunch and SlayUITests */,
 				4F971DBC225129CC002B3117 /* Products */,
+				AED82FF42290A09B00CDD1E9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -195,6 +199,14 @@
 				4F971DE2225129D1002B3117 /* Info.plist */,
 			);
 			path = "Brunch and SlayUITests";
+			sourceTree = "<group>";
+		};
+		AED82FF42290A09B00CDD1E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AED82FF52290A09B00CDD1E9 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
