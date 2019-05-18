@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F06C3C8228F7D9100456965 /* Kingfisher.framework */; };
 		4F3F5FA82268E9810090BF27 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F5FA72268E9810090BF27 /* audio */; };
 		4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1250226774E600F68C87 /* PodcastCell.swift */; };
 		4F6D1253226778C000F68C87 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1252226778C000F68C87 /* ShopCell.swift */; };
@@ -30,6 +31,7 @@
 		4F9C3B96226912CF00EA3212 /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C3B95226912CF00EA3212 /* ClassCell.swift */; };
 		4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA270012266529400C834AE /* PodcastDetailViewController.swift */; };
 		4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA27003226653A700C834AE /* ShopDetailViewController.swift */; };
+		4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */; };
 		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
@@ -58,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F06C3C8228F7D9100456965 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		4F3F5FA72268E9810090BF27 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
 		4F6D1250226774E600F68C87 /* PodcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		4F6D1252226778C000F68C87 /* ShopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 		4F6D125622677D9100F68C87 /* PodcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastData.swift; sourceTree = "<group>"; };
 		4F6D1258226782E500F68C87 /* ClassData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassData.swift; sourceTree = "<group>"; };
 		4F6D125A2267836100F68C87 /* ShopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopData.swift; sourceTree = "<group>"; };
+		4F865AAD228F760E003A9094 /* Carthage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Carthage; sourceTree = "<group>"; };
+		4F865AAF228F7639003A9094 /* Kingfisher */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Kingfisher; path = Carthage/Checkouts/Kingfisher; sourceTree = "<group>"; };
 		4F95BE67225A95C800064122 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
 		4F971DBB225129CC002B3117 /* Brunch and Slay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Brunch and Slay.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F971DBE225129CC002B3117 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		4F9C3B95226912CF00EA3212 /* ClassCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassCell.swift; sourceTree = "<group>"; };
 		4FA270012266529400C834AE /* PodcastDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDetailViewController.swift; sourceTree = "<group>"; };
 		4FA27003226653A700C834AE /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
+		4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSPodcastReader.swift; sourceTree = "<group>"; };
 		4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -102,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +129,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F865AAC228F760E003A9094 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F06C3C8228F7D9100456965 /* Kingfisher.framework */,
+				4F865AAF228F7639003A9094 /* Kingfisher */,
+				4F865AAD228F760E003A9094 /* Carthage */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4F971DB2225129CC002B3117 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +146,7 @@
 				4F971DD4225129D1002B3117 /* Brunch and SlayTests */,
 				4F971DDF225129D1002B3117 /* Brunch and SlayUITests */,
 				4F971DBC225129CC002B3117 /* Products */,
+				4F865AAC228F760E003A9094 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +193,7 @@
 				4F6D125A2267836100F68C87 /* ShopData.swift */,
 				4F9C3B95226912CF00EA3212 /* ClassCell.swift */,
 				4F9A3D31226917620092CF15 /* CartData.swift */,
+				4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -207,6 +226,7 @@
 				4F971DB7225129CC002B3117 /* Sources */,
 				4F971DB8225129CC002B3117 /* Frameworks */,
 				4F971DB9225129CC002B3117 /* Resources */,
+				4F865AB1228F7679003A9094 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -325,6 +345,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4F865AB1228F7679003A9094 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4F971DB7225129CC002B3117 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -337,6 +379,7 @@
 				4F6D1259226782E500F68C87 /* ClassData.swift in Sources */,
 				4F9A3D32226917620092CF15 /* CartData.swift in Sources */,
 				4F971DEF22513F69002B3117 /* User.swift in Sources */,
+				4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */,
 				4F99367C226556D600878C3E /* EventDetailViewController.swift in Sources */,
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
 				4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */,
@@ -529,6 +572,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Brunch and Slay/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -546,6 +593,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "Brunch and Slay/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

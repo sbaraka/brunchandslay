@@ -464,7 +464,7 @@
                                 <rect key="frame" x="319" y="572" width="40" height="30"/>
                                 <state key="normal" title="Detail"/>
                                 <connections>
-                                    <segue destination="JHd-dD-Vpj" kind="show" id="8Zq-JA-oRt"/>
+                                    <action selector="detailButtonPressed:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="uJ6-YR-Ca7"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="8Ww-sZ-JhO">
@@ -513,6 +513,7 @@
                         <outlet property="playSlider" destination="8Ww-sZ-JhO" id="n9U-xL-DAw"/>
                         <outlet property="podcastsTable" destination="6Qx-TH-Jxu" id="rPc-ND-QPA"/>
                         <outlet property="previousButton" destination="6aY-oG-zch" id="NSb-8S-SHS"/>
+                        <segue destination="JHd-dD-Vpj" kind="show" identifier="showPodcastDetail" id="KjX-tO-w3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

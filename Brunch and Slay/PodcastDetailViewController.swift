@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
+class PodcastDetailViewController: UIViewController{
     
     var timer: Timer!
     
@@ -19,7 +19,7 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
     
     var playerIsPlaying:Bool?
     
-    var audioPlayer:AVAudioPlayer?
+    var audioPlayer:AVPlayer?
     
     var rowIndex:Int?
     
@@ -44,26 +44,23 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         if(rowIndex! > 0)
         {
             rowIndex = rowIndex! - 1
-            let asset = NSDataAsset(name: podcastsTableData![rowIndex!].audioURL)
-            do
-            {
-                audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
+            
+            let audioURLString = podcastsTableData![rowIndex!].audioURLString
+            let asset = AVAsset(url: URL(string: audioURLString)!)
+            let playerItem = AVPlayerItem(asset: asset)
+            
+            audioPlayer = AVPlayer(playerItem: playerItem)
                 
-                titleView.text = podcastsTableData![rowIndex!].title
+            titleView.text = podcastsTableData![rowIndex!].title
+            
+            let imageURL = URL(string: podcastsTableData![rowIndex!].imageURLString)
+            
+            album.kf.setImage(with: imageURL)
                 
-                album.image = podcastsTableData![rowIndex!].image
+            playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
                 
-                playSlider.maximumValue = Float((audioPlayer?.duration)!)
-                
-                audioPlayer?.delegate = self
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
-                playerIsPlaying = true
-            }
-            catch let error as NSError
-            {
-                print(error.localizedDescription)
-            }
+            audioPlayer?.play()
+            playerIsPlaying = true
         }
     }
     
@@ -82,27 +79,21 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         }
         else
         {
+            let url = podcastData!.audioURLString
+            let asset = AVAsset(url: URL(string: url)!)
+            let playerItem = AVPlayerItem(asset: asset)
             
-            let asset = NSDataAsset(name: podcastData!.audioURL)
-            do
-            {
-                audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav ")
-                audioPlayer!.delegate = self
-                
-                titleView.text = podcastsTableData![rowIndex!].title
-                
+            audioPlayer = AVPlayer(playerItem: playerItem)
             
-                    
-                audioPlayer!.prepareToPlay()
-                audioPlayer!.currentTime = TimeInterval(playSlider.value)
-                audioPlayer!.play()
-                playerIsPlaying = true
-                playButton.setImage(UIImage(named: "pause"), for: .normal)
-            }
-            catch let error as NSError
-            {
-                print(error.localizedDescription)
-            }
+            
+                
+            titleView.text = podcastsTableData![rowIndex!].title
+            let doubleTime = Double(playSlider.value)
+            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            audioPlayer!.seek(to: cmTime)
+            audioPlayer!.play()
+            playerIsPlaying = true
+            playButton.setImage(UIImage(named: "pause"), for: .normal)
             
             
         }
@@ -113,26 +104,24 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         if(rowIndex! < (podcastsTableData?.count)! - 1)
         {
             rowIndex = rowIndex! + 1
-            let asset = NSDataAsset(name: podcastsTableData![rowIndex!].audioURL)
-            do
-            {
-                audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
+            
+            let audioURLString = podcastsTableData![rowIndex!].audioURLString
+            let asset = AVAsset(url: URL(string: audioURLString)!)
+            let playerItem = AVPlayerItem(asset: asset)
+            
+            audioPlayer = AVPlayer(playerItem: playerItem)
                 
-                titleView.text = podcastsTableData![rowIndex!].title
+            titleView.text = podcastsTableData![rowIndex!].title
+            
+            let imageURLString = podcastsTableData![rowIndex!].imageURLString
+            let imageURL = URL(string: imageURLString)
+            
+            album.kf.setImage(with: imageURL)
                 
-                album.image = podcastsTableData![rowIndex!].image
-                
-                playSlider.maximumValue = Float((audioPlayer?.duration)!)
-                
-                audioPlayer?.delegate = self
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
-                playerIsPlaying = true
-            }
-            catch let error as NSError
-            {
-                print(error.localizedDescription)
-            }
+            playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+            
+            audioPlayer?.play()
+            playerIsPlaying = true
         }
         
     }
@@ -147,21 +136,24 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
        
         if(playerIsPlaying!)
         {
-            audioPlayer!.prepareToPlay()
-            audioPlayer!.currentTime = TimeInterval(playSlider.value)
+            let doubleTime = Double(playSlider.value)
+            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            audioPlayer!.seek(to: cmTime)
             audioPlayer!.play()
         }
         else
         {
-            audioPlayer!.currentTime = TimeInterval(playSlider.value)
+            let doubleTime = Double(playSlider.value)
+            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            audioPlayer!.seek(to: cmTime)
         }
         
     }
     
     @objc func updateSlider() {
-        if(playerIsPlaying! && (audioPlayer?.isPlaying)!)
+        if(playerIsPlaying! && audioPlayer?.rate != 0)
         {
-            playSlider.value = Float(audioPlayer!.currentTime)
+            playSlider.value = Float(CMTimeGetSeconds(audioPlayer!.currentTime()))
         }
     }
     
@@ -179,7 +171,7 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    @objc func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
         playButton.setImage(UIImage(named: "play"), for: .normal)
         
@@ -193,7 +185,12 @@ class PodcastDetailViewController: UIViewController, AVAudioPlayerDelegate {
         
         
         titleView.text = podcastData?.title
-        album.image = podcastData?.image
+        let imageURLString = podcastData?.imageURLString
+        let imageURL = URL(string: imageURLString!)
+        
+        album.kf.setImage(with: imageURL)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(audioPlayerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         
         if(playerIsPlaying!)
         {

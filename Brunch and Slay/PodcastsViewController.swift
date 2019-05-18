@@ -9,14 +9,14 @@
 import AVFoundation
 import UIKit
 
-class PodcastsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate {
+class PodcastsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var rssPodcastReader: RSSPodcastReader = RSSPodcastReader()
     var timer: Timer!
     
     var podcastsTableData: [PodcastData] = []
     
-    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
-    
+    var audioPlayer: AVPlayer!
     var playerIsPlaying:Bool = false
     
     @IBOutlet weak var currentTitle: UILabel!
@@ -30,6 +30,15 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var nextButton: UIButton!
     
     @IBOutlet weak var podcastsTable: UITableView!
+    
+    @IBAction func detailButtonPressed(_ sender: Any) {
+        
+        if(podcastsTable.indexPathForSelectedRow != nil)
+        {
+            performSegue(withIdentifier: "showPodcastDetail", sender: sender)
+        }
+    }
+    
     
     @IBAction func previousAction(_ sender: Any) {
         if(podcastsTable.indexPathForSelectedRow!.row > 0)
@@ -59,25 +68,21 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             let path:IndexPath? = podcastsTable!.indexPathForSelectedRow
             if(path != nil)
             {
-                let asset = NSDataAsset(name: podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURL)
-                do
-                {
-                    audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
-                    audioPlayer.delegate = self
+                let url = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
+                let asset = AVAsset(url: URL(string: url)!)
+                
+                let playerItem = AVPlayerItem(asset: asset)
+                
+                audioPlayer = AVPlayer(playerItem: playerItem )
                     
-                    currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
-                    
-                    
-                    audioPlayer.prepareToPlay()
-                    audioPlayer.currentTime = TimeInterval(playSlider.value)
-                    audioPlayer.play()
-                    playerIsPlaying = true
-                    playButton.setImage(UIImage(named: "pause"), for: .normal)
-                }
-                catch let error as NSError
-                {
-                    print(error.localizedDescription)
-                }
+                currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
+                let doubleTime = Double(playSlider.value)
+                let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+                audioPlayer.seek(to: cmTime)
+                audioPlayer.play()
+                playerIsPlaying = true
+                playButton.setImage(UIImage(named: "pause"), for: .normal)
+               
             }
             
             
@@ -89,20 +94,20 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     {
     
         if(podcastsTable.indexPathForSelectedRow != nil)
+        {
+        
+        
+            if segue.destination is PodcastDetailViewController
             {
-        
-        
-                if segue.destination is PodcastDetailViewController
-                {
-                    let vc = segue.destination as? PodcastDetailViewController
-                    vc?.delegate = self
-                    vc?.podcastData = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!]
-                    vc?.audioPlayer = audioPlayer
-                    vc?.playerIsPlaying = playerIsPlaying
-                    vc?.podcastsTableData = podcastsTableData
-                    vc?.rowIndex = (podcastsTable.indexPathForSelectedRow?.row)!
-                }
+                let vc = segue.destination as? PodcastDetailViewController
+                vc?.delegate = self
+                vc?.podcastData = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!]
+                vc?.audioPlayer = audioPlayer
+                vc?.playerIsPlaying = playerIsPlaying
+                vc?.podcastsTableData = podcastsTableData
+                vc?.rowIndex = (podcastsTable.indexPathForSelectedRow?.row)!
             }
+        }
     }
     
     
@@ -128,22 +133,25 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         if(playerIsPlaying)
         {
         
-            audioPlayer.prepareToPlay()
-            audioPlayer.currentTime = TimeInterval(playSlider.value)
+            let doubleTime = Double(playSlider.value)
+            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            audioPlayer.seek(to: cmTime)
             audioPlayer.play()
         }
         else
         {
-            audioPlayer.currentTime = TimeInterval(playSlider.value)
+            let doubleTime = Double(playSlider.value)
+            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            audioPlayer.seek(to: cmTime)
         }
     }
     
     
     
     @objc func updateSlider() {
-        if(playerIsPlaying && audioPlayer.isPlaying)
+        if(playerIsPlaying && audioPlayer.rate != 0)
         {
-            playSlider.value = Float(audioPlayer.currentTime)
+            playSlider.value = Float(CMTimeGetSeconds(audioPlayer.currentTime()))
         }
     }
     
@@ -158,8 +166,9 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = podcastsTable.dequeueReusableCell(withIdentifier: "podcastCell") as! PodcastCell
         
         cell.titleLabel.text = podcastsTableData[indexPath.row].title
+        let url = URL(string: podcastsTableData[indexPath.row].imageURLString)
         
-        cell.album.image = podcastsTableData[indexPath.row].image
+        cell.album.kf.setImage(with: url)
         
         
         let backGroundView = UIView()
@@ -171,7 +180,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    @objc func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
         playButton.setImage(UIImage(named: "play"), for: .normal)
         
@@ -181,27 +190,23 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     {
         let cell = tableView.cellForRow(at: indexPath) as! PodcastCell
         
-        let asset = NSDataAsset(name: podcastsTableData[(indexPath.row)].audioURL)
-        do
-        {
-            playButton.setImage(UIImage(named: "pause"), for: .normal)
+        let url = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
+        let asset = AVAsset(url: URL(string: url)!)
+        
+        let playerItem = AVPlayerItem(asset: asset)
+        
+        playButton.setImage(UIImage(named: "pause"), for: .normal)
             
-            audioPlayer = try AVAudioPlayer(data: asset!.data, fileTypeHint:"wav")
-                
-            currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
-            currentTitle.text = cell.titleLabel.text
+        audioPlayer = AVPlayer(playerItem: playerItem)
+        
+        currentTitle.text = cell.titleLabel.text
             
-            playSlider.maximumValue = Float(audioPlayer.duration)
+        playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
             
-            audioPlayer.delegate = self
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-            playerIsPlaying = true
-        }
-        catch let error as NSError
-        {
-            print(error.localizedDescription)
-        }
+        audioPlayer.play()
+        playerIsPlaying = true
+        
+        
     }
 
     override func viewDidLoad() {
@@ -211,13 +216,12 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
         currentTitle.text = "None Selected"
         
-        podcastsTableData = [
-            PodcastData(title: "Baking Pies with Noah",  image: UIImage(named: "baking_with_noah")!, audioURL: "bakingpies" ),
-            PodcastData(title: "It's Aziz-y as That", image: UIImage(named:"its_azizy_as_that")!, audioURL: "bakingpies"),
-            PodcastData(title: "Sammy's Secrets to Success", image: UIImage(named: "sammys_secrets")!, audioURL: "bakingpies"),
-            PodcastData(title: "Shivam's Shopping Tips", image: UIImage(named: "shop_with_shivam")!, audioURL: "bakingpies")
-            
-        ]
+        NotificationCenter.default.addObserver(self, selector: #selector(audioPlayerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        
+        let url = URL(string: "https://feeds.soundcloud.com/users/soundcloud:users:323536510/sounds.rss")
+        
+        podcastsTableData = rssPodcastReader.fetchPodcastsDataFromURL(url: url!)
+
         
         if(playerIsPlaying)
         {
