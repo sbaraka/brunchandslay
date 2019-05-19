@@ -8,6 +8,7 @@
 
 import AVFoundation
 import UIKit
+import Kingfisher
 
 class PodcastsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,6 +21,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     var playerIsPlaying:Bool = false
     
     @IBOutlet weak var currentTitle: UILabel!
+    
+    
     
     @IBOutlet weak var playSlider: UISlider!
     
@@ -41,7 +44,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func previousAction(_ sender: Any) {
-        if(podcastsTable.indexPathForSelectedRow! != nil && podcastsTable.indexPathForSelectedRow!.row > 0)
+        if(podcastsTable.indexPathForSelectedRow != nil && podcastsTable.indexPathForSelectedRow!.row > 0)
         {
             let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row - 1, section: 0 )
             podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
@@ -112,7 +115,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     @IBAction func nextAction(_ sender: Any) {
-        if(podcastsTable.indexPathForSelectedRow! != nil && podcastsTable.indexPathForSelectedRow!.row < podcastsTableData.count - 1)
+        if(podcastsTable.indexPathForSelectedRow != nil && podcastsTable.indexPathForSelectedRow!.row < podcastsTableData.count - 1)
         {
             let indexPath = IndexPath(row: podcastsTable.indexPathForSelectedRow!.row + 1, section: 0 )
             podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
@@ -165,7 +168,17 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = podcastsTable.dequeueReusableCell(withIdentifier: "podcastCell") as! PodcastCell
         
-        cell.titleLabel.text = podcastsTableData[indexPath.row].title
+        if(podcastsTableData[indexPath.row].title.count >= 34)
+        {
+            cell.titleLabel.text = podcastsTableData[indexPath.row].title.prefix(34) + "..."
+        }
+        else
+        {
+            cell.titleLabel.text = podcastsTableData[indexPath.row].title
+        }
+        
+        cell.authorLabel.text = podcastsTableData[indexPath.row].author
+        
         let url = URL(string: podcastsTableData[indexPath.row].imageURLString)
         
         cell.album.kf.setImage(with: url)
@@ -195,18 +208,19 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
         let playerItem = AVPlayerItem(asset: asset)
         
-        playButton.setImage(UIImage(named: "pause"), for: .normal)
-            
         audioPlayer = AVPlayer(playerItem: playerItem)
         
-        currentTitle.text = cell.titleLabel.text
+        while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
         
-        playSlider.minimumValue = 0.0
-        playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+        if(playerItem.status != AVPlayerItem.Status.failed)
+        {
+            currentTitle.text = cell.titleLabel.text
+            playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+            playButton.setImage(UIImage(named: "pause"), for: .normal)
+            audioPlayer.play()
+            playerIsPlaying = true
             
-        audioPlayer.play()
-        playerIsPlaying = true
-        
+        }
         
     }
 

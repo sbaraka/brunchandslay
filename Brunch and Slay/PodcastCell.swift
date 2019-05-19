@@ -16,6 +16,7 @@ class PodcastCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var authorLabel: UILabel!
     
     
     override func awakeFromNib() {

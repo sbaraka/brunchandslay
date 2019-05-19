@@ -27,6 +27,9 @@ class PodcastDetailViewController: UIViewController{
     
     @IBOutlet weak var titleView: UILabel!
     
+    @IBOutlet weak var authorLabel: UILabel!
+    
+    
     @IBOutlet weak var album: UIImageView!
     
     @IBOutlet weak var playSlider: UISlider!
@@ -52,6 +55,8 @@ class PodcastDetailViewController: UIViewController{
             audioPlayer = AVPlayer(playerItem: playerItem)
                 
             titleView.text = podcastsTableData![rowIndex!].title
+            
+             authorLabel.text = podcastsTableData![rowIndex!].author
             
             let imageURL = URL(string: podcastsTableData![rowIndex!].imageURLString)
             
@@ -113,6 +118,8 @@ class PodcastDetailViewController: UIViewController{
             audioPlayer = AVPlayer(playerItem: playerItem)
                 
             titleView.text = podcastsTableData![rowIndex!].title
+            
+            authorLabel.text = podcastsTableData![rowIndex!].author
             
             let imageURLString = podcastsTableData![rowIndex!].imageURLString
             let imageURL = URL(string: imageURLString)
@@ -187,6 +194,8 @@ class PodcastDetailViewController: UIViewController{
         
         
         titleView.text = podcastData?.title
+        authorLabel.text = podcastData?.author
+        
         let imageURLString = podcastData?.imageURLString
         let imageURL = URL(string: imageURLString!)
         

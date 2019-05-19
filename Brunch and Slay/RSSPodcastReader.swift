@@ -8,13 +8,12 @@
 
 import Foundation
 import UIKit
-import Kingfisher
 
 class RSSPodcastReader: NSObject, XMLParserDelegate
 {
     private var podcastDataList: [PodcastData] = [PodcastData]()
     private var podcastDataElement: PodcastData = PodcastData(title: "", imageURLString: "", audioURLString: "", author: "")
-    private var foundCharacters: String = ""
+    var tempElementData: String = ""
     
     var isParserDone: Bool = false
     
@@ -61,27 +60,29 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
                 self.podcastDataElement.imageURLString = imageURLString
             }
         }
+        self.tempElementData = ""
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "title"
         {
-            self.podcastDataElement.title = self.foundCharacters
+            self.podcastDataElement.title = self.tempElementData
+            //self.podcastDataElement.title = "Title"
         }
         else if elementName == "itunes:author"
         {
-            self.podcastDataElement.author = self.foundCharacters
+            self.podcastDataElement.author = self.tempElementData
         }
         else if elementName == "item"
         {
             let tempPodcastData = PodcastData(title: podcastDataElement.title, imageURLString: podcastDataElement.imageURLString, audioURLString: podcastDataElement.audioURLString, author: podcastDataElement.author)
             self.podcastDataList.append(tempPodcastData)
         }
-        self.foundCharacters = ""
+        self.tempElementData = ""
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
-        self.foundCharacters += string
+        self.tempElementData = self.tempElementData + string
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
