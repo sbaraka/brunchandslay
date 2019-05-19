@@ -259,14 +259,6 @@
             </objects>
             <point key="canvasLocation" x="-738.39999999999998" y="1584.5577211394304"/>
         </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="bA3-pS-GZR">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="6fa-to-aNz" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uDq-Dj-PfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-90" y="1585"/>
-        </scene>
         <!--Shop Detail View Controller-->
         <scene sceneID="2iG-0F-OqN">
             <objects>
@@ -531,32 +523,44 @@
         <scene sceneID="MRY-8P-cpa">
             <objects>
                 <viewController id="XDK-mo-UYO" customClass="ClassesViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableViewCell key="view" clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2jP-GA-zvF">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MQL-rI-2tu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2jP-GA-zvF" id="ulg-oy-KRD">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="666.5"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iju-L3-VM8">
-                                    <rect key="frame" x="67" y="269" width="240" height="128"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <wkWebViewConfiguration key="configuration">
-                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                        <wkPreferences key="preferences"/>
-                                    </wkWebViewConfiguration>
-                                </wkWebView>
-                            </subviews>
-                        </tableViewCellContentView>
-                    </tableViewCell>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="youtubecell" rowHeight="112" id="cOT-sf-bSo" customClass="YoutubeCell" customModule="Brunch_and_Slay">
+                                <rect key="frame" x="0.0" y="28" width="375" height="112"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cOT-sf-bSo" id="Og9-uS-M6H">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="111.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQN-JW-mgk">
+                                            <rect key="frame" x="184" y="14" width="175" height="82"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <wkWebViewConfiguration key="configuration">
+                                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                <wkPreferences key="preferences"/>
+                                            </wkWebViewConfiguration>
+                                        </wkWebView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="youtubewebview" destination="JQN-JW-mgk" id="Fo3-TT-HaV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="XDK-mo-UYO" id="HYz-vT-lv7"/>
+                            <outlet property="delegate" destination="XDK-mo-UYO" id="8FH-ZM-C3S"/>
+                        </connections>
+                    </tableView>
                     <tabBarItem key="tabBarItem" title="Classes" image="classes" selectedImage="classes" springLoaded="YES" id="ffJ-hT-adx">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="youtubewebview" destination="iju-L3-VM8" id="sny-pe-Wov"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3re-sP-YaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
