@@ -17,7 +17,7 @@ class YoutubeCell:UITableViewCell{
 
 
 class ClassesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
-    let list = [URL(string:"https://www.youtube.com/embed/WR4QQsNm1ok"), URL(string:"https://www.youtube.com/embed/2nt8aFDCnNE")]
+    let list = [URL(string:"https://www.youtube.com/embed/WR4QQsNm1ok"), URL(string:"https://www.youtube.com/embed/N1cHWRi7Nrg"),URL(string:"https://www.youtube.com/embed/-KpZxW_BIbc"),URL(string:"https://www.youtube.com/embed/GbB1OkRQoQw"),URL(string:"https://www.youtube.com/embed/jBnmHE9y3so"),URL(string:"https://www.youtube.com/embed/D7MSgjhBze8"),URL(string:"https://www.youtube.com/embed/crdphdQzsuE"),URL(string:"https://www.youtube.com/embed/HCHvrtwYejQ"),URL(string:"https://www.youtube.com/embed/RtEWJ31ff5s")]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return list.count
