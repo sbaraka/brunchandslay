@@ -81,7 +81,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     
                 currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
                 let doubleTime = Double(playSlider.value)
-                let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: 1000000)
+                let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
                 audioPlayer.seek(to: cmTime)
                 audioPlayer.play()
                 playerIsPlaying = true
@@ -138,15 +138,18 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         {
         
             let doubleTime = Double(playSlider.value)
-            let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: 1000000)
+            let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
             audioPlayer.seek(to: cmTime)
             audioPlayer.play()
         }
         else
         {
-            let doubleTime = Double(playSlider.value)
-            let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: 1000000)
-            audioPlayer.seek(to: cmTime)
+            if(audioPlayer.currentItem != nil)
+            {
+                let doubleTime = Double(playSlider.value)
+                let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: audioPlayer.currentItem!.asset.duration.timescale)
+                audioPlayer.seek(to: cmTime)
+            }
         }
     }
     
