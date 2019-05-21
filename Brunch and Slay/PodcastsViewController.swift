@@ -81,7 +81,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     
                 currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
                 let doubleTime = Double(playSlider.value)
-                let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+                let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: 1000000)
                 audioPlayer.seek(to: cmTime)
                 audioPlayer.play()
                 playerIsPlaying = true
@@ -201,48 +201,50 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let cell = tableView.cellForRow(at: indexPath) as! PodcastCell
         
-        let tempURLString = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
-        if(tempURLString != audioURLString)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as! PodcastCell?
         {
-            audioURLString = tempURLString
-            
-            if(playerIsPlaying)
+            let tempURLString = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
+            if(tempURLString != audioURLString)
             {
-                audioPlayer.pause()
-            }
-        
-            let asset = AVURLAsset(url: URL(string: audioURLString)!)
-        
-            asset.resourceLoader.setDelegate(ResourceLoadingDelegate(), queue: DispatchQueue.global(qos: .userInitiated))
+                audioURLString = tempURLString
             
-            let playerItem = AVPlayerItem(asset: asset)
+                if(playerIsPlaying)
+                {
+                    audioPlayer.pause()
+                }
+        
+                let asset = AVURLAsset(url: URL(string: audioURLString)!)
+        
+                asset.resourceLoader.setDelegate(ResourceLoadingDelegate(), queue: DispatchQueue.global(qos: .userInitiated))
             
-            if(audioPlayer == nil)
-            {
-               audioPlayer = AVPlayer(playerItem: playerItem)
-            }
-            else
-            {
-                audioPlayer.replaceCurrentItem(with: playerItem)
-            }
+                let playerItem = AVPlayerItem(asset: asset)
+            
+                if(audioPlayer == nil)
+                {
+                    audioPlayer = AVPlayer(playerItem: playerItem)
+                }
+                else
+                {
+                    audioPlayer.replaceCurrentItem(with: playerItem)
+                }
             
         
-            //while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
+                //while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
         
-            if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-            {
-                currentTitle.text = cell.titleLabel.text
-                playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
-                playButton.setImage(UIImage(named: "pause"), for: .normal)
-                //audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
-                audioPlayer.play()
-                playerIsPlaying = true
+                if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+                {
+                    currentTitle.text = cell.titleLabel.text
+                    playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.asset.duration))
+                    playButton.setImage(UIImage(named: "pause"), for: .normal)
+                    //audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
+                    audioPlayer.play()
+                    playerIsPlaying = true
             
+                }
             }
         }
-        
     }
 
     override func viewDidLoad() {
