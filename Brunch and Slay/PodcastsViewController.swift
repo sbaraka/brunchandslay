@@ -138,14 +138,14 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         {
         
             let doubleTime = Double(playSlider.value)
-            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: 1000000)
             audioPlayer.seek(to: cmTime)
             audioPlayer.play()
         }
         else
         {
             let doubleTime = Double(playSlider.value)
-            let cmTime = CMTime(seconds: doubleTime, preferredTimescale: 1000000)
+            let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: 1000000)
             audioPlayer.seek(to: cmTime)
         }
     }
@@ -236,7 +236,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 currentTitle.text = cell.titleLabel.text
                 playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
                 playButton.setImage(UIImage(named: "pause"), for: .normal)
-                audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
+                //audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
                 audioPlayer.play()
                 playerIsPlaying = true
             
