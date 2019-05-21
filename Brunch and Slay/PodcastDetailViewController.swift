@@ -49,7 +49,7 @@ class PodcastDetailViewController: UIViewController{
             rowIndex = rowIndex! - 1
             
             let audioURLString = podcastsTableData![rowIndex!].audioURLString
-            let asset = AVAsset(url: URL(string: audioURLString)!)
+            let asset = AVURLAsset(url: URL(string: audioURLString)!)
             let playerItem = AVPlayerItem(asset: asset)
             
             audioPlayer = AVPlayer(playerItem: playerItem)
@@ -86,7 +86,7 @@ class PodcastDetailViewController: UIViewController{
         else
         {
             let url = podcastData!.audioURLString
-            let asset = AVAsset(url: URL(string: url)!)
+            let asset = AVURLAsset(url: URL(string: url)!)
             let playerItem = AVPlayerItem(asset: asset)
             
             audioPlayer = AVPlayer(playerItem: playerItem)
@@ -112,25 +112,29 @@ class PodcastDetailViewController: UIViewController{
             rowIndex = rowIndex! + 1
             
             let audioURLString = podcastsTableData![rowIndex!].audioURLString
-            let asset = AVAsset(url: URL(string: audioURLString)!)
+            let asset = AVURLAsset(url: URL(string: audioURLString)!)
             let playerItem = AVPlayerItem(asset: asset)
             
             audioPlayer = AVPlayer(playerItem: playerItem)
-                
-            titleView.text = podcastsTableData![rowIndex!].title
             
-            authorLabel.text = podcastsTableData![rowIndex!].author
+            if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+            {
             
-            let imageURLString = podcastsTableData![rowIndex!].imageURLString
-            let imageURL = URL(string: imageURLString)
+                titleView.text = podcastsTableData![rowIndex!].title
             
-            album.kf.setImage(with: imageURL)
+                authorLabel.text = podcastsTableData![rowIndex!].author
             
-            playSlider.minimumValue = 0.0
-            playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+                let imageURLString = podcastsTableData![rowIndex!].imageURLString
+                let imageURL = URL(string: imageURLString)
             
-            audioPlayer?.play()
-            playerIsPlaying = true
+                album.kf.setImage(with: imageURL)
+            
+                playSlider.minimumValue = 0.0
+                playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+            
+                audioPlayer?.play()
+                playerIsPlaying = true
+            }
         }
         
     }
@@ -166,7 +170,7 @@ class PodcastDetailViewController: UIViewController{
         }
     }
     
-    override func didMove(toParent parent: UIViewController?) {
+    /*override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
         
         if (parent != nil)
@@ -178,7 +182,7 @@ class PodcastDetailViewController: UIViewController{
             castParent.playerIsPlaying = playerIsPlaying!
             castParent.podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
         }
-    }
+    }*/
     
     @objc func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
