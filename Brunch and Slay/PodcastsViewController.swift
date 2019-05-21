@@ -82,10 +82,11 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
                 let doubleTime = Double(playSlider.value)
                 let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
-                audioPlayer.seek(to: cmTime)
-                audioPlayer.play()
-                playerIsPlaying = true
-                playButton.setImage(UIImage(named: "pause"), for: .normal)
+                audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                    self.audioPlayer.play()
+                    self.playerIsPlaying = true
+                    self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                }
                
             }
             
@@ -139,8 +140,10 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
             let doubleTime = Double(playSlider.value)
             let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
-            audioPlayer.seek(to: cmTime)
-            audioPlayer.play()
+            audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                self.audioPlayer.play()
+            }
+            
         }
         else
         {
@@ -148,7 +151,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             {
                 let doubleTime = Double(playSlider.value)
                 let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: audioPlayer.currentItem!.asset.duration.timescale)
-                audioPlayer.seek(to: cmTime)
+                audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             }
         }
     }

@@ -45,10 +45,13 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         if ( elementName == "enclosure" )
         {
-            if var url = attributeDict["url"]
+            if let fullAudioURLString = attributeDict["url"]
             {
-                url.insert("s", at: url.index(url.startIndex, offsetBy: 4))
-                self.podcastDataElement.audioURLString = url
+                //url.insert("s", at: url.index(url.startIndex, offsetBy: 4))
+                let subStringArray = fullAudioURLString.components(separatedBy: "http")
+                var sanitizedURLString = subStringArray[2]
+                sanitizedURLString = "https"+sanitizedURLString
+                self.podcastDataElement.audioURLString = sanitizedURLString
             }
             
         }
