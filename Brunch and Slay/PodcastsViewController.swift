@@ -17,12 +17,13 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var podcastsTableData: [PodcastData] = []
     
+    var audioURLString: String = ""
+    
     var audioPlayer: AVPlayer!
+    
     var playerIsPlaying:Bool = false
     
     @IBOutlet weak var currentTitle: UILabel!
-    
-    
     
     @IBOutlet weak var playSlider: UISlider!
     
@@ -183,7 +184,6 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
         cell.album.kf.setImage(with: url)
         
-        
         let backGroundView = UIView()
         
         backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
@@ -203,23 +203,44 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     {
         let cell = tableView.cellForRow(at: indexPath) as! PodcastCell
         
-        let url = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
-        let asset = AVAsset(url: URL(string: url)!)
-        
-        let playerItem = AVPlayerItem(asset: asset)
-        
-        audioPlayer = AVPlayer(playerItem: playerItem)
-        
-        while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
-        
-        if(playerItem.status != AVPlayerItem.Status.failed)
+        let tempURLString = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
+        if(tempURLString != audioURLString)
         {
-            currentTitle.text = cell.titleLabel.text
-            playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
-            playButton.setImage(UIImage(named: "pause"), for: .normal)
-            audioPlayer.play()
-            playerIsPlaying = true
+            audioURLString = tempURLString
             
+            if(playerIsPlaying)
+            {
+                audioPlayer.pause()
+            }
+        
+            let asset = AVURLAsset(url: URL(string: audioURLString)!)
+        
+            asset.resourceLoader.setDelegate(ResourceLoadingDelegate(), queue: DispatchQueue.global(qos: .userInitiated))
+            
+            let playerItem = AVPlayerItem(asset: asset)
+            
+            if(audioPlayer == nil)
+            {
+               audioPlayer = AVPlayer(playerItem: playerItem)
+            }
+            else
+            {
+                audioPlayer.replaceCurrentItem(with: playerItem)
+            }
+            
+        
+            //while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
+        
+            if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+            {
+                currentTitle.text = cell.titleLabel.text
+                playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+                playButton.setImage(UIImage(named: "pause"), for: .normal)
+                audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
+                audioPlayer.play()
+                playerIsPlaying = true
+            
+            }
         }
         
     }
