@@ -175,7 +175,15 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             
             let seconds = total - 60 * minutes
             
-            currentTimeLabel.text = String(minutes) + ":" + String(seconds)
+            currentTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
+            
+            let endTotal = Int(audioPlayer.currentItem!.asset.duration.seconds)
+            
+            let endMinutes = Int(endTotal / 60)
+            
+            let endSeconds = Int(endTotal - 60 * endMinutes)
+            
+            endTimeLabel.text = String(endMinutes) + ":" + String(format: "%02d",endSeconds)
         }
     }
     
@@ -256,20 +264,25 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
                     currentTitle.text = cell.titleLabel.text
-                    //playSlider.maximumValue = Float(playerItem.asset.duration.seconds)
+                    
                     let total = Int(playerItem.asset.duration.seconds)
                     
                     let minutes = Int(total / 60)
                     
                     let seconds = Int(total - 60 * minutes)
                     
-                    endTimeLabel.text = String(minutes) + ":" + String(seconds)
+                    endTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
                     
                     
                     playButton.setImage(UIImage(named: "pause"), for: .normal)
-                    //audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
-                    audioPlayer.play()
-                    playerIsPlaying = true
+                    
+                    
+                    playSlider.value = 0
+                    
+                    audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                        self.audioPlayer.play()
+                        self.playerIsPlaying = true
+                    }
             
                 }
                 

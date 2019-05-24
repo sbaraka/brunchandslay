@@ -27,6 +27,11 @@ class PodcastDetailViewController: UIViewController{
     
     weak var delegate: PodcastsViewController!
     
+    
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    
+    @IBOutlet weak var endTimeLabel: UILabel!
+    
     @IBOutlet weak var titleView: UILabel!
     
     @IBOutlet weak var authorLabel: UILabel!
@@ -81,11 +86,20 @@ class PodcastDetailViewController: UIViewController{
                 
                     album.kf.setImage(with: imageURL)
                 
-                    playSlider.minimumValue = 0.0
-                    playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
+                    let total = Int(playerItem.asset.duration.seconds)
                     
-                    audioPlayer?.play()
-                    playerIsPlaying = true
+                    let minutes = Int(total / 60)
+                    
+                    let seconds = Int(total - 60 * minutes)
+                    
+                    endTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
+                    
+                    playSlider.value = 0
+                    
+                    audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                        self.audioPlayer!.play()
+                        self.playerIsPlaying = true
+                    }
                 }
             }
         }
@@ -113,7 +127,9 @@ class PodcastDetailViewController: UIViewController{
             audioPlayer = AVPlayer(playerItem: playerItem)
                 
             titleView.text = podcastsTableData![rowIndex!].title
-            let doubleTime = Double(playSlider.value)
+            let seconds = audioPlayer?.currentItem!.asset.duration.seconds
+            
+            let doubleTime = Double(seconds! * Double(playSlider.value))
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: (audioPlayer?.currentItem?.asset.duration.timescale)!)
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                 self.audioPlayer!.play()
@@ -160,11 +176,14 @@ class PodcastDetailViewController: UIViewController{
                     
                     album.kf.setImage(with: imageURL)
                     
-                    playSlider.minimumValue = 0.0
-                    playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.duration))
                     
-                    audioPlayer?.play()
-                    playerIsPlaying = true
+                    
+                    playSlider.value = 0
+                    
+                    audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                        self.audioPlayer!.play()
+                        self.playerIsPlaying = true
+                    }
                 }
             }
         }
@@ -181,7 +200,8 @@ class PodcastDetailViewController: UIViewController{
        
         if(playerIsPlaying!)
         {
-            let doubleTime = Double(playSlider.value)
+            let seconds = audioPlayer!.currentItem!.asset.duration.seconds
+            let doubleTime = Double(seconds * Double(playSlider.value))
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: ((audioPlayer?.currentItem?.asset.duration.timescale)!))
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                 self.audioPlayer!.play()
@@ -189,7 +209,8 @@ class PodcastDetailViewController: UIViewController{
         }
         else
         {
-            let doubleTime = Double(playSlider.value)
+           let seconds = audioPlayer!.currentItem!.asset.duration.seconds
+            let doubleTime = Double(seconds * Double(playSlider.value))
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: ((audioPlayer?.currentItem?.asset.duration.timescale)!))
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
         }
@@ -199,7 +220,23 @@ class PodcastDetailViewController: UIViewController{
     @objc func updateSlider() {
         if(playerIsPlaying! && audioPlayer?.rate != 0)
         {
-            playSlider.value = Float(CMTimeGetSeconds(audioPlayer!.currentTime()))
+            playSlider.value = Float(audioPlayer!.currentTime().seconds/audioPlayer!.currentItem!.asset.duration.seconds)
+            
+            let total = Int(audioPlayer!.currentTime().seconds)
+            
+            let minutes = Int(audioPlayer!.currentTime().seconds/60)
+            
+            let seconds = total - 60 * minutes
+            
+            currentTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
+            
+            let endTotal = Int(audioPlayer!.currentItem!.asset.duration.seconds)
+            
+            let endMinutes = Int(endTotal / 60)
+            
+            let endSeconds = Int(endTotal - 60 * endMinutes)
+            
+            endTimeLabel.text = String(endMinutes) + ":" + String(format: "%02d",endSeconds)
         }
     }
     
