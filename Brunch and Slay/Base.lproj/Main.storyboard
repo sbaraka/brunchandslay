@@ -420,7 +420,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rth-R3-CSu">
-                                                    <rect key="frame" x="110" y="55" width="52" height="21"/>
+                                                    <rect key="frame" x="110" y="55.5" width="52" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -498,6 +498,18 @@
                                     <action selector="startScrub:" destination="8rJ-Kc-sve" eventType="touchDown" id="jrr-be-4hS"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQa-Te-poN">
+                                <rect key="frame" x="6" y="531" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4F-49-KgB">
+                                <rect key="frame" x="327" y="531" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -515,12 +527,15 @@
                             <constraint firstItem="tgJ-RC-42B" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DhS-S8-Kic" secondAttribute="trailing" constant="8" symbolic="YES" id="JFk-dz-c8s"/>
                             <constraint firstItem="75Z-0B-pbU" firstAttribute="leading" secondItem="6aY-oG-zch" secondAttribute="trailing" constant="50" id="L7o-Q5-aUR"/>
                             <constraint firstItem="6Qx-TH-Jxu" firstAttribute="centerX" secondItem="0gN-si-d7r" secondAttribute="centerX" id="QMK-w3-WDs"/>
+                            <constraint firstItem="c4F-49-KgB" firstAttribute="leading" secondItem="8Ww-sZ-JhO" secondAttribute="trailing" constant="8" symbolic="YES" id="RsY-qf-9Rf"/>
                             <constraint firstItem="75Z-0B-pbU" firstAttribute="top" secondItem="DhS-S8-Kic" secondAttribute="top" id="VfI-JR-qb5"/>
                             <constraint firstItem="0gN-si-d7r" firstAttribute="top" secondItem="6Qx-TH-Jxu" secondAttribute="bottom" constant="8" symbolic="YES" id="Weq-F3-6Sm"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="6aY-oG-zch" secondAttribute="bottom" constant="12" id="Zyl-uI-N7G"/>
                             <constraint firstItem="6aY-oG-zch" firstAttribute="top" secondItem="8Ww-sZ-JhO" secondAttribute="bottom" constant="12" id="aMR-HI-5sl"/>
+                            <constraint firstItem="c4F-49-KgB" firstAttribute="baseline" secondItem="ZQa-Te-poN" secondAttribute="baseline" id="bt4-a3-kEw"/>
                             <constraint firstItem="6Qx-TH-Jxu" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="hnT-uE-9Qe"/>
                             <constraint firstItem="8Ww-sZ-JhO" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="56" id="j91-dq-Ku4"/>
+                            <constraint firstItem="c4F-49-KgB" firstAttribute="centerY" secondItem="8Ww-sZ-JhO" secondAttribute="centerY" id="mMI-8W-gYu"/>
                             <constraint firstItem="DhS-S8-Kic" firstAttribute="centerY" secondItem="tgJ-RC-42B" secondAttribute="centerY" id="pqh-22-DK5"/>
                             <constraint firstAttribute="trailing" secondItem="6Qx-TH-Jxu" secondAttribute="trailing" id="vtk-st-DIC"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="bottom" secondItem="tgJ-RC-42B" secondAttribute="bottom" constant="16" id="xSo-s5-3Rh"/>
@@ -532,7 +547,9 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="currentTimeLabel" destination="ZQa-Te-poN" id="kpe-DR-Oob"/>
                         <outlet property="currentTitle" destination="0gN-si-d7r" id="sda-cm-Hhy"/>
+                        <outlet property="endTimeLabel" destination="c4F-49-KgB" id="ItR-Wc-gb8"/>
                         <outlet property="nextButton" destination="DhS-S8-Kic" id="AUC-hR-0wc"/>
                         <outlet property="playButton" destination="75Z-0B-pbU" id="e55-0I-8ua"/>
                         <outlet property="playSlider" destination="8Ww-sZ-JhO" id="n9U-xL-DAw"/>

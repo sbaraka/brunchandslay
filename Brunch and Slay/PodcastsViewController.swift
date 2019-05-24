@@ -23,6 +23,10 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var playerIsPlaying:Bool = false
     
+    @IBOutlet weak var currentTimeLabel: UILabel!
+    
+    @IBOutlet weak var endTimeLabel: UILabel!
+    
     @IBOutlet weak var currentTitle: UILabel!
     
     @IBOutlet weak var playSlider: UISlider!
@@ -161,7 +165,14 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func updateSlider() {
         if(playerIsPlaying && audioPlayer.rate != 0)
         {
-            playSlider.value = Float(CMTimeGetSeconds(audioPlayer.currentTime()))
+            playSlider.value = Float(audioPlayer.currentTime().seconds)
+            let total = Int(audioPlayer.currentTime().seconds)
+            
+            let minutes = Int(audioPlayer.currentTime().seconds/60)
+            
+            let seconds = total - 60 * minutes
+            
+            currentTimeLabel.text = String(minutes) + ":" + String(seconds)
         }
     }
     
@@ -242,13 +253,23 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
                     currentTitle.text = cell.titleLabel.text
-                    playSlider.maximumValue = Float(CMTimeGetSeconds(playerItem.asset.duration))
+                    playSlider.maximumValue = Float(playerItem.asset.duration.seconds)
+                    let total = Int(playerItem.asset.duration.seconds)
+                    
+                    let minutes = Int(total / 60)
+                    
+                    let seconds = Int(total - 60 * minutes)
+                    
+                    endTimeLabel.text = String(minutes) + ":" + String(seconds)
+                    
+                    
                     playButton.setImage(UIImage(named: "pause"), for: .normal)
                     //audioPlayer.seek(to: CMTimeMakeWithSeconds(0.0, preferredTimescale: 1000000))
                     audioPlayer.play()
                     playerIsPlaying = true
             
                 }
+                
             }
         }
     }
