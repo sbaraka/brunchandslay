@@ -84,7 +84,9 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 audioPlayer = AVPlayer(playerItem: playerItem )
                     
                 currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
-                let doubleTime = Double(playSlider.value)
+                let seconds = audioPlayer.currentItem!.asset.duration.seconds
+                
+                let doubleTime = Double( seconds * Double(playSlider.value))
                 let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
                 audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                     self.audioPlayer.play()
@@ -141,8 +143,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
         if(playerIsPlaying)
         {
-        
-            let doubleTime = Double(playSlider.value)
+            let seconds = audioPlayer.currentItem!.asset.duration.seconds
+            let doubleTime = Double(seconds * Double(playSlider.value))
             let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
             audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                 self.audioPlayer.play()
@@ -153,7 +155,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         {
             if(audioPlayer.currentItem != nil)
             {
-                let doubleTime = Double(playSlider.value)
+                let seconds = audioPlayer.currentItem!.asset.duration.seconds
+                let doubleTime = Double(seconds * Double(playSlider.value))
                 let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: audioPlayer.currentItem!.asset.duration.timescale)
                 audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
             }
@@ -165,7 +168,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     @objc func updateSlider() {
         if(playerIsPlaying && audioPlayer.rate != 0)
         {
-            playSlider.value = Float(audioPlayer.currentTime().seconds)
+            playSlider.value = Float(audioPlayer.currentTime().seconds/(audioPlayer.currentItem?.asset.duration.seconds)!)
             let total = Int(audioPlayer.currentTime().seconds)
             
             let minutes = Int(audioPlayer.currentTime().seconds/60)
@@ -253,7 +256,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
                     currentTitle.text = cell.titleLabel.text
-                    playSlider.maximumValue = Float(playerItem.asset.duration.seconds)
+                    //playSlider.maximumValue = Float(playerItem.asset.duration.seconds)
                     let total = Int(playerItem.asset.duration.seconds)
                     
                     let minutes = Int(total / 60)
