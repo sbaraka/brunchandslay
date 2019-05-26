@@ -265,8 +265,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
                 //while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
         
-                if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-                {
+                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+                //{
                     playSlider.value = 0
                     
                     audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
@@ -286,7 +286,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                     }
             
-                }
+               // }
                 
             }
         }

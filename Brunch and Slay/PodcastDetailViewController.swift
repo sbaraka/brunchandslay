@@ -78,8 +78,8 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                 }
                 
                 
-                if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-                {
+                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+                //{
                     playSlider.value = 0
                     
                     audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
@@ -93,7 +93,7 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                         
                         self.album.kf.setImage(with: imageURL)
                     }
-                }
+                //}
             }
         }
     }
@@ -159,8 +159,8 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                 }
                 
                 
-                if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-                {
+                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
+               // {
                     
                     playSlider.value = 0
                     
@@ -176,7 +176,7 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                         self.album.kf.setImage(with: imageURL)
                         
                     }
-                }
+                //}
             }
         }
         
@@ -246,8 +246,7 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
             practicalParent?.tableView((practicalParent?.podcastsTable)!, didSelectRowAt: indexPath)
             practicalParent?.playSlider.value = playSlider.value
             practicalParent?.audioPlayer = audioPlayer!
-            practicalParent?.playerIsPlaying = !playerIsPlaying!
-            practicalParent?.playAction((Any).self)
+            practicalParent?.playerIsPlaying = playerIsPlaying!
         }
     }
     
