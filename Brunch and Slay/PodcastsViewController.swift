@@ -68,7 +68,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             audioPlayer.pause()
             playerIsPlaying = false;
             
-            currentTitle.text = "None Selected"
+            //currentTitle.text = "None Selected"
         }
         else
         {
@@ -83,7 +83,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 
                 audioPlayer = AVPlayer(playerItem: playerItem )
                     
-                currentTitle.text = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].title
+                
                 let seconds = audioPlayer.currentItem!.asset.duration.seconds
                 
                 let doubleTime = Double( seconds * Double(playSlider.value))
@@ -92,6 +92,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     self.audioPlayer.play()
                     self.playerIsPlaying = true
                     self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                    self.currentTitle.text = self.podcastsTableData[(self.podcastsTable.indexPathForSelectedRow?.row)!].title
+                    
                 }
                
             }
@@ -117,6 +119,8 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 vc?.playerIsPlaying = playerIsPlaying
                 vc?.podcastsTableData = podcastsTableData
                 vc?.rowIndex = (podcastsTable.indexPathForSelectedRow?.row)!
+                vc?.practicalParent = self
+                //vc?.playSlider.value = playSlider.value
             }
         }
     }
@@ -153,7 +157,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else
         {
-            if(audioPlayer.currentItem != nil)
+            if( audioPlayer != nil && audioPlayer.currentItem != nil)
             {
                 let seconds = audioPlayer.currentItem!.asset.duration.seconds
                 let doubleTime = Double(seconds * Double(playSlider.value))
@@ -231,7 +235,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     {
         
         
-        if let cell = tableView.cellForRow(at: indexPath) as! PodcastCell?
+        if (tableView.cellForRow(at: indexPath) as! PodcastCell?) != nil
         {
             let tempURLString = podcastsTableData[(podcastsTable.indexPathForSelectedRow?.row)!].audioURLString
             if(tempURLString != audioURLString)
@@ -263,25 +267,23 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
-                    currentTitle.text = cell.titleLabel.text
-                    
-                    let total = Int(playerItem.asset.duration.seconds)
-                    
-                    let minutes = Int(total / 60)
-                    
-                    let seconds = Int(total - 60 * minutes)
-                    
-                    endTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
-                    
-                    
-                    playButton.setImage(UIImage(named: "pause"), for: .normal)
-                    
-                    
                     playSlider.value = 0
                     
                     audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                         self.audioPlayer.play()
                         self.playerIsPlaying = true
+                        self.currentTitle.text = self.podcastsTableData[indexPath.row].title
+                        let total = Int(playerItem.asset.duration.seconds)
+                        
+                        let minutes = Int(total / 60)
+                        
+                        let seconds = Int(total - 60 * minutes)
+                        
+                        self.endTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
+                        
+                        
+                        self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                        
                     }
             
                 }

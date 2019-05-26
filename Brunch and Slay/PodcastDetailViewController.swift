@@ -9,7 +9,7 @@
 import AVFoundation
 import UIKit
 
-class PodcastDetailViewController: UIViewController{
+class PodcastDetailViewController: UIViewController, UINavigationControllerDelegate{
     
     var timer: Timer!
     
@@ -24,6 +24,8 @@ class PodcastDetailViewController: UIViewController{
     var audioPlayer:AVPlayer?
     
     var rowIndex:Int?
+    
+    var practicalParent: PodcastsViewController?
     
     weak var delegate: PodcastsViewController!
     
@@ -78,27 +80,18 @@ class PodcastDetailViewController: UIViewController{
                 
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
-                    titleView.text = podcastsTableData![rowIndex!].title
-                
-                    authorLabel.text = podcastsTableData![rowIndex!].author
-                
-                    let imageURL = URL(string: podcastsTableData![rowIndex!].imageURLString)
-                
-                    album.kf.setImage(with: imageURL)
-                
-                    let total = Int(playerItem.asset.duration.seconds)
-                    
-                    let minutes = Int(total / 60)
-                    
-                    let seconds = Int(total - 60 * minutes)
-                    
-                    endTimeLabel.text = String(minutes) + ":" + String(format: "%02d", seconds)
-                    
                     playSlider.value = 0
                     
                     audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
+                        self.titleView.text = self.podcastsTableData![self.rowIndex!].title
+                        
+                        self.authorLabel.text = self.podcastsTableData![self.rowIndex!].author
+                        
+                        let imageURL = URL(string: self.podcastsTableData![self.rowIndex!].imageURLString)
+                        
+                        self.album.kf.setImage(with: imageURL)
                     }
                 }
             }
@@ -116,7 +109,7 @@ class PodcastDetailViewController: UIViewController{
             audioPlayer!.pause()
             playerIsPlaying = false
             
-            titleView.text = "None Selected"
+            //titleView.text = "None Selected"
         }
         else
         {
@@ -168,21 +161,20 @@ class PodcastDetailViewController: UIViewController{
                 
                 if(playerItem.status == AVPlayerItem.Status.readyToPlay)
                 {
-                    titleView.text = podcastsTableData![rowIndex!].title
-                    
-                    authorLabel.text = podcastsTableData![rowIndex!].author
-                    
-                    let imageURL = URL(string: podcastsTableData![rowIndex!].imageURLString)
-                    
-                    album.kf.setImage(with: imageURL)
-                    
-                    
                     
                     playSlider.value = 0
                     
                     audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
+                        self.titleView.text = self.podcastsTableData![self.rowIndex!].title
+                        
+                        self.authorLabel.text = self.podcastsTableData![self.rowIndex!].author
+                        
+                        let imageURL = URL(string: self.podcastsTableData![self.rowIndex!].imageURLString)
+                        
+                        self.album.kf.setImage(with: imageURL)
+                        
                     }
                 }
             }
@@ -240,29 +232,30 @@ class PodcastDetailViewController: UIViewController{
         }
     }
     
-    /*override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        
-        if (parent != nil)
-        {
-            let indexPath = IndexPath(row: rowIndex!, section: 0)
-            let castParent = parent as! PodcastsViewController
-            castParent.audioPlayer = audioPlayer!
-            castParent.currentTitle.text = titleView.text
-            castParent.playerIsPlaying = playerIsPlaying!
-            castParent.podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
-        }
-    }*/
-    
     @objc func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
         playButton.setImage(UIImage(named: "play"), for: .normal)
         
     }
     
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        let indexPath = IndexPath(row: rowIndex!, section: 0)
+        if viewController is TabController
+        {
+            practicalParent?.podcastsTable.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            practicalParent?.tableView((practicalParent?.podcastsTable)!, didSelectRowAt: indexPath)
+            practicalParent?.playSlider.value = playSlider.value
+            practicalParent?.audioPlayer = audioPlayer!
+            practicalParent?.playerIsPlaying = !playerIsPlaying!
+            practicalParent?.playAction((Any).self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        navigationController?.delegate = self
         
         timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         
