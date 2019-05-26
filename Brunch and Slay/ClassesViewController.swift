@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 
 class YoutubeCell:UITableViewCell{
+    @IBOutlet weak var youtubetitle: UITextView!
     @IBOutlet weak var youtubewebview: WKWebView!
 }
 
@@ -18,6 +19,7 @@ class YoutubeCell:UITableViewCell{
 
 class ClassesViewController: UIViewController,UITableViewDelegate,UITableViewDataSource{
     let list = [URL(string:"https://www.youtube.com/embed/WR4QQsNm1ok"), URL(string:"https://www.youtube.com/embed/N1cHWRi7Nrg"),URL(string:"https://www.youtube.com/embed/-KpZxW_BIbc"),URL(string:"https://www.youtube.com/embed/GbB1OkRQoQw"),URL(string:"https://www.youtube.com/embed/jBnmHE9y3so"),URL(string:"https://www.youtube.com/embed/D7MSgjhBze8"),URL(string:"https://www.youtube.com/embed/crdphdQzsuE"),URL(string:"https://www.youtube.com/embed/HCHvrtwYejQ"),URL(string:"https://www.youtube.com/embed/RtEWJ31ff5s")]
+    let titlelist = ["Brunch and Slay Kroger Pop-Up","BAS RECAP", "Oscars Meet Art","Brunch and Slay Dallas","Brunch and Slay In Partnership With NARS Presents Pink Holiday","SoulCycle ROTX 9.17.16","Brunch and Slay Presents A Celebration of SELF NARS Event HD 8.25.16","Brunch and Slay-Houston 7.16.16","Claire Sulmers Founder of Fashion Bomb Daily Chats with Brunch and Slay"]
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return list.count
@@ -32,7 +34,8 @@ class ClassesViewController: UIViewController,UITableViewDelegate,UITableViewDat
 //        return cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "youtubecell") as! YoutubeCell
         let url = URL(string:"https://www.youtube.com/embed/WR4QQsNm1ok")
-        cell.youtubewebview.load(URLRequest(url: list[indexPath.row]!))
+        cell.youtubetitle.text = titlelist[indexPath.row]
+    cell.youtubewebview.load(URLRequest(url: list[indexPath.row]!))
         return cell
     }
     override func viewDidLoad() {
