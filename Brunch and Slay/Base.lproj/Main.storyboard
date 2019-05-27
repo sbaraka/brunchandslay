@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ShB-SS-jsc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ShB-SS-jsc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -594,12 +594,12 @@
             </objects>
             <point key="canvasLocation" x="-738.39999999999998" y="797.45127436281871"/>
         </scene>
-        <!--Classes-->
+        <!--Videos-->
         <scene sceneID="MRY-8P-cpa">
             <objects>
-                <viewController id="XDK-mo-UYO" customClass="ClassesViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XDK-mo-UYO" customClass="VideoViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MQL-rI-2tu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -641,10 +641,10 @@
                             <outlet property="delegate" destination="XDK-mo-UYO" id="8FH-ZM-C3S"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Classes" image="classes" selectedImage="classes" springLoaded="YES" id="ffJ-hT-adx">
+                    <tabBarItem key="tabBarItem" title="Videos" image="videos" selectedImage="videos" springLoaded="YES" id="ffJ-hT-adx">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3re-sP-YaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -958,10 +958,10 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
-                    <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" translucent="NO" itemPositioning="centered" id="W28-zg-YXA">
+                    <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" translucent="NO" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -987,7 +987,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ap-jW-gUE">
-                                <rect key="frame" x="0.0" y="64" width="375" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1064,11 +1064,11 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHx-jN-0Yy">
-                                <rect key="frame" x="16" y="570" width="73" height="30"/>
+                                <rect key="frame" x="16" y="619" width="73" height="30"/>
                                 <state key="normal" title="Check Out"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1a1-UR-2JJ">
-                                <rect key="frame" x="289" y="570" width="70" height="30"/>
+                                <rect key="frame" x="289" y="619" width="70" height="30"/>
                                 <state key="normal" title="Clear Cart"/>
                             </button>
                         </subviews>
@@ -1099,7 +1099,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="classes" width="38" height="38"/>
         <image name="events" width="38" height="38"/>
         <image name="next" width="38" height="38"/>
         <image name="play" width="38" height="38"/>
@@ -1107,8 +1106,9 @@
         <image name="previous" width="38" height="38"/>
         <image name="settings" width="38" height="38"/>
         <image name="shop" width="38" height="38"/>
+        <image name="videos" width="38" height="38"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="B9G-AD-fze"/>
+        <segue reference="K2W-3l-Pue"/>
     </inferredMetricsTieBreakers>
 </document>
