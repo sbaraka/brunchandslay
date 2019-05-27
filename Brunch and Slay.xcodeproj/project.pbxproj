@@ -34,6 +34,7 @@
 		4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA27003226653A700C834AE /* ShopDetailViewController.swift */; };
 		4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */; };
 		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
+		4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
 		4FF318BC2253CED20079B1D3 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoViewController.swift */; };
@@ -97,6 +98,8 @@
 		4FA27003226653A700C834AE /* ShopDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewController.swift; sourceTree = "<group>"; };
 		4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSPodcastReader.swift; sourceTree = "<group>"; };
 		4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableCell.swift; sourceTree = "<group>"; };
+		4FDE9E91229C73D3004A4F22 /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Build; path = Carthage/Build; sourceTree = "<group>"; };
+		4FDE9E93229C73F5004A4F22 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		4FF318BB2253CED20079B1D3 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */,
 				AED82FF62290A09B00CDD1E9 /* WebKit.framework in Frameworks */,
 				4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */,
 			);
@@ -226,6 +230,8 @@
 		AED82FF42290A09B00CDD1E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4FDE9E93229C73F5004A4F22 /* Alamofire.framework */,
+				4FDE9E91229C73D3004A4F22 /* Build */,
 				AED82FF52290A09B00CDD1E9 /* WebKit.framework */,
 			);
 			name = Frameworks;
@@ -370,11 +376,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
+				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
