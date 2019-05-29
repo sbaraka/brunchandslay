@@ -33,7 +33,6 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 //        cell.textLabel?.text = list[indexPath.row]
 //        return cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "youtubecell") as! YoutubeCell
-        let url = URL(string:"https://www.youtube.com/embed/WR4QQsNm1ok")
         cell.youtubetitle.text = titlelist[indexPath.row]
     cell.youtubewebview.load(URLRequest(url: list[indexPath.row]!))
         return cell
