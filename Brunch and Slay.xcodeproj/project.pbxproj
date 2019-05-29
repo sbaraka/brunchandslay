@@ -15,7 +15,7 @@
 		4F6D125522677AEE00F68C87 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125422677AEE00F68C87 /* CartCell.swift */; };
 		4F6D125722677D9100F68C87 /* PodcastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125622677D9100F68C87 /* PodcastData.swift */; };
 		4F6D1259226782E500F68C87 /* ClassData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1258226782E500F68C87 /* ClassData.swift */; };
-		4F6D125B2267836100F68C87 /* ShopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125A2267836100F68C87 /* ShopData.swift */; };
+		4F6D125B2267836100F68C87 /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D125A2267836100F68C87 /* ProductData.swift */; };
 		4F95BE68225A95C800064122 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 4F95BE67225A95C800064122 /* icons */; };
 		4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DBE225129CC002B3117 /* AppDelegate.swift */; };
 		4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F971DC0225129CC002B3117 /* EventsViewController.swift */; };
@@ -71,7 +71,7 @@
 		4F6D125422677AEE00F68C87 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		4F6D125622677D9100F68C87 /* PodcastData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastData.swift; sourceTree = "<group>"; };
 		4F6D1258226782E500F68C87 /* ClassData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassData.swift; sourceTree = "<group>"; };
-		4F6D125A2267836100F68C87 /* ShopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopData.swift; sourceTree = "<group>"; };
+		4F6D125A2267836100F68C87 /* ProductData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
 		4F865AAD228F760E003A9094 /* Carthage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Carthage; sourceTree = "<group>"; };
 		4F865AAF228F7639003A9094 /* Kingfisher */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Kingfisher; path = Carthage/Checkouts/Kingfisher; sourceTree = "<group>"; };
 		4F95BE67225A95C800064122 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = icons; sourceTree = "<group>"; };
@@ -200,7 +200,7 @@
 				4F6D125422677AEE00F68C87 /* CartCell.swift */,
 				4F6D125622677D9100F68C87 /* PodcastData.swift */,
 				4F6D1258226782E500F68C87 /* ClassData.swift */,
-				4F6D125A2267836100F68C87 /* ShopData.swift */,
+				4F6D125A2267836100F68C87 /* ProductData.swift */,
 				4F9C3B95226912CF00EA3212 /* ClassCell.swift */,
 				4F9A3D31226917620092CF15 /* CartData.swift */,
 				4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */,
@@ -377,12 +377,14 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
+				"$(DERIVED_FILE_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -418,7 +420,7 @@
 				4F6D125722677D9100F68C87 /* PodcastData.swift in Sources */,
 				4F32C3C3229370B700F27650 /* ResourceLoadingDelegate.swift in Sources */,
 				4F99367E226559B900878C3E /* EventData.swift in Sources */,
-				4F6D125B2267836100F68C87 /* ShopData.swift in Sources */,
+				4F6D125B2267836100F68C87 /* ProductData.swift in Sources */,
 				4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */,
 				4F971DC1225129CC002B3117 /* EventsViewController.swift in Sources */,
 			);

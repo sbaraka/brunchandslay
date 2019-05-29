@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ShopViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
-    
     @IBOutlet weak var shopTable: UITableView!
     
-    var shopTableData: [ShopData] = []
+    
+    var shopTableData: [ProductData] = []
+    var jsonValues: JSON?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -37,9 +40,11 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.nameLabel.text = shopTableData[indexPath.row].name
         
-        cell.priceLabel.text = "Price: " + String(format:"%.2f",shopTableData[indexPath.row].price)
+        cell.priceLabel.text = "Price: " + shopTableData[indexPath.row].price
     
-        cell.previewImage.image = shopTableData[indexPath.row].preview
+        let imageURL = URL(string: shopTableData[indexPath.row].imageURLString)
+        
+        cell.previewImage.kf.setImage(with: imageURL)
         
         let backGroundView = UIView()
         
@@ -55,12 +60,56 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        shopTableData = [
-            ShopData(name: "Test item 1", price: 10.00, description: "A cool item", preview: UIImage(named: "its_azizy_as_that")!),
-            ShopData(name: "Test item 2", price: 10.00, description: "A cool item", preview: UIImage(named: "sammys_secrets")!)
+        //shopTableData = [
+            //ShopData(name: "Test item 1", price: 10.00, description: "A cool item", preview: UIImage(named: "its_azizy_as_that")!),
+            //ShopData(name: "Test item 2", price: 10.00, description: "A cool item", preview: UIImage(named: "sammys_secrets")!)
             
-        ]
+        //]
+        
+        let urlString = "https://brunchandslay.com/wp-json/wc/v2/products"
+        
+        let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+        
+        let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+        
+        let credential = URLCredential(user: key, password: pass, persistence: .forSession)
+        
+        var headers: HTTPHeaders = [:]
+        
+        if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+            headers[authorizationHeader.key] = authorizationHeader.value
+        }
+        
+        Alamofire.request(urlString, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+            
+            if let json = response.result.value
+            {
+                print("JSON: \(json)")
+                self.jsonValues = JSON(json)
+                
+                for i in 0...((self.jsonValues?.array?.count)! - 1 )
+                {
+                    let id = self.jsonValues?[i]["id"].int
+                    let name = self.jsonValues?[i]["name"].string
+                    let description = self.jsonValues![i]["description"].string
+                    let price = self.jsonValues![i]["price"].string
+                    let imageURLString = self.jsonValues![i]["images"][0]["src"].string
+                    
+                    self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                }
+                
+                DispatchQueue.main.async {
+                    self.shopTable.reloadData()
+                }
+                
+            }
+            
+        }
+        
+        
+        
     }
     
     
 }
+

@@ -10,7 +10,7 @@ import UIKit
 
 class ShopDetailViewController: UIViewController {
     
-    var shopData:ShopData?
+    var shopData:ProductData?
     
     @IBOutlet weak var previewImage: UIImageView!
     
@@ -30,10 +30,10 @@ class ShopDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        previewImage.image = shopData?.preview
+        //previewImage.image = shopData?.preview
         nameLabel.text = shopData?.name
         priceLabel.text = "Price: " + String(format:"%.2f", (shopData?.price)!)
-        descriptionLabel.text = shopData?.description
+        //descriptionLabel.text = shopData?.description
         
     }
     
