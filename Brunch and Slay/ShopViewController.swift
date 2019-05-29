@@ -40,7 +40,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.nameLabel.text = shopTableData[indexPath.row].name
         
-        cell.priceLabel.text = "Price: " + shopTableData[indexPath.row].price
+        let priceDouble = Double(shopTableData[indexPath.row].price)
+        let formattedPrice = String(format: "%04.2f", priceDouble!)
+        
+        cell.priceLabel.text = "Price: $" + formattedPrice
     
         let imageURL = URL(string: shopTableData[indexPath.row].imageURLString)
         
