@@ -10,9 +10,16 @@ import UIKit
 
 class TabController: UITabBarController {
     
+    @IBOutlet weak var cartButton: UIBarButtonItem!
+    
+    @IBOutlet weak var signInButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.navigationItem.rightBarButtonItems = nil
+        
     }
     
     
