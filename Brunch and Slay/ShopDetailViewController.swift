@@ -25,15 +25,31 @@ class ShopDetailViewController: UIViewController {
     @IBOutlet weak var quantityStepper: UIStepper!
     
     
+    @IBAction func stepQuantity(_ sender: Any) {
+        quantityBox.text = String(format: "%01.0f",quantityStepper.value)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        //previewImage.image = shopData?.preview
+        let imageURL = URL(string: (shopData?.imageURLString)!)
+        
+        previewImage.kf.setImage(with: imageURL)
         nameLabel.text = shopData?.name
-        priceLabel.text = "Price: " + String(format:"%.2f", (shopData?.price)!)
-        //descriptionLabel.text = shopData?.description
+        
+        let priceDouble = Double((shopData?.price)!)
+        let formattedPrice = String(format: "%04.2f", priceDouble!)
+        
+        priceLabel.text = "Price: $" + formattedPrice
+        
+        let sanitizedDescription = (shopData?.description)!.replacingOccurrences(of: "<p>", with: "\n").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "<div class=\"grammarly-disable-indicator\"></div>", with: "")
+        
+        descriptionLabel.text = "Description: " + sanitizedDescription
+        
+        quantityBox.text = String(format: "%01.0f",quantityStepper.value)
         
     }
     

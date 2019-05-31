@@ -78,22 +78,23 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                 }
                 
                 
-                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-                //{
-                    playSlider.value = 0
-                    
-                    audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                
+                playSlider.value = 0
+                
+                audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in DispatchQueue.main.async {
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
                         self.titleView.text = self.podcastsTableData![self.rowIndex!].title
-                        
+                    
                         self.authorLabel.text = self.podcastsTableData![self.rowIndex!].author
-                        
+                    
                         let imageURL = URL(string: self.podcastsTableData![self.rowIndex!].imageURLString)
-                        
+                    
                         self.album.kf.setImage(with: imageURL)
                     }
-                //}
+                    
+                }
+                
             }
         }
     }
@@ -125,9 +126,11 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
             let doubleTime = Double(seconds! * Double(playSlider.value))
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: (audioPlayer?.currentItem?.asset.duration.timescale)!)
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
-                self.audioPlayer!.play()
-                self.playerIsPlaying = true
-                self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                DispatchQueue.main.async {
+                    self.audioPlayer!.play()
+                    self.playerIsPlaying = true
+                    self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                }
             }
         }
     }
@@ -158,13 +161,10 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                     audioPlayer?.replaceCurrentItem(with: playerItem)
                 }
                 
+                    
+                playSlider.value = 0
                 
-                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-               // {
-                    
-                    playSlider.value = 0
-                    
-                    audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in DispatchQueue.main.async {
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
                         self.titleView.text = self.podcastsTableData![self.rowIndex!].title
@@ -174,9 +174,10 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                         let imageURL = URL(string: self.podcastsTableData![self.rowIndex!].imageURLString)
                         
                         self.album.kf.setImage(with: imageURL)
-                        
                     }
-                //}
+                    
+                }
+                
             }
         }
         

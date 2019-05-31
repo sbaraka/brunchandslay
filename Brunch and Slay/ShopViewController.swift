@@ -38,7 +38,15 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = shopTable.dequeueReusableCell(withIdentifier: "merchandiseCell") as! ShopCell
         
-        cell.nameLabel.text = shopTableData[indexPath.row].name
+        if(shopTableData[indexPath.row].name.count >= 24)
+        {
+            cell.nameLabel.text = shopTableData[indexPath.row].name.prefix(24) + "..."
+        }
+        else
+        {
+            cell.nameLabel.text = shopTableData[indexPath.row].name
+        }
+       
         
         let priceDouble = Double(shopTableData[indexPath.row].price)
         let formattedPrice = String(format: "%04.2f", priceDouble!)

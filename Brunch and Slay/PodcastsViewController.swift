@@ -89,10 +89,12 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 let doubleTime = Double( seconds * Double(playSlider.value))
                 let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
                 audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
-                    self.audioPlayer.play()
-                    self.playerIsPlaying = true
-                    self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-                    self.currentTitle.text = self.podcastsTableData[(self.podcastsTable.indexPathForSelectedRow?.row)!].title
+                    DispatchQueue.main.async {
+                        self.audioPlayer.play()
+                        self.playerIsPlaying = true
+                        self.playButton.setImage(UIImage(named: "pause"), for: .normal)
+                        self.currentTitle.text = self.podcastsTableData[(self.podcastsTable.indexPathForSelectedRow?.row)!].title
+                    }
                     
                 }
                
@@ -265,11 +267,11 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         
                 //while(!(playerItem.status == AVPlayerItem.Status.readyToPlay || playerItem.status == AVPlayerItem.Status.failed) ){}
         
-                //if(playerItem.status == AVPlayerItem.Status.readyToPlay)
-                //{
-                    playSlider.value = 0
+                playSlider.value = 0
                     
-                    audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (
+                    isFinished:Bool) in DispatchQueue.main.async
+                    {
                         self.audioPlayer.play()
                         self.playerIsPlaying = true
                         self.currentTitle.text = self.podcastsTableData[indexPath.row].title
@@ -283,10 +285,10 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                         
                         self.playButton.setImage(UIImage(named: "pause"), for: .normal)
-                        
+                                    
                     }
-            
-               // }
+                        
+                }
                 
             }
         }
