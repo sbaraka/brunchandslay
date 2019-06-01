@@ -10,14 +10,26 @@ import UIKit
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    
     var cartTableData:[CartData] = []
     
     @IBOutlet weak var cartTable: UITableView!
     
-    
     @IBOutlet weak var checkoutButton: UIButton!
     
     @IBOutlet weak var clearCartButton: UIButton!
+
+    
+    
+    @IBAction func clearCart(_ sender: Any) {
+        
+        ShoppingCart.instance.cartItems = []
+        cartTableData = []
+        cartTable.reloadData()
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartTableData.count
@@ -26,17 +38,39 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = cartTable.dequeueReusableCell(withIdentifier: "checkOutCell") as! CartCell
         
-        cell.nameLabel.text = cartTableData[indexPath.row].name
         
-        cell.previewImage.image = cartTableData[indexPath.row].preview
+        if(cartTableData[indexPath.row].item.name.count > 34)
+        {
+            cell.nameLabel.text = cartTableData[indexPath.row].item.name.prefix(31) + "..."
+        }
+        else
+        {
+            cell.nameLabel.text = cartTableData[indexPath.row].item.name
+        }
         
-        cell.priceLabel.text = "Price: " + String(format:"%.2f",cartTableData[indexPath.row].price)
+        let imageURL = URL(string: cartTableData[indexPath.row].item.imageURLString)
         
-        cell.quantityLabel.text = "Quantity: " + String(cartTableData[indexPath.row].quantity)
+        cell.previewImage.kf.setImage(with: imageURL)
         
-        cell.totalLabel.text = "Total: " + String(format:"%.2f",cartTableData[indexPath.row].price * Double(cartTableData[indexPath.row].quantity))
+        let priceDouble = Double(cartTableData[indexPath.row].item.price)
         
+        cell.priceLabel.text = "Price: $" + String(format:"%04.2f",priceDouble!)
         
+        let quantityString = String(cartTableData[indexPath.row].quantity)
+        
+        cell.quantityLabel.text = "Quantity: " + quantityString
+        
+        let quantityDouble = Double(cartTableData[indexPath.row].quantity)
+        
+        let totalDouble = priceDouble! * quantityDouble
+        
+        cell.totalLabel.text = "Total: $" + String(format:"%04.2f",totalDouble)
+        
+        let backGroundView = UIView()
+        
+        backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
+        
+        cell.selectedBackgroundView = backGroundView
         return cell
     }
     
@@ -44,7 +78,20 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Do any additional setup after loading the view, typically from a nib
+        
+        cartTable.delegate = self
+        
+        cartTable.dataSource = self
+        
+        cartTableData = ShoppingCart.instance.cartItems
+        
+        DispatchQueue.main.async {
+            self.cartTable.reloadData()
+        }
+        
+      
+        
     }
     
     

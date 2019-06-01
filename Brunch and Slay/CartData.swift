@@ -11,9 +11,6 @@ import Foundation
 
 struct CartData
 {
-    var name:String
-    var price:Double
+    var item:ProductData
     var quantity:Int
-    var total: Double
-    var preview:UIImage
 }

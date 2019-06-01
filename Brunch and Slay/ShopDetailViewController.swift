@@ -24,6 +24,45 @@ class ShopDetailViewController: UIViewController {
     
     @IBOutlet weak var quantityStepper: UIStepper!
     
+    @IBAction func addToCart(_ sender: Any) {
+        var itemInCart: Bool = false
+        var location: Int = -1
+        
+        if(ShoppingCart.instance.cartItems.count > 0)
+        {
+            for i in 0...ShoppingCart.instance.cartItems.count - 1
+            {
+                if(ShoppingCart.instance.cartItems[i].item.id == shopData?.id)
+                    {
+                        itemInCart = true
+                        location = i
+                        break
+                    }
+            }
+        }
+        
+        if(itemInCart)
+        {
+            
+            if(quantityStepper.value > 0)
+            {
+                ShoppingCart.instance.cartItems[location].quantity += Int(quantityStepper.value)
+            }
+        }
+        else
+        {
+            if(quantityStepper.value > 0)
+            {
+                let tempItem = CartData(item: shopData!, quantity: Int(quantityStepper.value))
+            
+            ShoppingCart.instance.cartItems.append(tempItem)
+            }
+            
+        }
+        
+        
+    }
+    
     
     @IBAction func stepQuantity(_ sender: Any) {
         quantityBox.text = String(format: "%01.0f",quantityStepper.value)

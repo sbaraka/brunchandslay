@@ -21,7 +21,6 @@ class CartCell: UITableViewCell {
     @IBOutlet weak var totalLabel: UILabel!
     
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
