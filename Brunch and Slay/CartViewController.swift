@@ -6,13 +6,15 @@
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
+import Alamofire
+import SwiftyJSON
 import UIKit
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     var cartTableData:[CartData] = []
+    
+    var fullTotal:Double = 0
     
     @IBOutlet weak var cartTable: UITableView!
     
@@ -20,12 +22,25 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var clearCartButton: UIButton!
 
+    @IBOutlet weak var fullTotalLabel: UILabel!
     
     
     @IBAction func clearCart(_ sender: Any) {
         
         ShoppingCart.instance.cartItems = []
         cartTableData = []
+        
+        self.fullTotal = 0
+        for i in 0...self.cartTableData.count - 1
+        {
+            let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+            let itemTax = itemPrice * ShoppingCart.instance.taxRate
+            
+            self.fullTotal += itemPrice + itemTax
+        }
+        
+        self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+        
         cartTable.reloadData()
         
     }
@@ -62,7 +77,11 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let quantityDouble = Double(cartTableData[indexPath.row].quantity)
         
-        let totalDouble = priceDouble! * quantityDouble
+        let taxDouble = priceDouble! * quantityDouble * ShoppingCart.instance.taxRate
+        
+        cell.taxLabel.text = "Tax: $" + String(format:"%04.2f",taxDouble)
+        
+        let totalDouble = priceDouble! * quantityDouble + taxDouble
         
         cell.totalLabel.text = "Total: $" + String(format:"%04.2f",totalDouble)
         
@@ -74,7 +93,23 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        cartTableData.remove(at: indexPath.row)
+        ShoppingCart.instance.cartItems.remove(at: indexPath.row)
+        
+        self.fullTotal = 0
+        for i in 0...self.cartTableData.count - 1
+        {
+            let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+            let itemTax = itemPrice * ShoppingCart.instance.taxRate
+            
+            self.fullTotal += itemPrice + itemTax
+        }
+        
+        self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+        
+        self.cartTable.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,11 +121,52 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cartTableData = ShoppingCart.instance.cartItems
         
-        DispatchQueue.main.async {
-            self.cartTable.reloadData()
+        let taxUrlString = "https://brunchandslay.com/wp-json/wc/v2/taxes"
+        
+        let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+        
+        let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+        let credential = URLCredential(user: key, password: pass, persistence: .forSession)
+        
+        var headers: HTTPHeaders = [:]
+        
+        if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+            headers[authorizationHeader.key] = authorizationHeader.value
         }
         
-      
+        
+        Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+            {
+                response in debugPrint(response)
+                
+                if let json = response.value
+                {
+                    print("JSON: \(json)")
+                    let jsonValues = JSON(json)
+                    
+                    let taxRate = (jsonValues[0]["rate"].double)! / 100.0
+                    
+                    ShoppingCart.instance.taxRate = taxRate
+                    
+                    self.fullTotal = 0
+                    for i in 0...self.cartTableData.count - 1
+                    {
+                        let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+                        let itemTax = itemPrice * ShoppingCart.instance.taxRate
+                        
+                        self.fullTotal += itemPrice + itemTax
+                    }
+                    
+                    self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+                        
+                        
+                    DispatchQueue.main.async {
+                        self.cartTable.reloadData()
+                    }
+                }
+        }
+        
+        
         
     }
     

@@ -18,6 +18,8 @@ class CartCell: UITableViewCell {
     
     @IBOutlet weak var quantityLabel: UILabel!
     
+    @IBOutlet weak var taxLabel: UILabel!
+    
     @IBOutlet weak var totalLabel: UILabel!
     
     

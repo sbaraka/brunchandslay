@@ -15,9 +15,12 @@ class ShoppingCart
     
     var cartItems: [CartData]
     
+    var taxRate: Double
+    
     private init()
     {
         self.cartItems = []
+        self.taxRate = 0
     }
     
 }

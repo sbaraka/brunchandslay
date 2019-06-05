@@ -77,7 +77,9 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         //]
         
-        let urlString = "https://brunchandslay.com/wp-json/wc/v2/products"
+        let productUrlString = "https://brunchandslay.com/wp-json/wc/v2/products"
+        
+        let taxUrlString = "https://brunchandslay.com/wp-json/wc/v2/taxes"
         
         let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
         
@@ -91,7 +93,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             headers[authorizationHeader.key] = authorizationHeader.value
         }
         
-        Alamofire.request(urlString, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+        Alamofire.request(productUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
             
             if let json = response.result.value
             {
@@ -115,6 +117,23 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }
             
+            Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+            {
+                response in debugPrint(response)
+                    
+                if let json = response.value
+                {
+                    print("JSON: \(json)")
+                    self.jsonValues = JSON(json)
+                    
+                    let taxRate = (self.jsonValues?[0]["rate"].double)! / 100.0
+                    
+                    ShoppingCart.instance.taxRate = taxRate
+                }
+                
+            
+            
+            }
         }
         
         
