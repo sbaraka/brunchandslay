@@ -16,25 +16,46 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     var tempElementData: String = ""
     
     var isParserDone: Bool = false
-    
+    var tryAgain: Bool = false
     
     func fetchPodcastsDataFromURL(url: URL) -> [PodcastData]
     {
         isParserDone = false
         podcastDataList = [PodcastData]()
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in guard let data = data, error == nil else {
+        var task = URLSession.shared.dataTask(with: url) { data, response, error in guard
+            let data = data, error == nil else {
                 print (error ?? "Unknown error")
+                self.tryAgain = true
                 return
             }
+            self.tryAgain = false
             let parser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
         }
         
+        
         task.resume()
         
         while(!isParserDone)
         {
+            if(tryAgain)
+            {
+                task.cancel()
+                tryAgain = false
+                task = URLSession.shared.dataTask(with: url) { data, response, error in guard
+                    let data = data, error == nil else {
+                        print (error ?? "Unknown error")
+                        self.tryAgain = true
+                        return
+                    }
+                    self.tryAgain = false
+                    let parser = XMLParser(data: data)
+                    parser.delegate = self
+                    parser.parse()
+                }
+                task.resume()
+            }
             
         }
         

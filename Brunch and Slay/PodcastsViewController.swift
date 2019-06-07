@@ -39,6 +39,9 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var podcastsTable: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     @IBAction func detailButtonPressed(_ sender: Any) {
         
         if(podcastsTable.indexPathForSelectedRow != nil)
@@ -304,9 +307,20 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(audioPlayerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         
         let url = URL(string: "https://feeds.soundcloud.com/users/soundcloud:users:323536510/sounds.rss")
+    
+       
         
-        podcastsTableData = rssPodcastReader.fetchPodcastsDataFromURL(url: url!)
-
+        DispatchQueue.global(qos: .background).async {
+            DispatchQueue.main.async {
+                self.activityIndicator.startAnimating()
+            }
+            self.podcastsTableData = self.rssPodcastReader.fetchPodcastsDataFromURL(url: url!)
+            DispatchQueue.main.async {
+                self.podcastsTable.reloadData()
+                self.activityIndicator.stopAnimating()
+            }
+        }
+        
         
         if(playerIsPlaying)
         {

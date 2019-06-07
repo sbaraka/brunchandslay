@@ -16,6 +16,9 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var shopTable: UITableView!
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     var shopTableData: [ProductData] = []
     var jsonValues: JSON?
     
@@ -97,6 +100,10 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             if let json = response.result.value
             {
+                DispatchQueue.main.async {
+                    self.activityIndicator.startAnimating()
+                }
+                
                 print("JSON: \(json)")
                 self.jsonValues = JSON(json)
                 
@@ -113,31 +120,31 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 DispatchQueue.main.async {
                     self.shopTable.reloadData()
+                    self.activityIndicator.stopAnimating()
                 }
                 
-            }
-            
-            Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
-            {
-                response in debugPrint(response)
-                    
-                if let json = response.value
-                {
-                    print("JSON: \(json)")
-                    self.jsonValues = JSON(json)
-                    
-                    let taxRate = (self.jsonValues?[0]["rate"].double)! / 100.0
-                    
-                    ShoppingCart.instance.taxRate = taxRate
-                }
-                
-            
-            
             }
         }
+            
+        Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+        {
+            response in debugPrint(response)
+            
+            if let json = response.value
+            {
+                print("JSON: \(json)")
+                self.jsonValues = JSON(json)
+                
+                let taxRate = (self.jsonValues?[0]["rate"].double)! / 100.0
+                
+                ShoppingCart.instance.taxRate = taxRate
+            }
+            
         
         
+        }
         
+    
     }
     
     
