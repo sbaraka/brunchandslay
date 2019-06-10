@@ -9,8 +9,15 @@
 import Alamofire
 import SwiftyJSON
 import UIKit
+import BraintreeCore
+import BraintreePayPal
+import BraintreeDropIn
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let key = ""
+    
+    let brainTreeClient = BTAPIClient(authorization: <#T##String#>)
     
     var cartTableData:[CartData] = []
     
@@ -24,6 +31,30 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var fullTotalLabel: UILabel!
     
+    @IBAction func checkOut(_ sender: Any) {
+        
+        
+        
+    }
+    
+    func showDropIn(clientTokenOrTokenizationKey: String) {
+        let request = BTDropInRequest()
+        let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
+        {
+            (controller,result,error) in
+            if (error != nil) {
+                print("ERROR")
+            }
+            else if(result?.isCancelled == true){
+                print("CANCELLED")
+            }
+            else if let result = result {
+                
+            }
+            controller.dismiss(animated: true, completion: nil)
+        }
+        self.present(dropIn!, animated: true, completion: nil)
+    }
     
     @IBAction func clearCart(_ sender: Any) {
         

@@ -1058,6 +1058,9 @@
                                     <constraint firstAttribute="height" constant="30" id="NcR-7n-3id"/>
                                 </constraints>
                                 <state key="normal" title="Check Out"/>
+                                <connections>
+                                    <action selector="checkOut:" destination="Zvg-uM-Gea" eventType="touchUpInside" id="tXy-EF-ZNT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1a1-UR-2JJ">
                                 <rect key="frame" x="289" y="570" width="70" height="30"/>
