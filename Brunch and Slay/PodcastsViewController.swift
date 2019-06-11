@@ -206,14 +206,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = podcastsTable.dequeueReusableCell(withIdentifier: "podcastCell") as! PodcastCell
         
-        if(podcastsTableData[indexPath.row].title.count >= 34)
-        {
-            cell.titleLabel.text = podcastsTableData[indexPath.row].title.prefix(34) + "..."
-        }
-        else
-        {
-            cell.titleLabel.text = podcastsTableData[indexPath.row].title
-        }
+        cell.titleLabel.text = podcastsTableData[indexPath.row].title
         
         cell.authorLabel.text = podcastsTableData[indexPath.row].author
         
@@ -277,6 +270,7 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                     {
                         self.audioPlayer.play()
                         self.playerIsPlaying = true
+                        
                         self.currentTitle.text = self.podcastsTableData[indexPath.row].title
                         let total = Int(playerItem.asset.duration.seconds)
                         
