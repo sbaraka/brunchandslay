@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F06C3C8228F7D9100456965 /* Kingfisher.framework */; };
+		4F14FD8822B046D200D395FC /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F06C3C8228F7D9100456965 /* Kingfisher.framework */; };
+		4F14FD8922B046D200D395FC /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F06C3C8228F7D9100456965 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F32C3C3229370B700F27650 /* ResourceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32C3C2229370B700F27650 /* ResourceLoadingDelegate.swift */; };
 		4F3F5FA82268E9810090BF27 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F5FA72268E9810090BF27 /* audio */; };
 		4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6D1250226774E600F68C87 /* PodcastCell.swift */; };
@@ -61,6 +63,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4F14FD8A22B046D200D395FC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F14FD8922B046D200D395FC /* Kingfisher.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4F06C3C8228F7D9100456965 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		4F32C3C2229370B700F27650 /* ResourceLoadingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AED82FF62290A09B00CDD1E9 /* WebKit.framework in Frameworks */,
+				4F14FD8822B046D200D395FC /* Kingfisher.framework in Frameworks */,
 				4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +259,7 @@
 				4F971DB8225129CC002B3117 /* Frameworks */,
 				4F971DB9225129CC002B3117 /* Resources */,
 				4F865AB1228F7679003A9094 /* ShellScript */,
+				4F14FD8A22B046D200D395FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
