@@ -15,9 +15,9 @@ import BraintreeDropIn
 
 class CartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let key = ""
+    let tokenKey = ""
     
-    let brainTreeClient = BTAPIClient(authorization: <#T##String#>)
+    var brainTreeClient: BTAPIClient?
     
     var cartTableData:[CartData] = []
     
@@ -33,7 +33,20 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBAction func checkOut(_ sender: Any) {
         
-        
+        if(cartTableData.count > 0)
+        {
+            performSegue(withIdentifier: "checkout", sender: sender)
+        }
+        else
+        {
+            let alertController = UIAlertController(title: "Cannot Check Out", message: "Cart is empty", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            
+            alertController.addAction(defaultAction)
+            
+            present(alertController, animated: true, completion: nil)
+        }
         
     }
     
@@ -145,6 +158,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib
+        brainTreeClient = BTAPIClient(authorization: self.tokenKey)
         
         cartTable.delegate = self
         
