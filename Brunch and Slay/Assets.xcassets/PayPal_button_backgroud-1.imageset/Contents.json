@@ -1,0 +1,18 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "PayPal_button_backgroud.pdf"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "properties" : {
+    "auto-scaling" : "auto",
+    "compression-type" : "lossless",
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "original"
+  }
+}
