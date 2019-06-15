@@ -1,8 +1,8 @@
 //
-//  CheckOutViewController.swift
+//  ShippingViewController.swift
 //  Brunch and Slay
 //
-//  Created by Noah on 6/10/19.
+//  Created by Noah on 6/14/19.
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
@@ -11,12 +11,35 @@ import BraintreeCore
 import BraintreePayPal
 import BraintreeDropIn
 
-class CheckOutViewController: UIViewController {
-
+class ShippingViewController: UIViewController {
     
     let tokenKey = "sandbox_v28y3428_77cbcs58byh4ys4f"
     
     var brainTreeClient: BTAPIClient?
+    
+    @IBOutlet weak var firstNameBox: UITextField!
+    
+    @IBOutlet weak var lastNameBox: UITextField!
+    
+    @IBOutlet weak var companyBox: UITextField!
+    
+    @IBOutlet weak var countryButton: UIButton!
+    
+    @IBOutlet weak var address1Box: UITextField!
+    
+    @IBOutlet weak var address2Box: UITextField!
+    
+    @IBOutlet weak var cityBox: UITextField!
+    
+    @IBOutlet weak var stateButton: UIButton!
+    
+    @IBOutlet weak var zipBox: UITextField!
+    
+    
+    @IBAction func openPayPal(_ sender: Any) {
+        
+        
+    }
     
     func showDropIn(clientTokenOrTokenizationKey: String) {
         let request = BTDropInRequest()
@@ -40,7 +63,7 @@ class CheckOutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        brainTreeClient = BTAPIClient(authorization: self.tokenKey)
+         brainTreeClient = BTAPIClient(authorization: self.tokenKey)
 
         // Do any additional setup after loading the view.
     }
