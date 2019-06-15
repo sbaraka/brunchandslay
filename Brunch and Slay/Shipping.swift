@@ -12,6 +12,7 @@ struct Shipping
 {
     var firstName: String
     var lastName: String
+    var companyName: String
     var address1: String
     var address2: String
     var city: String
