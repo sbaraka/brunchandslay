@@ -10,6 +10,7 @@ import Foundation
 
 struct Order
 {
+    var orderID: Int
     var paymentMethod: String
     var paymentMethodTitle: String
     var billing: Billing

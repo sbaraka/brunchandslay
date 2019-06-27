@@ -7,17 +7,12 @@
 //
 
 import UIKit
-import BraintreeCore
-import BraintreePayPal
-import BraintreeDropIn
 import Alamofire
 import SwiftyJSON
 
 class ShippingViewController: UIViewController {
     
-    let tokenKey = "sandbox_v28y3428_77cbcs58byh4ys4f"
-    
-    var brainTreeClient: BTAPIClient?
+    private var redirectURLString: String?
     
     @IBOutlet weak var firstNameBox: UITextField!
     
@@ -25,7 +20,7 @@ class ShippingViewController: UIViewController {
     
     @IBOutlet weak var companyBox: UITextField!
     
-    @IBOutlet weak var countryButton: UIButton!
+    @IBOutlet weak var countryBox: UITextField!
     
     @IBOutlet weak var address1Box: UITextField!
     
@@ -33,10 +28,9 @@ class ShippingViewController: UIViewController {
     
     @IBOutlet weak var cityBox: UITextField!
     
-    @IBOutlet weak var stateButton: UIButton!
+    @IBOutlet weak var stateBox: UITextField!
     
     @IBOutlet weak var zipBox: UITextField!
-    
     
     @IBAction func openPayPal(_ sender: Any) {
         //Start filling shipping data
@@ -46,7 +40,7 @@ class ShippingViewController: UIViewController {
         
         ShoppingCart.instance.order?.shipping.companyName = companyBox.text!
         
-        ShoppingCart.instance.order?.shipping.country = (countryButton.titleLabel?.text)!
+        ShoppingCart.instance.order?.shipping.country = countryBox.text!
         
         ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
         
@@ -54,63 +48,87 @@ class ShippingViewController: UIViewController {
         
         ShoppingCart.instance.order?.shipping.city = cityBox.text!
         
-        ShoppingCart.instance.order?.shipping.state = (stateButton.titleLabel?.text)!
+        ShoppingCart.instance.order?.shipping.state = stateBox.text!
         
         ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
         //End of filling shipping data
         
-        showDropIn(clientTokenOrTokenizationKey: tokenKey)
+        let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
+        
+        let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
+        
+        let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+        
+        let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+        
+        let credential = URLCredential(user: key, password: pass, persistence: .forSession)
+        
+        var headers: HTTPHeaders = [:]
+        
+        if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+            headers[authorizationHeader.key] = authorizationHeader.value
+        }
+        
+        let orderString = ShoppingCart.instance.makeOrderText()
+        
+        let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
+        
+        let json = JSON(data: encodedString!).dictionaryObject
+        
+        Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+            
+            let postResponseJSON = JSON(response.result.value!)
+            ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
+            
+        }
+        
+        let paymentJSON: JSON = [
+            "order_id": (ShoppingCart.instance.order?.orderID)!,
+            "payment_method": ShoppingCart.instance.payMethod
+        ]
+        
+        var resultCode: Int?
+        
+        Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+            
+            let postResponseJSON = JSON(response.result.value!)
+            
+            resultCode = postResponseJSON["code"].intValue
+            
+            if(resultCode == 200)
+            {
+                self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+            }
+            
+            
+        }
+        
+        if(resultCode == 200)
+        {
+             performSegue(withIdentifier: "shippingToPayment", sender: sender)
+        }
+        else
+        {
+            //Display error message
+        }
+        
+       
+        
     }
     
-    func showDropIn(clientTokenOrTokenizationKey: String) {
-        let request = BTDropInRequest()
-        let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "shippingToPayment"
         {
-            (controller,result,error) in
-            if (error != nil) {
-                print("ERROR")
-            }
-            else if(result?.isCancelled == true){
-                print("CANCELLED")
-            }
-            else if let result = result {
-                
-                let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
-                
-                let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
-                
-                let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
-                
-                let credential = URLCredential(user: key, password: pass, persistence: .forSession)
-                
-                var headers: HTTPHeaders = [:]
-                
-                if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
-                    headers[authorizationHeader.key] = authorizationHeader.value
-                }
-                
-                let orderString = ShoppingCart.instance.makeOrderText()
-                
-                let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
-                
-                let json = JSON(data: encodedString!).dictionaryObject
-                
-                Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
-                    
-                    
-                }
-                
-                
-            }
-            controller.dismiss(animated: true, completion: nil)
+            let viewController = segue.destination as? WebPaymentViewController
+            
+            
+            viewController?.redirectURLString = redirectURLString
         }
-        self.present(dropIn!, animated: true, completion: nil)
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         brainTreeClient = BTAPIClient(authorization: self.tokenKey)
 
         // Do any additional setup after loading the view.
     }

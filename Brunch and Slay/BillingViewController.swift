@@ -7,17 +7,15 @@
 //
 
 import UIKit
-import BraintreeCore
-import BraintreePayPal
-import BraintreeDropIn
+import SwiftyJSON
+import Alamofire
+
 
 class BillingViewController: UIViewController {
     
-    let tokenKey = "sandbox_v28y3428_77cbcs58byh4ys4f"
-    
-    var brainTreeClient: BTAPIClient?
-    
     var shippingSameAsBilling: Bool = false
+    
+    private var redirectURLString: String?
     
     @IBOutlet weak var firstNameBox: UITextField!
     
@@ -25,7 +23,7 @@ class BillingViewController: UIViewController {
     
     @IBOutlet weak var companyNameBox: UITextField!
     
-    @IBOutlet weak var countryButton: UIButton!
+    @IBOutlet weak var countryBox: UITextField!
     
     @IBOutlet weak var address1Box: UITextField!
     
@@ -33,7 +31,7 @@ class BillingViewController: UIViewController {
     
     @IBOutlet weak var cityBox: UITextField!
     
-    @IBOutlet weak var stateButton: UIButton!
+    @IBOutlet weak var stateBox: UITextField!
     
     @IBOutlet weak var zipBox: UITextField!
     
@@ -80,10 +78,114 @@ class BillingViewController: UIViewController {
     
     
     @IBAction func goToPayPalOrShipping(_ sender: Any) {
+        //Start filling in billing data
+        ShoppingCart.instance.order?.billing.firstName = firstNameBox.text!
+        
+        ShoppingCart.instance.order?.billing.lastName = lastNameBox.text!
+        
+        ShoppingCart.instance.order?.billing.companyName = companyNameBox.text!
+        
+        ShoppingCart.instance.order?.billing.country = countryBox.text!
+        
+        ShoppingCart.instance.order?.billing.address1 = address1Box.text!
+        
+        ShoppingCart.instance.order?.billing.address2 = address2Box.text!
+        
+        ShoppingCart.instance.order?.billing.city = cityBox.text!
+        
+        ShoppingCart.instance.order?.billing.state = stateBox.text!
+        
+        ShoppingCart.instance.order?.billing.postalCode = zipBox.text!
+        
+        ShoppingCart.instance.order?.billing.email = emailBox.text!
+        
+        ShoppingCart.instance.order?.billing.phone = phoneBox.text!
+        //End of filling billing data
         
         if(shippingSameAsBilling)
         {
-          showDropIn(clientTokenOrTokenizationKey: tokenKey)
+            //Start filling shipping data
+        
+            ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
+            
+            ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
+            
+            ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
+            
+            ShoppingCart.instance.order?.shipping.country = countryBox.text!
+            
+            ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
+            
+            ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
+            
+            ShoppingCart.instance.order?.shipping.city = cityBox.text!
+            
+            ShoppingCart.instance.order?.shipping.state = stateBox.text!
+            
+            ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
+            //End of filling shipping data
+            
+            
+            let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
+            
+            let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
+            
+            let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+            
+            let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+            
+            let credential = URLCredential(user: key, password: pass, persistence: .forSession)
+            
+            var headers: HTTPHeaders = [:]
+            
+            if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+                headers[authorizationHeader.key] = authorizationHeader.value
+            }
+            
+            let orderString = ShoppingCart.instance.makeOrderText()
+            
+            let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
+            
+            let json = JSON(data: encodedString!).dictionaryObject
+            
+            Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                
+                let postResponseJSON = JSON(response.result.value!)
+                ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
+                
+            }
+            
+            let paymentJSON: JSON = [
+                "order_id": (ShoppingCart.instance.order?.orderID)!,
+                "payment_method": ShoppingCart.instance.payMethod
+            ]
+            
+            var resultCode: Int?
+            
+            Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                
+                let postResponseJSON = JSON(response.result.value!)
+                
+                resultCode = postResponseJSON["code"].intValue
+                
+                if(resultCode == 200)
+                {
+                    self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+                }
+                
+                
+            }
+
+            if(resultCode == 200)
+            {
+                performSegue(withIdentifier: "billingToPayment", sender: sender)
+            }
+            else
+            {
+                //Display error message
+            }
+           
+            
         }
         else
         {
@@ -92,111 +194,31 @@ class BillingViewController: UIViewController {
         
     }
     
-    func showDropIn(clientTokenOrTokenizationKey: String) {
-        let request = BTDropInRequest()
-        let dropIn = BTDropInController(authorization: clientTokenOrTokenizationKey, request: request)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let viewController = segue.destination as? WebPaymentViewController
+        
+        if segue.identifier == "billingToPayment"
         {
-            (controller,result,error) in
-            if (error != nil) {
-                print("ERROR")
-            }
-            else if(result?.isCancelled == true){
-                print("CANCELLED")
-            }
-            else if let result = result {
-                
-                let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
-                
-                let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
-                
-                let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
-                
-                let credential = URLCredential(user: key, password: pass, persistence: .forSession)
-                
-                var headers: HTTPHeaders = [:]
-                
-                if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
-                    headers[authorizationHeader.key] = authorizationHeader.value
-                }
-                
-                let orderString = ShoppingCart.instance.makeOrderText()
-                
-                let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
-                
-                let json = JSON(data: encodedString!).dictionaryObject
-                
-                Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
-                    
-                    
-                }
-                
-            }
-            controller.dismiss(animated: true, completion: nil)
+            viewController?.redirectURLString = redirectURLString
         }
-        self.present(dropIn!, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        brainTreeClient = BTAPIClient(authorization: self.tokenKey)
-        
-        //Start filling in billing data
-        ShoppingCart.instance.order?.billing.firstName = firstNameBox.text!
-        
-        ShoppingCart.instance.order?.billing.lastName = lastNameBox.text!
-        
-        ShoppingCart.instance.order?.billing.companyName = companyNameBox.text!
-        
-        ShoppingCart.instance.order?.billing.country = (countryButton.titleLabel?.text)!
-        
-        ShoppingCart.instance.order?.billing.address1 = address1Box.text!
-        
-        ShoppingCart.instance.order?.billing.address2 = address2Box.text!
-        
-        ShoppingCart.instance.order?.billing.city = cityBox.text!
-        
-        ShoppingCart.instance.order?.billing.state = (stateButton.titleLabel?.text)!
-        
-        ShoppingCart.instance.order?.billing.postalCode = zipBox.text!
-        
-        ShoppingCart.instance.order?.billing.email = emailBox.text!
-        
-        ShoppingCart.instance.order?.billing.phone = phoneBox.text!
-        //End of filling billing data
-
+        // Do any additional setup after loading the view.
         if(shippingSameAsBilling)
         {
             checkBoxButton.setImage(UIImage(named: "checkbox_checked")!, for: .normal)
             
-            shippingOrPayPalButton.titleLabel?.text = "Proceed to PayPal"
+            shippingOrPayPalButton.titleLabel?.text = "Proceed to Payment"
             
-            shippingOrPayPalButton.frame = CGRect(x: 121, y: 571, width: 133, height: 30)
+            shippingOrPayPalButton.frame = CGRect(x: 108.5, y: 571, width: 158, height: 30)
             
-            shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
+        shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
             
             shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
             
-            
-            //Start filling shipping data
-            ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.country = (countryButton.titleLabel?.text)!
-            
-            ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
-            
-            ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
-            
-            ShoppingCart.instance.order?.shipping.city = cityBox.text!
-            
-            ShoppingCart.instance.order?.shipping.state = (stateButton.titleLabel?.text)!
-            
-            ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
-            //End of filling shipping data
             
         }
         else
@@ -212,7 +234,7 @@ class BillingViewController: UIViewController {
             shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
         }
         
-        // Do any additional setup after loading the view.
+      
     }
     
 

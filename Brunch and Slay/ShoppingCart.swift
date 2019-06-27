@@ -13,6 +13,8 @@ class ShoppingCart
     
     static let instance = ShoppingCart()
     
+    var payMethod: String
+    
     var order: Order?
     
     var cartItems: [CartData]
@@ -23,6 +25,7 @@ class ShoppingCart
     {
         self.cartItems = []
         self.taxRate = 0
+        self.payMethod = "paypal"
     }
     
     func makeOrderText() -> String
