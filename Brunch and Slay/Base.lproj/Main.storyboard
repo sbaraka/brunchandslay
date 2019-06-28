@@ -1389,15 +1389,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uj2-5X-VBX">
-                                <rect key="frame" x="311" y="630" width="124" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <color key="tintColor" red="0.015686274510000001" green="0.023529411760000001" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Proceed to PayPal" backgroundImage="PayPal_button_backgroud">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pYF-er-Xnx">
                                 <rect key="frame" x="8" y="152.5" width="125" height="21"/>
                                 <constraints>
@@ -1841,7 +1832,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PayPal_button_backgroud" width="93" height="17"/>
         <image name="PayPal_button_backgroud-1" width="120" height="30"/>
         <image name="checkbox_unchecked" width="23" height="23"/>
         <image name="events" width="38" height="38"/>
@@ -1856,7 +1846,7 @@
         <image name="videos" width="38" height="38"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NtS-tH-wY0"/>
+        <segue reference="Jk3-um-xlO"/>
         <segue reference="B9G-AD-fze"/>
     </inferredMetricsTieBreakers>
 </document>

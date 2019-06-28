@@ -152,6 +152,7 @@ class BillingViewController: UIViewController {
                 
                 let postResponseJSON = JSON(response.result.value!)
                 ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
+                ShoppingCart.instance.clearCart()
              
                 let paymentJSON: JSON = [
                     "order_id": (ShoppingCart.instance.order?.orderID)!,

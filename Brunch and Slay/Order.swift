@@ -15,6 +15,5 @@ struct Order
     var paymentMethodTitle: String
     var billing: Billing
     var shipping: Shipping
-    var cartItems: [CartData]
     var shippingLines: [ShippingLine]
 }

@@ -28,6 +28,11 @@ class ShoppingCart
         self.payMethod = "paypal"
     }
     
+    func clearCart()
+    {
+        cartItems = []
+    }
+    
     func makeOrderText() -> String
     {
         var lineItemsSubString = "[ "
@@ -59,7 +64,7 @@ class ShoppingCart
         
         shippingLinesSubString += "] "
         
-        let orderString = "{ \"payment_method\": \"" + (order?.paymentMethod)! + "\", " + "\"payment_method_title\": \"" + (order?.paymentMethodTitle)! + "\", " + "\"set_paid\": true, " + "\"billing\": { \"first_name\": \"" + (order?.billing.firstName)! + "\", \"last_name\": \"" + (order?.billing.lastName)! + "\", \"address_1\": \"" + (order?.billing.address1)! + "\", \"address_2\": \"" + (order?.billing.address2)! + "\", \"city\": \"" + (order?.billing.city)! + "\", \"state\": \"" + (order?.billing.state)! + "\", \"postcode\": \"" + (order?.billing.postalCode)! + "\", \"country\": \"" + (order?.billing.country)! + "\", \"email\": \"" + (order?.billing.email)! + "\", \"phone\": \"" + (order?.billing.phone)! + "\" }, \"shipping\": { \"first_name\": \"" + (order?.shipping.firstName)! + "\", \"last_name\": \"" + (order?.shipping.lastName)! + "\", \"address_1\": \"" + (order?.shipping.address1)! + "\", \"address_2\": \"" + (order?.shipping.address2)! + "\", \"city\": \"" + (order?.shipping.city)! + "\", \"state\": \"" + (order?.shipping.state)! + "\", \"postcode\": \"" + (order?.shipping.postalCode)! + "\", \"country\": \"" + (order?.shipping.country)! + "\" }, \"line_items\": " + lineItemsSubString + "\"shipping_lines\": " + shippingLinesSubString + "}"
+        let orderString = "{ \"payment_method\": \"" + (order?.paymentMethod)! + "\", " + "\"payment_method_title\": \"" + (order?.paymentMethodTitle)! + "\", " + "\"set_paid\": false, " + "\"billing\": { \"first_name\": \"" + (order?.billing.firstName)! + "\", \"last_name\": \"" + (order?.billing.lastName)! + "\", \"address_1\": \"" + (order?.billing.address1)! + "\", \"address_2\": \"" + (order?.billing.address2)! + "\", \"city\": \"" + (order?.billing.city)! + "\", \"state\": \"" + (order?.billing.state)! + "\", \"postcode\": \"" + (order?.billing.postalCode)! + "\", \"country\": \"" + (order?.billing.country)! + "\", \"email\": \"" + (order?.billing.email)! + "\", \"phone\": \"" + (order?.billing.phone)! + "\" }, \"shipping\": { \"first_name\": \"" + (order?.shipping.firstName)! + "\", \"last_name\": \"" + (order?.shipping.lastName)! + "\", \"address_1\": \"" + (order?.shipping.address1)! + "\", \"address_2\": \"" + (order?.shipping.address2)! + "\", \"city\": \"" + (order?.shipping.city)! + "\", \"state\": \"" + (order?.shipping.state)! + "\", \"postcode\": \"" + (order?.shipping.postalCode)! + "\", \"country\": \"" + (order?.shipping.country)! + "\" }, \"line_items\": " + lineItemsSubString + "\"shipping_lines\": " + shippingLinesSubString + "}"
         
         
         return orderString
