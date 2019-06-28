@@ -80,39 +80,32 @@ class ShippingViewController: UIViewController {
             let postResponseJSON = JSON(response.result.value!)
             ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
             
-        }
-        
-        let paymentJSON: JSON = [
-            "order_id": (ShoppingCart.instance.order?.orderID)!,
-            "payment_method": ShoppingCart.instance.payMethod
-        ]
-        
-        var resultCode: Int?
-        
-        Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+            let paymentJSON: JSON = [
+                "order_id": (ShoppingCart.instance.order?.orderID)!,
+                "payment_method": ShoppingCart.instance.payMethod
+            ]
             
-            let postResponseJSON = JSON(response.result.value!)
+            var resultCode: Int?
             
-            resultCode = postResponseJSON["code"].intValue
-            
-            if(resultCode == 200)
-            {
-                self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+            Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                
+                let postResponseJSON = JSON(response.result.value!)
+                
+                resultCode = postResponseJSON["code"].intValue
+                
+                if(resultCode == 200)
+                {
+                    self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+                    self.performSegue(withIdentifier: "shippingToPayment", sender: sender)
+                }
+                else
+                {
+                    //Display error message
+                }
+                
             }
             
-            
         }
-        
-        if(resultCode == 200)
-        {
-             performSegue(withIdentifier: "shippingToPayment", sender: sender)
-        }
-        else
-        {
-            //Display error message
-        }
-        
-       
         
     }
     
