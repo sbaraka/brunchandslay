@@ -967,17 +967,23 @@
                                 <viewLayoutGuide key="safeArea" id="1Gr-QC-kUa"/>
                                 <state key="normal" title="Enter"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3m-j4-NqO">
+                                <rect key="frame" x="18" y="607" width="339" height="30"/>
+                                <state key="normal" title="Don't have an account? Create one now."/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Fkb-dT-O0C" firstAttribute="centerX" secondItem="EeC-hJ-yXU" secondAttribute="centerX" id="3QI-kA-7ZB"/>
                             <constraint firstItem="XVn-qW-Du9" firstAttribute="top" secondItem="cPH-qt-gmH" secondAttribute="top" constant="171" id="BFz-9R-q3q"/>
+                            <constraint firstItem="u3m-j4-NqO" firstAttribute="centerX" secondItem="EeC-hJ-yXU" secondAttribute="centerX" id="DGE-uj-KFK"/>
                             <constraint firstItem="Fkb-dT-O0C" firstAttribute="top" secondItem="XVn-qW-Du9" secondAttribute="bottom" constant="8" symbolic="YES" id="FjU-e8-LQK"/>
                             <constraint firstItem="Fkb-dT-O0C" firstAttribute="trailing" secondItem="Jer-8R-RPj" secondAttribute="trailing" id="IYj-yQ-BuC"/>
                             <constraint firstItem="uZ0-Th-oaz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3Gs-fI-4WF" secondAttribute="trailing" constant="8" symbolic="YES" id="JWZ-Kn-KCB"/>
                             <constraint firstItem="3Gs-fI-4WF" firstAttribute="leading" secondItem="CZI-d7-Cc0" secondAttribute="trailing" constant="19" id="Qjz-Gr-7Ou"/>
                             <constraint firstItem="3Gs-fI-4WF" firstAttribute="top" secondItem="Jer-8R-RPj" secondAttribute="bottom" constant="26" id="Rze-lN-Jds"/>
+                            <constraint firstItem="cPH-qt-gmH" firstAttribute="trailing" secondItem="u3m-j4-NqO" secondAttribute="trailing" constant="18" id="Us0-aw-NjQ"/>
                             <constraint firstItem="Fkb-dT-O0C" firstAttribute="leading" secondItem="0wl-bh-ouR" secondAttribute="leading" id="X03-y8-fct"/>
                             <constraint firstItem="cPH-qt-gmH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0wl-bh-ouR" secondAttribute="trailing" symbolic="YES" id="Xav-Hs-fw4"/>
                             <constraint firstItem="XVn-qW-Du9" firstAttribute="leading" secondItem="cPH-qt-gmH" secondAttribute="leading" constant="39" id="bjg-Vj-XKw"/>
@@ -986,7 +992,9 @@
                             <constraint firstItem="CZI-d7-Cc0" firstAttribute="top" secondItem="uZ0-Th-oaz" secondAttribute="top" id="dAM-WO-Qgr"/>
                             <constraint firstItem="Jer-8R-RPj" firstAttribute="leading" secondItem="CZI-d7-Cc0" secondAttribute="leading" id="fOk-It-PdO"/>
                             <constraint firstItem="XVn-qW-Du9" firstAttribute="leading" secondItem="Fkb-dT-O0C" secondAttribute="leading" id="j8F-96-LTg"/>
+                            <constraint firstItem="u3m-j4-NqO" firstAttribute="leading" secondItem="cPH-qt-gmH" secondAttribute="leading" constant="18" id="l1E-HV-E7N"/>
                             <constraint firstItem="0wl-bh-ouR" firstAttribute="leading" secondItem="Jer-8R-RPj" secondAttribute="leading" id="m1g-ai-DHr"/>
+                            <constraint firstItem="cPH-qt-gmH" firstAttribute="bottom" secondItem="u3m-j4-NqO" secondAttribute="bottom" constant="30" id="nki-7K-chA"/>
                             <constraint firstItem="CZI-d7-Cc0" firstAttribute="centerY" secondItem="3Gs-fI-4WF" secondAttribute="centerY" id="sBQ-tU-FRI"/>
                             <constraint firstItem="0wl-bh-ouR" firstAttribute="top" secondItem="Fkb-dT-O0C" secondAttribute="bottom" constant="15" id="vdK-FH-Hqh"/>
                             <constraint firstItem="cPH-qt-gmH" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XVn-qW-Du9" secondAttribute="trailing" symbolic="YES" id="vfk-lD-VUK"/>
