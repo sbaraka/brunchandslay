@@ -911,7 +911,7 @@
         <!--LogIn-->
         <scene sceneID="loH-nm-50e">
             <objects>
-                <viewController id="cqa-VQ-veU" userLabel="LogIn" customClass="SignInViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="SIgn In" id="cqa-VQ-veU" userLabel="LogIn" customClass="SignInViewController" customModule="Brunch_and_Slay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="EeC-hJ-yXU" customClass="Sign">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -966,10 +966,16 @@
                                 <rect key="frame" x="299" y="406" width="37" height="30"/>
                                 <viewLayoutGuide key="safeArea" id="1Gr-QC-kUa"/>
                                 <state key="normal" title="Enter"/>
+                                <connections>
+                                    <action selector="enterClicked:" destination="cqa-VQ-veU" eventType="touchUpInside" id="uXL-ig-eQn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3m-j4-NqO">
                                 <rect key="frame" x="18" y="607" width="339" height="30"/>
                                 <state key="normal" title="Don't have an account? Create one now."/>
+                                <connections>
+                                    <action selector="createAccountClicked:" destination="cqa-VQ-veU" eventType="touchUpInside" id="1tn-Pe-bYF"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1002,6 +1008,7 @@
                         <viewLayoutGuide key="safeArea" id="cPH-qt-gmH"/>
                     </view>
                     <connections>
+                        <outlet property="emailBox" destination="Fkb-dT-O0C" id="TmA-aO-WsL"/>
                         <outlet property="passwordTextField" destination="Jer-8R-RPj" id="tPh-cK-9nM"/>
                     </connections>
                 </viewController>

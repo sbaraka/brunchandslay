@@ -10,6 +10,8 @@ import UIKit
 
 class SignInViewController: UIViewController {
     
+    @IBOutlet weak var emailBox: UITextField!
+    
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
@@ -19,8 +21,19 @@ class SignInViewController: UIViewController {
     
     //MARK: Actions
     
+    @IBAction func enterClicked(_ sender: Any) {
+        
+        //use email and password to authorize user and pull data
+        let emailString = emailBox.text
+        let passString = passwordTextField.text
+    }
     
     @IBAction func switchChanged(_ sender: Any) {
         passwordTextField.isSecureTextEntry.toggle()
+    }
+    
+    
+    @IBAction func createAccountClicked(_ sender: Any) {
+        //create to save user data
     }
 }
