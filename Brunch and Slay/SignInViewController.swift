@@ -35,5 +35,6 @@ class SignInViewController: UIViewController {
     
     @IBAction func createAccountClicked(_ sender: Any) {
         //create to save user data
+        performSegue(withIdentifier: "goToCreateUser", sender: sender)
     }
 }

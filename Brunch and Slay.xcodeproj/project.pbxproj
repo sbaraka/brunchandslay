@@ -95,6 +95,7 @@
 		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
 		4FCF137322C3CA38008693CA /* WebPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */; };
 		4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
+		4FE6AC6A22C94350001FDDCA /* CreateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6AC6922C9434F001FDDCA /* CreateUserViewController.swift */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
 		4FF318BC2253CED20079B1D3 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoViewController.swift */; };
@@ -214,6 +215,7 @@
 		4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPaymentViewController.swift; sourceTree = "<group>"; };
 		4FDE9E91229C73D3004A4F22 /* Build */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Build; path = Carthage/Build; sourceTree = "<group>"; };
 		4FDE9E93229C73F5004A4F22 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		4FE6AC6922C9434F001FDDCA /* CreateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserViewController.swift; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		4FF318BB2253CED20079B1D3 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				4F69750222B422DC002D3809 /* ShippingViewController.swift */,
 				4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */,
 				4F46E21822C401E300BBC598 /* ConfirmPaymentViewController.swift */,
+				4FE6AC6922C9434F001FDDCA /* CreateUserViewController.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				4F7C9D1E22A2D3FC0086F358 /* ShoppingCart.swift in Sources */,
 				4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */,
 				4FF318BC2253CED20079B1D3 /* VideoViewController.swift in Sources */,
+				4FE6AC6A22C94350001FDDCA /* CreateUserViewController.swift in Sources */,
 				4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */,
 				4F69750322B422DC002D3809 /* ShippingViewController.swift in Sources */,
 				4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */,
