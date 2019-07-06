@@ -13,10 +13,10 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
 {
     private var podcastDataList: [PodcastData] = [PodcastData]()
     private var podcastDataElement: PodcastData = PodcastData(title: "", imageURLString: "", audioURLString: "", author: "")
-    var tempElementData: String = ""
+    private var tempElementData: String = ""
     
-    var isParserDone: Bool = false
-    var tryAgain: Bool = false
+    private var isParserDone: Bool = false
+    private var tryAgain: Bool = false
     
     func fetchPodcastsDataFromURL(url: URL) -> [PodcastData]
     {

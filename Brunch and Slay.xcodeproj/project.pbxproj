@@ -59,6 +59,10 @@
 		4F14FD8322B03C2900D395FC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
 		4F14FD8422B03C2900D395FC /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F14FD8522B03C2900D395FC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED82FF52290A09B00CDD1E9 /* WebKit.framework */; };
+		4F21B0A022CFD0AE00931471 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */; };
+		4F21B0A222CFD15700931471 /* VideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B0A122CFD15700931471 /* VideoData.swift */; };
+		4F21B0A422CFD5AF00931471 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B0A322CFD5AF00931471 /* VideoCell.swift */; };
+		4F21B0A622CFF98900931471 /* RSSVideoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B0A522CFF98900931471 /* RSSVideoReader.swift */; };
 		4F24490922B2B33A00B0D37E /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24490822B2B33A00B0D37E /* Order.swift */; };
 		4F24490B22B2B3EE00B0D37E /* Billing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24490A22B2B3EE00B0D37E /* Billing.swift */; };
 		4F24490D22B2B43F00B0D37E /* Shipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24490C22B2B43F00B0D37E /* Shipping.swift */; };
@@ -97,7 +101,7 @@
 		4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
-		4FF318BC2253CED20079B1D3 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoViewController.swift */; };
+		4FF318BC2253CED20079B1D3 /* VideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */; };
 		4FF318BE2253CF920079B1D3 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BD2253CF920079B1D3 /* ShopViewController.swift */; };
 		4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */; };
 		4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C12253D2E60079B1D3 /* SignInViewController.swift */; };
@@ -169,6 +173,10 @@
 		4F14FD5622B03B6200D395FC /* BraintreePayPal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BraintreePayPal.framework; path = Carthage/Build/iOS/BraintreePayPal.framework; sourceTree = "<group>"; };
 		4F14FD5722B03B6200D395FC /* BraintreeVenmo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BraintreeVenmo.framework; path = Carthage/Build/iOS/BraintreeVenmo.framework; sourceTree = "<group>"; };
 		4F14FD5822B03B6200D395FC /* BraintreeDataCollector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BraintreeDataCollector.framework; path = Carthage/Build/iOS/BraintreeDataCollector.framework; sourceTree = "<group>"; };
+		4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		4F21B0A122CFD15700931471 /* VideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoData.swift; sourceTree = "<group>"; };
+		4F21B0A322CFD5AF00931471 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		4F21B0A522CFF98900931471 /* RSSVideoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSVideoReader.swift; sourceTree = "<group>"; };
 		4F24490822B2B33A00B0D37E /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		4F24490A22B2B3EE00B0D37E /* Billing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Billing.swift; sourceTree = "<group>"; };
 		4F24490C22B2B43F00B0D37E /* Shipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shipping.swift; sourceTree = "<group>"; };
@@ -216,7 +224,7 @@
 		4FDE9E93229C73F5004A4F22 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
-		4FF318BB2253CED20079B1D3 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		4FF318BD2253CF920079B1D3 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4FF318C12253D2E60079B1D3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -330,7 +338,7 @@
 				4F971DC4225129CC002B3117 /* Main.storyboard */,
 				4F971DC9225129D0002B3117 /* LaunchScreen.storyboard */,
 				4F971DCC225129D0002B3117 /* Info.plist */,
-				4FF318BB2253CED20079B1D3 /* VideoViewController.swift */,
+				4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */,
 				4FF318BD2253CF920079B1D3 /* ShopViewController.swift */,
 				4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */,
 				4FF318C12253D2E60079B1D3 /* SignInViewController.swift */,
@@ -361,6 +369,10 @@
 				4F69750222B422DC002D3809 /* ShippingViewController.swift */,
 				4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */,
 				4F46E21822C401E300BBC598 /* ConfirmPaymentViewController.swift */,
+				4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */,
+				4F21B0A122CFD15700931471 /* VideoData.swift */,
+				4F21B0A322CFD5AF00931471 /* VideoCell.swift */,
+				4F21B0A522CFF98900931471 /* RSSVideoReader.swift */,
 			);
 			path = "Brunch and Slay";
 			sourceTree = "<group>";
@@ -599,6 +611,7 @@
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
 				4F46E21922C401E300BBC598 /* ConfirmPaymentViewController.swift in Sources */,
 				4F24490D22B2B43F00B0D37E /* Shipping.swift in Sources */,
+				4F21B0A422CFD5AF00931471 /* VideoCell.swift in Sources */,
 				4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */,
 				4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */,
 				4FCF137322C3CA38008693CA /* WebPaymentViewController.swift in Sources */,
@@ -607,12 +620,15 @@
 				4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */,
 				4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */,
 				4F7C9D1E22A2D3FC0086F358 /* ShoppingCart.swift in Sources */,
+				4F21B0A022CFD0AE00931471 /* VideoPlayerViewController.swift in Sources */,
+				4F21B0A222CFD15700931471 /* VideoData.swift in Sources */,
 				4F6D1251226774E600F68C87 /* PodcastCell.swift in Sources */,
-				4FF318BC2253CED20079B1D3 /* VideoViewController.swift in Sources */,
+				4FF318BC2253CED20079B1D3 /* VideoListViewController.swift in Sources */,
 				4F971DBF225129CC002B3117 /* AppDelegate.swift in Sources */,
 				4F69750322B422DC002D3809 /* ShippingViewController.swift in Sources */,
 				4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */,
 				4F6D125722677D9100F68C87 /* PodcastData.swift in Sources */,
+				4F21B0A622CFF98900931471 /* RSSVideoReader.swift in Sources */,
 				4F24490F22B2B96B00B0D37E /* ShippingLine.swift in Sources */,
 				4F32C3C3229370B700F27650 /* ResourceLoadingDelegate.swift in Sources */,
 				4F99367E226559B900878C3E /* EventData.swift in Sources */,
