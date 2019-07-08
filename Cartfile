@@ -1,4 +1,3 @@
 GitHub "onevcat/Kingfisher" ~> 5.0
 GitHub "Alamofire/Alamofire" >= 4.2.0
-GitHub "SwiftyJSON/SwiftyJSON" ~> 3.0
-GitHub "braintree/braintree-ios-drop-in"
+GitHub "SwiftyJSON/SwiftyJSON" ~> 4.0
