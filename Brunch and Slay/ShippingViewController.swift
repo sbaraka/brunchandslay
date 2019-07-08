@@ -52,7 +52,7 @@ class ShippingViewController: UIViewController {
         
         ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
         //End of filling shipping data
-        
+        do{
         let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
         
         let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
@@ -73,7 +73,7 @@ class ShippingViewController: UIViewController {
         
         let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
         
-        let json = JSON(data: encodedString!).dictionaryObject
+            let json = try JSON(data: encodedString!).dictionaryObject
         
         Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
             
@@ -105,6 +105,10 @@ class ShippingViewController: UIViewController {
                 }
                 
             }
+            
+        }
+        }
+        catch let error as NSError{
             
         }
         

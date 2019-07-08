@@ -104,6 +104,7 @@ class BillingViewController: UIViewController {
         
         if(shippingSameAsBilling)
         {
+            do{
             //Start filling shipping data
         
             ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
@@ -146,7 +147,7 @@ class BillingViewController: UIViewController {
             
             let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
             
-            let json = JSON(data: encodedString!).dictionaryObject
+                let json = try JSON(data: encodedString!).dictionaryObject
             
             Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                 
@@ -178,7 +179,10 @@ class BillingViewController: UIViewController {
                     }
                 }
             }
-            
+            }
+            catch let error as NSError{
+                
+            }
         }
         else
         {
