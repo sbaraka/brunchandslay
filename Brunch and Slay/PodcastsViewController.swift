@@ -69,6 +69,16 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             playButton.setImage(UIImage(named: "play"), for: .normal)
             
             audioPlayer.pause()
+            
+            do
+            {
+                try AVAudioSession.sharedInstance().setActive(false)
+            }
+            catch
+            {
+                print(error)
+            }
+            
             playerIsPlaying = false;
             
             //currentTitle.text = "None Selected"
@@ -93,6 +103,17 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 let cmTime = CMTimeMakeWithSeconds( doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
                 audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                     DispatchQueue.main.async {
+                        
+                        do
+                        {
+                            try AVAudioSession.sharedInstance().setActive(true)
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
+                      
+                        
                         self.audioPlayer.play()
                         self.playerIsPlaying = true
                         self.playButton.setImage(UIImage(named: "pause"), for: .normal)
@@ -145,6 +166,15 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
         if(playerIsPlaying)
         {
             audioPlayer.pause()
+            
+            do
+            {
+                try AVAudioSession.sharedInstance().setActive(false)
+            }
+            catch
+            {
+                print(error)
+            }
         }
     }
     
@@ -156,6 +186,14 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
             let doubleTime = Double(seconds * Double(playSlider.value))
             let cmTime = CMTimeMakeWithSeconds(doubleTime, preferredTimescale: (audioPlayer.currentItem?.asset.duration.timescale)!)
             audioPlayer.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                do
+                {
+                    try AVAudioSession.sharedInstance().setActive(true)
+                }
+                catch
+                {
+                    print(error)
+                }
                 self.audioPlayer.play()
             }
             
@@ -243,6 +281,15 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 if(playerIsPlaying)
                 {
                     audioPlayer.pause()
+                    
+                    do
+                    {
+                        try AVAudioSession.sharedInstance().setActive(false)
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
                 }
         
                 let asset = AVURLAsset(url: URL(string: audioURLString)!)
@@ -268,6 +315,14 @@ class PodcastsViewController: UIViewController, UITableViewDelegate, UITableView
                 audioPlayer.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (
                     isFinished:Bool) in DispatchQueue.main.async
                     {
+                        do
+                        {
+                            try AVAudioSession.sharedInstance().setActive(true)
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
                         self.audioPlayer.play()
                         self.playerIsPlaying = true
                         

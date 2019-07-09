@@ -82,6 +82,14 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                 playSlider.value = 0
                 
                 audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in DispatchQueue.main.async {
+                        do
+                        {
+                            try AVAudioSession.sharedInstance().setActive(true)
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
                         self.titleView.text = self.podcastsTableData![self.rowIndex!].title
@@ -108,6 +116,14 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
             playButton.setImage(UIImage(named: "play"), for: .normal)
             
             audioPlayer!.pause()
+            do
+            {
+                try AVAudioSession.sharedInstance().setActive(false)
+            }
+            catch
+            {
+                print(error)
+            }
             playerIsPlaying = false
             
             //titleView.text = "None Selected"
@@ -127,6 +143,14 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: (audioPlayer?.currentItem?.asset.duration.timescale)!)
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
                 DispatchQueue.main.async {
+                    do
+                    {
+                        try AVAudioSession.sharedInstance().setActive(true)
+                    }
+                    catch
+                    {
+                        print(error)
+                    }
                     self.audioPlayer!.play()
                     self.playerIsPlaying = true
                     self.playButton.setImage(UIImage(named: "pause"), for: .normal)
@@ -165,6 +189,14 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
                 playSlider.value = 0
                 
                 audioPlayer!.seek(to: CMTime.zero, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in DispatchQueue.main.async {
+                        do
+                        {
+                            try AVAudioSession.sharedInstance().setActive(true)
+                        }
+                        catch
+                        {
+                            print(error)
+                        }
                         self.audioPlayer!.play()
                         self.playerIsPlaying = true
                         self.titleView.text = self.podcastsTableData![self.rowIndex!].title
@@ -185,7 +217,15 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
     @IBAction func startScrub(_ sender: Any) {
         if(playerIsPlaying!)
         {
-           audioPlayer!.pause()
+            audioPlayer!.pause()
+            do
+            {
+                try AVAudioSession.sharedInstance().setActive(false)
+            }
+            catch
+            {
+                print(error)
+            }
         }
     }
     
@@ -197,6 +237,14 @@ class PodcastDetailViewController: UIViewController, UINavigationControllerDeleg
             let doubleTime = Double(seconds * Double(playSlider.value))
             let cmTime = CMTime(seconds: doubleTime, preferredTimescale: ((audioPlayer?.currentItem?.asset.duration.timescale)!))
             audioPlayer!.seek(to: cmTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { (isFinished:Bool) in
+                do
+                {
+                    try AVAudioSession.sharedInstance().setActive(true)
+                }
+                catch
+                {
+                    print(error)
+                }
                 self.audioPlayer!.play()
             }
         }
