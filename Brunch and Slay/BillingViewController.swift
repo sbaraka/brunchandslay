@@ -36,7 +36,7 @@ class BillingViewController: UIViewController {
     @IBOutlet weak var zipBox: UITextField!
     
     @IBOutlet weak var emailBox: UITextField!
-
+    
     @IBOutlet weak var phoneBox: UITextField!
     
     @IBOutlet weak var checkBoxButton: UIButton!
@@ -105,80 +105,102 @@ class BillingViewController: UIViewController {
         if(shippingSameAsBilling)
         {
             do{
-            //Start filling shipping data
-        
-            ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
-            
-            ShoppingCart.instance.order?.shipping.country = countryBox.text!
-            
-            ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
-            
-            ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
-            
-            ShoppingCart.instance.order?.shipping.city = cityBox.text!
-            
-            ShoppingCart.instance.order?.shipping.state = stateBox.text!
-            
-            ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
-            //End of filling shipping data
-            
-            
-            let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
-            
-            let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
-            
-            let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
-            
-            let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
-            
-            let credential = URLCredential(user: key, password: pass, persistence: .forSession)
-            
-            var headers: HTTPHeaders = [:]
-            
-            if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
-                headers[authorizationHeader.key] = authorizationHeader.value
-            }
-            
-            let orderString = ShoppingCart.instance.makeOrderText()
-            
-            let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
-            
+                //Start filling shipping data
+                
+                ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
+                
+                ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
+                
+                ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
+                
+                ShoppingCart.instance.order?.shipping.country = countryBox.text!
+                
+                ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
+                
+                ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
+                
+                ShoppingCart.instance.order?.shipping.city = cityBox.text!
+                
+                ShoppingCart.instance.order?.shipping.state = stateBox.text!
+                
+                ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
+                //End of filling shipping data
+                
+                
+                UserDefaults.standard.set(firstNameBox.text!, forKey: "firstNameBilling")
+                
+                UserDefaults.standard.set(lastNameBox.text!, forKey: "lastNameBilling")
+                
+                UserDefaults.standard.set(companyNameBox.text!, forKey: "companyNameBilling")
+                
+                UserDefaults.standard.set(address1Box.text!, forKey: "address1Billing")
+                
+                UserDefaults.standard.set(address2Box.text!, forKey: "address2Billing")
+                
+                UserDefaults.standard.set(cityBox.text!, forKey: "cityBilling")
+                
+                UserDefaults.standard.set(stateBox.text!, forKey: "stateBilling")
+                
+                UserDefaults.standard.set(zipBox.text!, forKey: "zipBilling")
+                
+                UserDefaults.standard.set(countryBox.text!, forKey: "countryBilling")
+                
+                UserDefaults.standard.set(emailBox.text!, forKey: "emailBilling")
+                
+                UserDefaults.standard.set(phoneBox.text!, forKey: "phoneBilling")
+                
+                let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
+                
+                let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
+                
+                let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+                
+                let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+                
+                let credential = URLCredential(user: key, password: pass, persistence:  .forSession)
+                
+                var headers: HTTPHeaders = [:]
+                
+                if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+                    headers[authorizationHeader.key] = authorizationHeader.value
+                }
+                
+                let orderString = ShoppingCart.instance.makeOrderText()
+                
+                let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
+                
                 let json = try JSON(data: encodedString!).dictionaryObject
-            
-            Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                 
-                let postResponseJSON = JSON(response.result.value!)
-                ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
-                ShoppingCart.instance.clearCart()
-             
-                let paymentJSON: JSON = [
-                    "order_id": (ShoppingCart.instance.order?.orderID)!,
-                    "payment_method": ShoppingCart.instance.payMethod
-                ]
-                
-                var resultCode: Int?
-                
-                Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                     
                     let postResponseJSON = JSON(response.result.value!)
+                    ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
+                    ShoppingCart.instance.clearCart()
                     
-                    resultCode = postResponseJSON["code"].intValue
+                    let paymentJSON: JSON = [
+                        "order_id": (ShoppingCart.instance.order?.orderID)!,
+                        "payment_method": ShoppingCart.instance.payMethod
+                    ]
                     
-                    if(resultCode == 200)
-                    {
-                        self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
-                        self.performSegue(withIdentifier: "billingToPayment", sender: sender)
-                    }
-                    else
-                    {
-                        //Display error message
+                    var resultCode: Int?
+                    
+                    Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                        
+                        let postResponseJSON = JSON(response.result.value!)
+                        
+                        resultCode = postResponseJSON["code"].intValue
+                        
+                        if(resultCode == 200)
+                        {
+                            self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+                            self.performSegue(withIdentifier: "billingToPayment", sender: sender)
+                        }
+                        else
+                        {
+                            //Display error message
+                        }
                     }
                 }
-            }
             }
             catch let error as NSError{
                 
@@ -212,7 +234,7 @@ class BillingViewController: UIViewController {
             
             shippingOrPayPalButton.frame = CGRect(x: 108.5, y: 571, width: 158, height: 30)
             
-        shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
+            shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
             
             shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
             
@@ -231,18 +253,31 @@ class BillingViewController: UIViewController {
             shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
         }
         
-      
+        if let firstName = UserDefaults.standard.string(forKey: "firstNameBilling")
+        {
+            firstNameBox.text = firstName
+            lastNameBox.text = UserDefaults.standard.string(forKey: "lastNameBilling")
+            companyNameBox.text = UserDefaults.standard.string(forKey: "companyNameBilling")
+            address1Box.text = UserDefaults.standard.string(forKey: "address1Billing")
+            address2Box.text = UserDefaults.standard.string(forKey: "address2Billing")
+            cityBox.text = UserDefaults.standard.string(forKey: "cityBilling")
+            stateBox.text = UserDefaults.standard.string(forKey: "stateBilling")
+            zipBox.text = UserDefaults.standard.string(forKey: "zipBilling")
+            countryBox.text = UserDefaults.standard.string(forKey: "countryBilling")
+            emailBox.text = UserDefaults.standard.string(forKey: "emailBilling")
+            phoneBox.text = UserDefaults.standard.string(forKey: "phoneBilling")
+        }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
