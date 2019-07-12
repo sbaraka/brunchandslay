@@ -143,6 +143,7 @@
 		4FDE9E93229C73F5004A4F22 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		4FE6E4372256AFB00090EE41 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		4FE6E4392256B14B0090EE41 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		4FF2C66822D8188000DE142F /* Brunch and Slay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Brunch and Slay.entitlements"; sourceTree = "<group>"; };
 		4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		4FF318BD2253CF920079B1D3 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 		4F971DBD225129CC002B3117 /* Brunch and Slay */ = {
 			isa = PBXGroup;
 			children = (
+				4FF2C66822D8188000DE142F /* Brunch and Slay.entitlements */,
 				4F3F5FA72268E9810090BF27 /* audio */,
 				4F95BE67225A95C800064122 /* icons */,
 				4F971DEE22513F69002B3117 /* User.swift */,
@@ -361,6 +363,11 @@
 				TargetAttributes = {
 					4F971DBA225129CC002B3117 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					4F971DD0225129D1002B3117 = {
 						CreatedOnToolsVersion = 10.1;
@@ -665,7 +672,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Brunch and Slay/Brunch and Slay.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M3V3L5AL8J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -675,7 +684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brunchandslay.Brunch-and-Slay";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrunchAndSlay.brunchandslay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -686,7 +695,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Brunch and Slay/Brunch and Slay.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = M3V3L5AL8J;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -696,7 +707,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "brunchandslay.Brunch-and-Slay";
+				PRODUCT_BUNDLE_IDENTIFIER = com.BrunchAndSlay.brunchandslay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
