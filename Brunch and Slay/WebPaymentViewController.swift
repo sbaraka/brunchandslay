@@ -15,14 +15,11 @@ class WebPaymentViewController: UIViewController, WKUIDelegate, WKNavigationDele
     @IBOutlet weak var webView: WKWebView!
     var redirectURLString: String!
     
-    override func loadView() {
-        webView.uiDelegate = self
-        view = webView
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        webView.uiDelegate = self
+        
         // Do any additional setup after loading the view.
         let redirectURL = URL(string: redirectURLString)
         let myRequest = URLRequest(url: redirectURL!)
