@@ -83,13 +83,23 @@
                                     <outlet property="delegate" destination="9pv-A4-QxB" id="58c-Qj-DN9"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="RSn-EU-efT">
+                                <rect key="frame" x="162.5" y="284" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fLe-be-gKL"/>
+                                    <constraint firstAttribute="width" constant="50" id="p4n-ic-BgV"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.019607843140000001" green="0.01176470588" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="INO-rR-l9h" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="34D-ml-kUj"/>
                             <constraint firstItem="INO-rR-l9h" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="SNS-na-wjf"/>
+                            <constraint firstItem="RSn-EU-efT" firstAttribute="centerX" secondItem="tsR-hK-woN" secondAttribute="centerX" id="ViN-0M-6bq"/>
                             <constraint firstItem="INO-rR-l9h" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="dNZ-WZ-aK2"/>
+                            <constraint firstItem="RSn-EU-efT" firstAttribute="centerY" secondItem="tsR-hK-woN" secondAttribute="centerY" id="ieT-7a-XOd"/>
                             <constraint firstAttribute="trailing" secondItem="INO-rR-l9h" secondAttribute="trailing" id="xcv-Du-Fvj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
@@ -98,12 +108,13 @@
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="RSn-EU-efT" id="dfB-NQ-GNO"/>
                         <outlet property="eventsTable" destination="INO-rR-l9h" id="LBi-4w-ldh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1383" y="798"/>
+            <point key="canvasLocation" x="-1383.2" y="797.45127436281871"/>
         </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="Vf3-KK-DIy">
@@ -651,21 +662,21 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75Z-0B-pbU">
-                                <rect key="frame" x="168.5" y="568" width="38" height="38"/>
+                                <rect key="frame" x="179.5" y="568" width="16" height="38"/>
                                 <state key="normal" image="play"/>
                                 <connections>
                                     <action selector="playAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="uEc-5l-0Bv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhS-S8-Kic">
-                                <rect key="frame" x="256.5" y="568" width="38" height="38"/>
+                                <rect key="frame" x="245.5" y="568" width="16" height="38"/>
                                 <state key="normal" image="next"/>
                                 <connections>
                                     <action selector="nextAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ArD-fd-7dE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aY-oG-zch">
-                                <rect key="frame" x="80.5" y="568" width="38" height="38"/>
+                                <rect key="frame" x="113.5" y="568" width="16" height="38"/>
                                 <state key="normal" image="previous"/>
                                 <connections>
                                     <action selector="previousAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="Onx-BJ-38G"/>
@@ -991,7 +1002,7 @@
                     <navigationItem key="navigationItem" id="AiN-ol-Ush">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="Hq9-8Y-TKe">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZEq-We-FKu">
-                                <rect key="frame" x="222" y="7" width="46" height="30"/>
+                                <rect key="frame" x="313" y="7" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cart">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var eventsTable: UITableView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var eventsTableData: [EventData] = []
+    
+    var postImageXMLParser = PostImageXMLParser()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -45,20 +50,83 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-
+    func buildEventFromJSON(json: JSON) -> EventData
+    {
+        var event = EventData(name: "", location: "", date: "", description: "", imageURLString: "")
+        
+        event.name = json["title"]["rendered"].stringValue
+        
+        let contentStringArray = json["content"]["rendered"].stringValue.replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").split(separator: "\n")
+        
+        var locationArray = contentStringArray[0].components(separatedBy: ": ")
+        
+        locationArray.removeFirst()
+        
+        event.location = locationArray.joined(separator: ": ")
+        
+        var dateArray = contentStringArray[1].components(separatedBy: ": ")
+        
+        dateArray.removeFirst()
+        
+        event.date = dateArray.joined(separator: ": ")
+        
+        var descriptArray = contentStringArray[2].components(separatedBy: ": ")
+        
+        descriptArray.removeFirst()
+        
+        event.description = descriptArray.joined(separator: ": ")
+        
+        event.imageURLString = postImageXMLParser.getImageURLStringFromTag(tag: String(contentStringArray[3]))
+        return event
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        eventsTableData = [
-            EventData(name: "Test 1", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. \nThe quick brown fox jumps over the lazy dog", image: UIImage(named: "baking_with_noah")!),
-            EventData(name: "Test 2", location: "Here", date: "Today", description: "This is just a test with a bunch of garbage text. \nThe quick brown fox jumps over the lazy dog", image: UIImage(named: "baking_with_noah")!)
-        ]
+        let eventsURLString = "https://brunchandslay.com/wp-json/wp/v2/posts"
+        
+        Alamofire.request(eventsURLString).responseJSON{
+            
+            response in debugPrint(response)
+            
+            if let json = response.result.value
+            {
+                DispatchQueue.main.async {
+                    self.activityIndicator.startAnimating()
+                }
+                
+                let jsonValues = JSON(json)
+                
+                for i in 0...((jsonValues.array?.count)! - 1 )
+                {
+                    var isEvent = false
+                    
+                    for j in 0...((jsonValues[i]["tags"].array?.count)! - 1)
+                    {
+                        if(jsonValues[i]["tags"][j].intValue == 189)
+                        {
+                            isEvent = true
+                        }
+                    }
+                    
+                    if(isEvent)
+                    {
+                        self.eventsTableData.append(self.buildEventFromJSON(json: jsonValues[i]))
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.eventsTable.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
+            }
+            
+        }
         
     }
-
-
+    
+    
 }
 

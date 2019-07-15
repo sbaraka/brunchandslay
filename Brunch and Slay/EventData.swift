@@ -14,6 +14,6 @@ struct EventData {
     var location:String
     var date:String
     var description:String
-    var image:UIImage
+    var imageURLString:String
 }
 
