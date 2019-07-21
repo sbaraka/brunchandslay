@@ -107,15 +107,20 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("JSON: \(json)")
                 self.jsonValues = JSON(json)
                 
-                for i in 0...((self.jsonValues?.array?.count)! - 1 )
+                let count = (self.jsonValues?.array?.count) ?? 0
+                
+                if(count > 0)
                 {
-                    let id = self.jsonValues?[i]["id"].int
-                    let name = self.jsonValues?[i]["name"].string
-                    let description = self.jsonValues![i]["description"].string
-                    let price = self.jsonValues![i]["price"].string
-                    let imageURLString = self.jsonValues![i]["images"][0]["src"].string
-                    
-                    self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                    for i in 0...(count - 1 )
+                    {
+                        let id = self.jsonValues?[i]["id"].int
+                        let name = self.jsonValues?[i]["name"].string
+                        let description = self.jsonValues![i]["description"].string
+                        let price = self.jsonValues![i]["price"].string
+                        let imageURLString = self.jsonValues![i]["images"][0]["src"].string
+                        
+                        self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                    }
                 }
                 
                 DispatchQueue.main.async {
@@ -135,7 +140,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("JSON: \(json)")
                 self.jsonValues = JSON(json)
                 
-                let taxRate = (self.jsonValues?[0]["rate"].double)! / 100.0
+                let taxRate = (self.jsonValues?[0]["rate"].double ?? 0) / 100.0
                 
                 ShoppingCart.instance.taxRate = taxRate
             }

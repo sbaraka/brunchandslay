@@ -37,15 +37,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = eventsTable.dequeueReusableCell(withIdentifier: "protoCell") as! EventTableCell
         cell.nameLabel.text = eventsTableData[indexPath.row].name
         
-        cell.locationLabel.text = eventsTableData[indexPath.row].location
+        cell.locationLabel.text = "Location: " + eventsTableData[indexPath.row].location
         
-        cell.dateLabel.text = eventsTableData[indexPath.row].date
-        
-        let backGroundView = UIView()
-        
-        backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
-        
-        cell.selectedBackgroundView = backGroundView
+        cell.dateLabel.text = "Date: " + eventsTableData[indexPath.row].date
         
         return cell
     }
@@ -99,24 +93,32 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 
                 let jsonValues = JSON(json)
                 
-                for i in 0...((jsonValues.array?.count)! - 1 )
+                let iCount = (jsonValues.array?.count) ?? 0
+                if (iCount > 0)
                 {
-                    var isEvent = false
-                    
-                    for j in 0...((jsonValues[i]["tags"].array?.count)! - 1)
+                    for i in 0...(iCount - 1 )
                     {
-                        if(jsonValues[i]["tags"][j].intValue == 189)
+                        var isEvent = false
+                        
+                        let jCount = (jsonValues[i]["tags"].array?.count) ?? 0
+                        
+                        if(jCount > 0)
                         {
-                            isEvent = true
+                            for j in 0...(jCount - 1)
+                            {
+                                if(jsonValues[i]["tags"][j].intValue == 190)
+                                {
+                                    isEvent = true
+                                }
+                            }
+                        }
+                        
+                        if(isEvent)
+                        {
+                            self.eventsTableData.append(self.buildEventFromJSON(json: jsonValues[i]))
                         }
                     }
-                    
-                    if(isEvent)
-                    {
-                        self.eventsTableData.append(self.buildEventFromJSON(json: jsonValues[i]))
-                    }
                 }
-                
                 DispatchQueue.main.async {
                     self.eventsTable.reloadData()
                     self.activityIndicator.stopAnimating()

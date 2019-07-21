@@ -37,12 +37,6 @@ class VideoListViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         cell.videoTitleLabel.text = videoTableData[indexPath.row].title
         
-        let backGroundView = UIView()
-        
-        backGroundView.backgroundColor = UIColor.init(displayP3Red: 255/255, green: 147/255, blue: 0/255, alpha: 255/255)
-        
-        cell.selectedBackgroundView = backGroundView
-        
         return cell
     }
     

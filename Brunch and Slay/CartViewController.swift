@@ -52,12 +52,18 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         cartTableData = []
         
         self.fullTotal = 0
-        for i in 0...self.cartTableData.count - 1
+        
+        let count = self.cartTableData.count
+        
+        if (count > 0)
         {
-            let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
-            let itemTax = itemPrice * ShoppingCart.instance.taxRate
-            
-            self.fullTotal += itemPrice + itemTax
+            for i in 0...count - 1
+            {
+                let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+                let itemTax = itemPrice * ShoppingCart.instance.taxRate
+                
+                self.fullTotal += itemPrice + itemTax
+            }
         }
         
         self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
@@ -119,12 +125,16 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         ShoppingCart.instance.cartItems.remove(at: indexPath.row)
         
         self.fullTotal = 0
-        for i in 0...self.cartTableData.count - 1
+        let count = self.cartTableData.count
+        if(count > 0)
         {
-            let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
-            let itemTax = itemPrice * ShoppingCart.instance.taxRate
-            
-            self.fullTotal += itemPrice + itemTax
+            for i in 0...count - 1
+            {
+                let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+                let itemTax = itemPrice * ShoppingCart.instance.taxRate
+                
+                self.fullTotal += itemPrice + itemTax
+            }
         }
         
         self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
@@ -170,12 +180,18 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     ShoppingCart.instance.taxRate = taxRate
                     
                     self.fullTotal = 0
-                    for i in 0...self.cartTableData.count - 1
+                    
+                    let count = self.cartTableData.count
+                    
+                    if(count > 0)
                     {
-                        let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
-                        let itemTax = itemPrice * ShoppingCart.instance.taxRate
-                        
-                        self.fullTotal += itemPrice + itemTax
+                        for i in 0...count - 1
+                        {
+                            let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+                            let itemTax = itemPrice * ShoppingCart.instance.taxRate
+                            
+                            self.fullTotal += itemPrice + itemTax
+                        }
                     }
                     
                     self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)

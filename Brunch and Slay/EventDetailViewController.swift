@@ -27,9 +27,9 @@ class EventDetailViewController: UIViewController {
         super.viewDidLoad()
 
         nameLabel.text = eventData?.name
-        dateLabel.text = eventData?.date
-        locationLabel.text = eventData?.location
-        descriptionLabel.text = eventData?.description
+        dateLabel.text = "Date: " + (eventData?.date ?? "")
+        locationLabel.text = "Location: " + (eventData?.location ?? "")
+        descriptionLabel.text = "Description: " + (eventData?.description ?? "")
         let eventImageURL = URL(string: eventData!.imageURLString)
         eventImage.kf.setImage(with: eventImageURL)
         // Do any additional setup after loading the view.
