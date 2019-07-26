@@ -41,6 +41,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         cell.dateLabel.text = "Date: " + eventsTableData[indexPath.row].date
         
+        let backGroundView = UIView()
+        
+        backGroundView.backgroundColor = UIColor.init(displayP3Red: 4/255, green: 6/255, blue: 54/255, alpha: 220/255)
+        
+        cell.selectedBackgroundView = backGroundView
+        
         return cell
     }
     

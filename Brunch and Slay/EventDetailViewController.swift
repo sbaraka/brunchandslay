@@ -21,7 +21,7 @@ class EventDetailViewController: UIViewController {
     
     @IBOutlet weak var locationLabel: UILabel!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

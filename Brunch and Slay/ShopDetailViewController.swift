@@ -18,7 +18,7 @@ class ShopDetailViewController: UIViewController {
     
     @IBOutlet weak var priceLabel: UILabel!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UITextView!
     
     @IBOutlet weak var quantityBox: UITextField!
     

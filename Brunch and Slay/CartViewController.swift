@@ -175,7 +175,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("JSON: \(json)")
                     let jsonValues = JSON(json)
                     
-                    let taxRate = (jsonValues[0]["rate"].double)! / 100.0
+                    let taxRate = (jsonValues[0]["rate"].double ?? 0) / 100.0
                     
                     ShoppingCart.instance.taxRate = taxRate
                     

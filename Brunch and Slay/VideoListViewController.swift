@@ -33,9 +33,15 @@ class VideoListViewController: UIViewController,UITableViewDelegate,UITableViewD
         let cell = videoTable.dequeueReusableCell(withIdentifier: "videoCell") as! VideoCell
        
         let thumbnailURL = URL(string: videoTableData[indexPath.row].thumbnailURLString)
-    cell.videoThumbnailView.kf.setImage(with: thumbnailURL)
+        cell.videoThumbnailView.kf.setImage(with: thumbnailURL)
         
         cell.videoTitleLabel.text = videoTableData[indexPath.row].title
+        
+        let backGroundView = UIView()
+        
+        backGroundView.backgroundColor = UIColor.init(displayP3Red: 4/255, green: 6/255, blue: 54/255, alpha: 220/255)
+        
+        cell.selectedBackgroundView = backGroundView
         
         return cell
     }
