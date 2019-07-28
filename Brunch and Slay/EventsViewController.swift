@@ -87,6 +87,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let eventsURLString = "https://brunchandslay.com/wp-json/wp/v2/posts"
         
+        self.view.bringSubviewToFront(activityIndicator)
+        
         Alamofire.request(eventsURLString).responseJSON{
             
             response in debugPrint(response)

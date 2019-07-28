@@ -24,7 +24,6 @@ class WebPaymentViewController: UIViewController, WKUIDelegate, WKNavigationDele
         let redirectURL = URL(string: redirectURLString)
         let myRequest = URLRequest(url: redirectURL!)
         webView.load(myRequest)
-        
     }
     
 

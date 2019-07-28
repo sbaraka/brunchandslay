@@ -107,7 +107,7 @@ class ShippingViewController: UIViewController {
                 
                 let paymentJSON: JSON = [
                     "order_id": (ShoppingCart.instance.order?.orderID)!,
-                    "payment_method": ShoppingCart.instance.payMethod
+                    "payment_method": (ShoppingCart.instance.order?.paymentMethod)!
                 ]
                 
                 var resultCode: Int?
@@ -120,6 +120,8 @@ class ShippingViewController: UIViewController {
                     
                     if(resultCode == 200)
                     {
+                        ShoppingCart.instance.clearCart()
+                        
                         self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
                         self.performSegue(withIdentifier: "shippingToPayment", sender: sender)
                     }

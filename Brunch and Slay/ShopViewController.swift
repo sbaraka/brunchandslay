@@ -115,13 +115,18 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                 {
                     for i in 0...(count - 1 )
                     {
-                        let id = self.jsonValues?[i]["id"].int
-                        let name = self.jsonValues?[i]["name"].string
-                        let description = self.jsonValues![i]["description"].string
-                        let price = self.jsonValues![i]["price"].string
-                        let imageURLString = self.jsonValues![i]["images"][0]["src"].string
+                        let isVirtual = self.jsonValues![i]["virtual"].boolValue
                         
-                        self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                        if(!isVirtual)
+                        {
+                            let id = self.jsonValues?[i]["id"].int
+                            let name = self.jsonValues?[i]["name"].string
+                            let description = self.jsonValues![i]["description"].string
+                            let price = self.jsonValues![i]["price"].string
+                            let imageURLString = self.jsonValues![i]["images"][0]["src"].string
+                            
+                            self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                        }
                     }
                 }
                 

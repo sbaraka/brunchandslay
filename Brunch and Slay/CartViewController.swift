@@ -142,6 +142,30 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.cartTable.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        cartTableData = ShoppingCart.instance.cartItems
+        cartTable.reloadData()
+        
+        self.fullTotal = 0
+        
+        let count = self.cartTableData.count
+        
+        if(count > 0)
+        {
+            for i in 0...count - 1
+            {
+                let itemPrice = Double(self.cartTableData[i].item.price)! * Double(self.cartTableData[i].quantity)
+                let itemTax = itemPrice * ShoppingCart.instance.taxRate
+                
+                self.fullTotal += itemPrice + itemTax
+            }
+        }
+        
+        self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib
@@ -197,10 +221,12 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                     
-                    self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+                   
                         
                         
                     DispatchQueue.main.async {
+                        self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
+                        
                         self.cartTable.reloadData()
                     }
                 }

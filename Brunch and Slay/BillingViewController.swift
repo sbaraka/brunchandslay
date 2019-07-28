@@ -17,6 +17,8 @@ class BillingViewController: UIViewController {
     
     private var redirectURLString: String?
     
+    @IBOutlet weak var shippingOrPayPalWidth: NSLayoutConstraint!
+    
     @IBOutlet weak var firstNameBox: UITextField!
     
     @IBOutlet weak var lastNameBox: UITextField!
@@ -51,25 +53,32 @@ class BillingViewController: UIViewController {
             {
                 self.checkBoxButton.setImage(UIImage(named: "checkbox_checked")!, for: .normal)
                 
-                self.shippingOrPayPalButton.titleLabel?.text = "Proceed to PayPal"
+                self.shippingOrPayPalButton.setTitle("Proceed to PayPal", for: .normal)
                 
-                self.shippingOrPayPalButton.frame = CGRect(x: 121, y: 571, width: 133, height: 30)
+                //self.shippingOrPayPalButton.frame = CGRect(x: 108.5, y: 571, width: 158, height: 30)
                 
-                self.shippingOrPayPalButton.setImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
+                //self.shippingOrPayPalButton.sizeToFit()
                 
-                self.shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
+                self.shippingOrPayPalWidth.constant = 158
+                self.shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
+                
+                
+                self.shippingOrPayPalButton.setTitleColor(UIColor.white, for: .normal)
             }
             else
             {
                 self.checkBoxButton.setImage(UIImage(named: "checkbox_unchecked")!, for: .normal)
                 
-                self.shippingOrPayPalButton.titleLabel?.text = "Continue"
+                self.shippingOrPayPalButton.setTitle("Continue", for: .normal)
                 
-                self.shippingOrPayPalButton.frame = CGRect(x: 154, y: 571, width: 67, height: 30)
+                //self.shippingOrPayPalButton.frame = CGRect(x: 154, y: 571, width: 67, height: 30)
                 
+                //self.shippingOrPayPalButton.sizeToFit()
+                
+                self.shippingOrPayPalWidth.constant = 67
                 self.shippingOrPayPalButton.setBackgroundImage(UIImage(named: "picker_button_background-2"), for: .normal)
                 
-                self.shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
+                self.shippingOrPayPalButton.setTitleColor(UIColor.black, for: .normal)
                 
             }
         }
@@ -183,7 +192,7 @@ class BillingViewController: UIViewController {
                     
                     let paymentJSON: JSON = [
                         "order_id": (ShoppingCart.instance.order?.orderID)!,
-                        "payment_method": ShoppingCart.instance.payMethod
+                        "payment_method": (ShoppingCart.instance.order?.paymentMethod)!
                     ]
                     
                     var resultCode: Int?
@@ -196,6 +205,8 @@ class BillingViewController: UIViewController {
                         
                         if(resultCode == 200)
                         {
+                            ShoppingCart.instance.clearCart()
+                            
                             self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
                             self.performSegue(withIdentifier: "billingToPayment", sender: sender)
                         }
@@ -234,27 +245,35 @@ class BillingViewController: UIViewController {
         {
             checkBoxButton.setImage(UIImage(named: "checkbox_checked")!, for: .normal)
             
-            shippingOrPayPalButton.titleLabel?.text = "Proceed to Payment"
+            shippingOrPayPalButton.setTitle("Proceed to PayPal", for: .normal)
             
-            shippingOrPayPalButton.frame = CGRect(x: 108.5, y: 571, width: 158, height: 30)
+            //shippingOrPayPalButton.frame = CGRect(x: 108.5, y: 571, width: 158, height: 30)
+            
+            //shippingOrPayPalButton.sizeToFit()
+            
+            shippingOrPayPalWidth.constant = 158
             
             shippingOrPayPalButton.setBackgroundImage(UIImage(named: "PayPal_button_backgroud-1"), for: .normal)
             
-            shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
-            
+            shippingOrPayPalButton.setTitleColor(UIColor.white, for: .normal)
             
         }
         else
         {
             checkBoxButton.setImage(UIImage(named: "checkbox_unchecked")!, for: .normal)
             
-            shippingOrPayPalButton.titleLabel?.text = "Continue"
+            shippingOrPayPalButton.setTitle("Continue", for: .normal)
             
-            shippingOrPayPalButton.frame = CGRect(x: 154, y: 571, width: 67, height: 30)
+            //shippingOrPayPalButton.frame = CGRect(x: 154, y: 571, width: 67, height: 30)
+            
+            //shippingOrPayPalButton.sizeToFit()
+            
+            shippingOrPayPalWidth.constant = 67
             
             shippingOrPayPalButton.setBackgroundImage(UIImage(named: "picker_button_background-2"), for: .normal)
             
-            shippingOrPayPalButton.titleLabel?.textColor = UIColor.white
+            shippingOrPayPalButton.setTitleColor(UIColor.black, for: .normal)
+            
         }
         
         if let firstName = UserDefaults.standard.string(forKey: "firstNameBilling")
