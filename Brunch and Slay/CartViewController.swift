@@ -157,6 +157,9 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
         
         let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+        
+        let authorizedUrlString = taxUrlString + "?consumer_key=" + key + "&consumer_secret=" + pass
+        
         let credential = URLCredential(user: key, password: pass, persistence: .forSession)
         
         var headers: HTTPHeaders = [:]
@@ -166,7 +169,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
         
-        Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+        Alamofire.request(authorizedUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
             {
                 response in debugPrint(response)
                 

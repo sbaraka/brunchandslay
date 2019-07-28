@@ -88,6 +88,8 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
         
+        let authorizedUrlString = productUrlString + "?consumer_key=" + key + "&consumer_secret=" + pass
+        
         let credential = URLCredential(user: key, password: pass, persistence: .forSession)
         
         var headers: HTTPHeaders = [:]
@@ -96,7 +98,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             headers[authorizationHeader.key] = authorizationHeader.value
         }
         
-        Alamofire.request(productUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+        Alamofire.request(authorizedUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
             
             if let json = response.result.value
             {

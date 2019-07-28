@@ -86,7 +86,7 @@ class ShopDetailViewController: UIViewController {
         
         let sanitizedDescription = (shopData?.description)!.replacingOccurrences(of: "<p>", with: "\n").replacingOccurrences(of: "</p>", with: "").replacingOccurrences(of: "<div class=\"grammarly-disable-indicator\"></div>", with: "")
         
-        descriptionLabel.text = "Description: " + sanitizedDescription
+        descriptionLabel.text = sanitizedDescription
         
         quantityBox.text = String(format: "%01.0f",quantityStepper.value)
         

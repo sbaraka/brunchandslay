@@ -157,6 +157,10 @@ class BillingViewController: UIViewController {
                 
                 let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
                 
+                let authorizedOrder = orderURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
+                
+                let authorizedPayment = processPaymentURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
+                
                 let credential = URLCredential(user: key, password: pass, persistence:  .forSession)
                 
                 var headers: HTTPHeaders = [:]
@@ -171,7 +175,7 @@ class BillingViewController: UIViewController {
                 
                 let json = try JSON(data: encodedString!).dictionaryObject
                 
-                Alamofire.request(orderURLString, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                Alamofire.request(authorizedOrder, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                     
                     let postResponseJSON = JSON(response.result.value!)
                     ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
@@ -184,7 +188,7 @@ class BillingViewController: UIViewController {
                     
                     var resultCode: Int?
                     
-                    Alamofire.request(processPaymentURLString, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                    Alamofire.request(authorizedPayment, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                         
                         let postResponseJSON = JSON(response.result.value!)
                         
