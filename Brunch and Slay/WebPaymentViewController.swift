@@ -26,6 +26,10 @@ class WebPaymentViewController: UIViewController, WKUIDelegate, WKNavigationDele
         webView.load(myRequest)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 
     /*
     // MARK: - Navigation
