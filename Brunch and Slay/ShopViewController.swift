@@ -51,8 +51,9 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
        
         
-        let priceDouble = Double(shopTableData[indexPath.row].price)
-        let formattedPrice = String(format: "%04.2f", priceDouble!)
+        let priceDouble = Double(shopTableData[indexPath.row].price) ?? 0.0
+        
+        let formattedPrice = String(format: "%04.2f", priceDouble)
         
         cell.priceLabel.text = "Price: $" + formattedPrice
     
@@ -119,15 +120,31 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                         
                         if(!isVirtual)
                         {
-                            let id = self.jsonValues?[i]["id"].int
-                            let name = self.jsonValues?[i]["name"].string
-                            let description = self.jsonValues![i]["description"].string
-                            let price = self.jsonValues![i]["price"].string
-                            let imageURLString = self.jsonValues![i]["images"][0]["src"].string
+                            let id = self.jsonValues![i]["id"].int ?? 0
+                            let name = self.jsonValues![i]["name"].string ?? ""
+                            let description = self.jsonValues![i]["description"].string ?? ""
+                            let price = self.jsonValues![i]["price"].string ?? ""
+                            let imageURLString = self.jsonValues![i]["images"][0]["src"].string ?? ""
                             
-                            self.shopTableData.append(ProductData(id: id!, name: name!, description: description!, price: price!, imageURLString: imageURLString!))
+                            self.shopTableData.append(ProductData(id: id, name: name, description: description, price: price, imageURLString: imageURLString))
                         }
                     }
+                }
+                
+                Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+                    {
+                        response in debugPrint(response)
+                        
+                        if let json = response.value
+                        {
+                            print("JSON: \(json)")
+                            self.jsonValues = JSON(json)
+                            
+                            let taxRate = (self.jsonValues?[0]["rate"].double ?? 0) / 100.0
+                            
+                            ShoppingCart.instance.taxRate = taxRate
+                        }
+                        
                 }
                 
                 DispatchQueue.main.async {
@@ -138,23 +155,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
             
-        Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
-        {
-            response in debugPrint(response)
-            
-            if let json = response.value
-            {
-                print("JSON: \(json)")
-                self.jsonValues = JSON(json)
-                
-                let taxRate = (self.jsonValues?[0]["rate"].double ?? 0) / 100.0
-                
-                ShoppingCart.instance.taxRate = taxRate
-            }
-            
         
-        
-        }
         
     
     }
