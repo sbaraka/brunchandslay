@@ -19,7 +19,6 @@
 		4F24490F22B2B96B00B0D37E /* ShippingLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F24490E22B2B96B00B0D37E /* ShippingLine.swift */; };
 		4F32C3C3229370B700F27650 /* ResourceLoadingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32C3C2229370B700F27650 /* ResourceLoadingDelegate.swift */; };
 		4F3F5FA82268E9810090BF27 /* audio in Resources */ = {isa = PBXBuildFile; fileRef = 4F3F5FA72268E9810090BF27 /* audio */; };
-		4F46E21922C401E300BBC598 /* ConfirmPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F46E21822C401E300BBC598 /* ConfirmPaymentViewController.swift */; };
 		4F5E7F8C22DCE36F00E5789B /* PostImageXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5E7F8B22DCE36F00E5789B /* PostImageXMLParser.swift */; };
 		4F69750122B422BA002D3809 /* BillingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69750022B422BA002D3809 /* BillingViewController.swift */; };
 		4F69750322B422DC002D3809 /* ShippingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69750222B422DC002D3809 /* ShippingViewController.swift */; };
@@ -44,6 +43,7 @@
 		4F99367E226559B900878C3E /* EventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F99367D226559B900878C3E /* EventData.swift */; };
 		4F9A3D32226917620092CF15 /* CartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9A3D31226917620092CF15 /* CartData.swift */; };
 		4F9C3B96226912CF00EA3212 /* ClassCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9C3B95226912CF00EA3212 /* ClassCell.swift */; };
+		4FA0D74C22F8AFB400463054 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
 		4FA270022266529400C834AE /* PodcastDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA270012266529400C834AE /* PodcastDetailViewController.swift */; };
 		4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA27003226653A700C834AE /* ShopDetailViewController.swift */; };
 		4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */; };
@@ -56,8 +56,6 @@
 		4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */; };
 		4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C12253D2E60079B1D3 /* SignInViewController.swift */; };
 		4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C32253D3D40079B1D3 /* CartViewController.swift */; };
-		AEF7064A22F88963002BB5A8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
-		AEF7064B22F88963002BB5A8 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,20 +75,6 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		AEF7064C22F88963002BB5A8 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				AEF7064B22F88963002BB5A8 /* Alamofire.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		4F06C3C8228F7D9100456965 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
@@ -103,7 +87,6 @@
 		4F24490E22B2B96B00B0D37E /* ShippingLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingLine.swift; sourceTree = "<group>"; };
 		4F32C3C2229370B700F27650 /* ResourceLoadingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLoadingDelegate.swift; sourceTree = "<group>"; };
 		4F3F5FA72268E9810090BF27 /* audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = audio; sourceTree = "<group>"; };
-		4F46E21822C401E300BBC598 /* ConfirmPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPaymentViewController.swift; sourceTree = "<group>"; };
 		4F5E7F8B22DCE36F00E5789B /* PostImageXMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageXMLParser.swift; sourceTree = "<group>"; };
 		4F69750022B422BA002D3809 /* BillingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingViewController.swift; sourceTree = "<group>"; };
 		4F69750222B422DC002D3809 /* ShippingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingViewController.swift; sourceTree = "<group>"; };
@@ -159,8 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA0D74C22F8AFB400463054 /* Alamofire.framework in Frameworks */,
 				4F14FD8522B03C2900D395FC /* WebKit.framework in Frameworks */,
-				AEF7064A22F88963002BB5A8 /* Alamofire.framework in Frameworks */,
 				4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,7 +241,6 @@
 				4F69750022B422BA002D3809 /* BillingViewController.swift */,
 				4F69750222B422DC002D3809 /* ShippingViewController.swift */,
 				4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */,
-				4F46E21822C401E300BBC598 /* ConfirmPaymentViewController.swift */,
 				4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */,
 				4F21B0A122CFD15700931471 /* VideoData.swift */,
 				4F21B0A322CFD5AF00931471 /* VideoCell.swift */,
@@ -306,7 +288,6 @@
 				4F971DB7225129CC002B3117 /* Sources */,
 				4F971DB8225129CC002B3117 /* Frameworks */,
 				4F971DB9225129CC002B3117 /* Resources */,
-				AEF7064C22F88963002BB5A8 /* Embed Frameworks */,
 				4F865AB1228F7679003A9094 /* ShellScript */,
 			);
 			buildRules = (
@@ -473,7 +454,6 @@
 				4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */,
 				4F99367C226556D600878C3E /* EventDetailViewController.swift in Sources */,
 				4F971DC3225129CC002B3117 /* PodcastsViewController.swift in Sources */,
-				4F46E21922C401E300BBC598 /* ConfirmPaymentViewController.swift in Sources */,
 				4F24490D22B2B43F00B0D37E /* Shipping.swift in Sources */,
 				4F21B0A422CFD5AF00931471 /* VideoCell.swift in Sources */,
 				4FA27004226653A700C834AE /* ShopDetailViewController.swift in Sources */,
@@ -688,10 +668,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BrunchAndSlay.brunchandslay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -711,10 +692,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.BrunchAndSlay.brunchandslay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

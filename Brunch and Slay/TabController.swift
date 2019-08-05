@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import Foundation
 
 class TabController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(red: 1, green: 140/255, blue: 0, alpha: 1)], for: .selected)
+        
+    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
+        
+        
     }
-    
     
 }
