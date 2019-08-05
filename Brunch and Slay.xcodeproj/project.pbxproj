@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F06C3C8228F7D9100456965 /* Kingfisher.framework */; };
-		4F14FD8422B03C2900D395FC /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F14FD8522B03C2900D395FC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED82FF52290A09B00CDD1E9 /* WebKit.framework */; };
 		4F21B0A022CFD0AE00931471 /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B09F22CFD0AE00931471 /* VideoPlayerViewController.swift */; };
 		4F21B0A222CFD15700931471 /* VideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F21B0A122CFD15700931471 /* VideoData.swift */; };
@@ -50,7 +49,6 @@
 		4FCB4712228C71DF004CACFC /* RSSPodcastReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB4711228C71DF004CACFC /* RSSPodcastReader.swift */; };
 		4FCDEBB02263A6780084BFCE /* EventTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCDEBAF2263A6780084BFCE /* EventTableCell.swift */; };
 		4FCF137322C3CA38008693CA /* WebPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCF137222C3CA38008693CA /* WebPaymentViewController.swift */; };
-		4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
 		4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4372256AFB00090EE41 /* TabController.swift */; };
 		4FE6E43A2256B14C0090EE41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE6E4392256B14B0090EE41 /* NavigationController.swift */; };
 		4FF318BC2253CED20079B1D3 /* VideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */; };
@@ -58,6 +56,8 @@
 		4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */; };
 		4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C12253D2E60079B1D3 /* SignInViewController.swift */; };
 		4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C32253D3D40079B1D3 /* CartViewController.swift */; };
+		AEF7064A22F88963002BB5A8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; };
+		AEF7064B22F88963002BB5A8 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDE9E93229C73F5004A4F22 /* Alamofire.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,13 +78,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4F14FD8722B03C2900D395FC /* Embed Frameworks */ = {
+		AEF7064C22F88963002BB5A8 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4F14FD8422B03C2900D395FC /* Alamofire.framework in Embed Frameworks */,
+				AEF7064B22F88963002BB5A8 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,7 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F14FD8522B03C2900D395FC /* WebKit.framework in Frameworks */,
-				4FDE9E94229C73F5004A4F22 /* Alamofire.framework in Frameworks */,
+				AEF7064A22F88963002BB5A8 /* Alamofire.framework in Frameworks */,
 				4F06C3C9228F7D9100456965 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,8 +306,8 @@
 				4F971DB7225129CC002B3117 /* Sources */,
 				4F971DB8225129CC002B3117 /* Frameworks */,
 				4F971DB9225129CC002B3117 /* Resources */,
+				AEF7064C22F88963002BB5A8 /* Embed Frameworks */,
 				4F865AB1228F7679003A9094 /* ShellScript */,
-				4F14FD8722B03C2900D395FC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -453,7 +453,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n# skip if we run in debug\nif [ \"$CONFIGURATION\" == \"Debug\" ]; then\necho \"Skip frameworks cleaning in debug version\"\nexit 0\nfi\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
