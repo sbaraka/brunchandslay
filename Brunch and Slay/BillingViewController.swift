@@ -87,145 +87,149 @@ class BillingViewController: UIViewController {
     
     
     @IBAction func goToPayPalOrShipping(_ sender: Any) {
-        //Start filling in billing data
-        ShoppingCart.instance.order?.billing.firstName = firstNameBox.text!
         
-        ShoppingCart.instance.order?.billing.lastName = lastNameBox.text!
-        
-        ShoppingCart.instance.order?.billing.companyName = companyNameBox.text!
-        
-        ShoppingCart.instance.order?.billing.country = countryBox.text!
-        
-        ShoppingCart.instance.order?.billing.address1 = address1Box.text!
-        
-        ShoppingCart.instance.order?.billing.address2 = address2Box.text!
-        
-        ShoppingCart.instance.order?.billing.city = cityBox.text!
-        
-        ShoppingCart.instance.order?.billing.state = stateBox.text!
-        
-        ShoppingCart.instance.order?.billing.postalCode = zipBox.text!
-        
-        ShoppingCart.instance.order?.billing.email = emailBox.text!
-        
-        ShoppingCart.instance.order?.billing.phone = phoneBox.text!
-        //End of filling billing data
-        
-        if(shippingSameAsBilling)
+        if(ShoppingCart.instance.cartItems.count > 0)
         {
-            do{
-                //Start filling shipping data
-                
-                ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
-                
-                ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
-                
-                ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
-                
-                ShoppingCart.instance.order?.shipping.country = countryBox.text!
-                
-                ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
-                
-                ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
-                
-                ShoppingCart.instance.order?.shipping.city = cityBox.text!
-                
-                ShoppingCart.instance.order?.shipping.state = stateBox.text!
-                
-                ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
-                //End of filling shipping data
-                
-                
-                UserDefaults.standard.set(firstNameBox.text!, forKey: "firstNameBilling")
-                
-                UserDefaults.standard.set(lastNameBox.text!, forKey: "lastNameBilling")
-                
-                UserDefaults.standard.set(companyNameBox.text!, forKey: "companyNameBilling")
-                
-                UserDefaults.standard.set(address1Box.text!, forKey: "address1Billing")
-                
-                UserDefaults.standard.set(address2Box.text!, forKey: "address2Billing")
-                
-                UserDefaults.standard.set(cityBox.text!, forKey: "cityBilling")
-                
-                UserDefaults.standard.set(stateBox.text!, forKey: "stateBilling")
-                
-                UserDefaults.standard.set(zipBox.text!, forKey: "zipBilling")
-                
-                UserDefaults.standard.set(countryBox.text!, forKey: "countryBilling")
-                
-                UserDefaults.standard.set(emailBox.text!, forKey: "emailBilling")
-                
-                UserDefaults.standard.set(phoneBox.text!, forKey: "phoneBilling")
-                
-                let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
-                
-                let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
-                
-                let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
-                
-                let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
-                
-                let authorizedOrder = orderURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
-                
-                let authorizedPayment = processPaymentURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
-                
-                let credential = URLCredential(user: key, password: pass, persistence:  .forSession)
-                
-                var headers: HTTPHeaders = [:]
-                
-                if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
-                    headers[authorizationHeader.key] = authorizationHeader.value
-                }
-                
-                let orderString = ShoppingCart.instance.makeOrderText()
-                
-                let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
-                
-                let json = try JSON(data: encodedString!).dictionaryObject
-                
-                Alamofire.request(authorizedOrder, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+            //Start filling in billing data
+            ShoppingCart.instance.order?.billing.firstName = firstNameBox.text!
+            
+            ShoppingCart.instance.order?.billing.lastName = lastNameBox.text!
+            
+            ShoppingCart.instance.order?.billing.companyName = companyNameBox.text!
+            
+            ShoppingCart.instance.order?.billing.country = countryBox.text!
+            
+            ShoppingCart.instance.order?.billing.address1 = address1Box.text!
+            
+            ShoppingCart.instance.order?.billing.address2 = address2Box.text!
+            
+            ShoppingCart.instance.order?.billing.city = cityBox.text!
+            
+            ShoppingCart.instance.order?.billing.state = stateBox.text!
+            
+            ShoppingCart.instance.order?.billing.postalCode = zipBox.text!
+            
+            ShoppingCart.instance.order?.billing.email = emailBox.text!
+            
+            ShoppingCart.instance.order?.billing.phone = phoneBox.text!
+            //End of filling billing data
+            
+            if(shippingSameAsBilling)
+            {
+                do{
+                    //Start filling shipping data
                     
-                    let postResponseJSON = JSON(response.result.value!)
-                    ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
-                    ShoppingCart.instance.clearCart()
+                    ShoppingCart.instance.order?.shipping.firstName = firstNameBox.text!
                     
-                    let paymentJSON: JSON = [
-                        "order_id": (ShoppingCart.instance.order?.orderID)!,
-                        "payment_method": (ShoppingCart.instance.order?.paymentMethod)!
-                    ]
+                    ShoppingCart.instance.order?.shipping.lastName = lastNameBox.text!
                     
-                    var resultCode: Int?
+                    ShoppingCart.instance.order?.shipping.companyName = companyNameBox.text!
                     
-                    Alamofire.request(authorizedPayment, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
+                    ShoppingCart.instance.order?.shipping.country = countryBox.text!
+                    
+                    ShoppingCart.instance.order?.shipping.address1 = address1Box.text!
+                    
+                    ShoppingCart.instance.order?.shipping.address2 = address2Box.text!
+                    
+                    ShoppingCart.instance.order?.shipping.city = cityBox.text!
+                    
+                    ShoppingCart.instance.order?.shipping.state = stateBox.text!
+                    
+                    ShoppingCart.instance.order?.shipping.postalCode = zipBox.text!
+                    //End of filling shipping data
+                    
+                    
+                    UserDefaults.standard.set(firstNameBox.text!, forKey: "firstNameBilling")
+                    
+                    UserDefaults.standard.set(lastNameBox.text!, forKey: "lastNameBilling")
+                    
+                    UserDefaults.standard.set(companyNameBox.text!, forKey: "companyNameBilling")
+                    
+                    UserDefaults.standard.set(address1Box.text!, forKey: "address1Billing")
+                    
+                    UserDefaults.standard.set(address2Box.text!, forKey: "address2Billing")
+                    
+                    UserDefaults.standard.set(cityBox.text!, forKey: "cityBilling")
+                    
+                    UserDefaults.standard.set(stateBox.text!, forKey: "stateBilling")
+                    
+                    UserDefaults.standard.set(zipBox.text!, forKey: "zipBilling")
+                    
+                    UserDefaults.standard.set(countryBox.text!, forKey: "countryBilling")
+                    
+                    UserDefaults.standard.set(emailBox.text!, forKey: "emailBilling")
+                    
+                    UserDefaults.standard.set(phoneBox.text!, forKey: "phoneBilling")
+                    
+                    let orderURLString = "https://brunchandslay.com/wp-json/wc/v2/orders"
+                    
+                    let processPaymentURLString = "https://brunchandslay.com/wp-json/wc/v2/process_payment"
+                    
+                    let key = "ck_1f524b00ccc62c462dac098fee0a21c6ed852712"
+                    
+                    let pass = "cs_1b0196f008f336d3a4a7870e5e858abe3d208734"
+                    
+                    let authorizedOrder = orderURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
+                    
+                    let authorizedPayment = processPaymentURLString + "?consumer_key=" + key + "&consumer_secret=" + pass
+                    
+                    let credential = URLCredential(user: key, password: pass, persistence:  .forSession)
+                    
+                    var headers: HTTPHeaders = [:]
+                    
+                    if let authorizationHeader = Request.authorizationHeader(user: key, password: pass){
+                        headers[authorizationHeader.key] = authorizationHeader.value
+                    }
+                    
+                    
+                    let orderString = ShoppingCart.instance.makeOrderText()
+                    
+                    let encodedString = (orderString as NSString).data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)
+                    
+                    let json = try JSON(data: encodedString!).dictionaryObject
+                    
+                    Alamofire.request(authorizedOrder, method: .post, parameters: json, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                         
                         let postResponseJSON = JSON(response.result.value!)
+                        ShoppingCart.instance.order?.orderID = postResponseJSON["id"].intValue
+                        ShoppingCart.instance.clearCart()
                         
-                        resultCode = postResponseJSON["code"].intValue
+                        let paymentJSON: JSON = [
+                            "order_id": (ShoppingCart.instance.order?.orderID)!,
+                            "payment_method": (ShoppingCart.instance.order?.paymentMethod)!
+                        ]
                         
-                        if(resultCode == 200)
-                        {
-                            ShoppingCart.instance.clearCart()
+                        var resultCode: Int?
+                        
+                        Alamofire.request(authorizedPayment, method: .post, parameters: paymentJSON.dictionaryObject, encoding: JSONEncoding.default, headers: headers).authenticate(usingCredential: credential).responseJSON{ response in debugPrint(response)
                             
-                            self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
-                            self.performSegue(withIdentifier: "billingToPayment", sender: sender)
-                        }
-                        else
-                        {
-                            //Display error message
+                            let postResponseJSON = JSON(response.result.value!)
+                            
+                            resultCode = postResponseJSON["code"].intValue
+                            
+                            if(resultCode == 200)
+                            {
+                                ShoppingCart.instance.clearCart()
+                                 
+                                self.redirectURLString = postResponseJSON["data"]["redirect"].stringValue
+                                self.performSegue(withIdentifier: "billingToPayment", sender: sender)
+                            }
+                            else
+                            {
+                                //Display error message
+                            }
                         }
                     }
                 }
+                catch let error as NSError{
+                    
+                }
             }
-            catch let error as NSError{
-                
+            else
+            {
+                performSegue(withIdentifier: "goToShipping", sender: sender)
             }
         }
-        else
-        {
-            performSegue(withIdentifier: "goToShipping", sender: sender)
-        }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

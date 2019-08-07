@@ -9,6 +9,8 @@
 import UIKit
 import AVKit
 import UserNotifications
+import Alamofire
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -62,6 +64,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
+        
+        let registerURLString = "https://brunchandslay.com/pnfw/register/"
+        
+        let parametersJSON: JSON = [
+            "os": "iOS",
+            "token": token,
+            "lang": "en"
+        ]
+        
+        Alamofire.request(registerURLString, method: .post, parameters: parametersJSON.dictionaryObject, encoding: URLEncoding.default).responseJSON{response in debugPrint(response)
+        
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
