@@ -6,6 +6,7 @@
 //  Copyright © 2019 Brunch and Slay. All rights reserved.
 //
 
+import Alamofire
 import Foundation
 import UIKit
 
@@ -16,49 +17,26 @@ class RSSPodcastReader: NSObject, XMLParserDelegate
     private var tempElementData: String = ""
     
     private var isParserDone: Bool = false
-    private var tryAgain: Bool = false
     
-    func fetchPodcastsDataFromURL(url: URL) -> [PodcastData]
+    func fetchPodcastsDataFromURL(url: URL) ->[PodcastData]
     {
         isParserDone = false
         podcastDataList = [PodcastData]()
-        var task = URLSession.shared.dataTask(with: url) { data, response, error in guard
-            let data = data, error == nil else {
-                print (error ?? "Unknown error")
-                self.tryAgain = true
-                return
+        
+        Alamofire.request(url).response {
+            response in debugPrint(response)
+            
+            if let data = response.data
+            {
+                let parser = XMLParser(data: data)
+                parser.delegate = self
+                parser.parse()
             }
-            self.tryAgain = false
-            let parser = XMLParser(data: data)
-            parser.delegate = self
-            parser.parse()
         }
-        
-        
-        task.resume()
         
         while(!isParserDone)
         {
-            if(tryAgain)
-            {
-                task.cancel()
-                tryAgain = false
-                task = URLSession.shared.dataTask(with: url) { data, response, error in guard
-                    let data = data, error == nil else {
-                        print (error ?? "Unknown error")
-                        self.tryAgain = true
-                        return
-                    }
-                    self.tryAgain = false
-                    let parser = XMLParser(data: data)
-                    parser.delegate = self
-                    parser.parse()
-                }
-                task.resume()
-            }
-            
         }
-        
         
         return podcastDataList
     }
