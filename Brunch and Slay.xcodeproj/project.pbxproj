@@ -54,7 +54,6 @@
 		4FF318BC2253CED20079B1D3 /* VideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */; };
 		4FF318BE2253CF920079B1D3 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BD2253CF920079B1D3 /* ShopViewController.swift */; };
 		4FF318C02253CFD10079B1D3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */; };
-		4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C12253D2E60079B1D3 /* SignInViewController.swift */; };
 		4FF318C42253D3D40079B1D3 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF318C32253D3D40079B1D3 /* CartViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,7 +131,6 @@
 		4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewController.swift; sourceTree = "<group>"; };
 		4FF318BD2253CF920079B1D3 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4FF318C12253D2E60079B1D3 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4FF318C32253D3D40079B1D3 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		AED82FF52290A09B00CDD1E9 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -214,7 +212,6 @@
 				4FF318BB2253CED20079B1D3 /* VideoListViewController.swift */,
 				4FF318BD2253CF920079B1D3 /* ShopViewController.swift */,
 				4FF318BF2253CFD10079B1D3 /* SettingsViewController.swift */,
-				4FF318C12253D2E60079B1D3 /* SignInViewController.swift */,
 				4FF318C32253D3D40079B1D3 /* CartViewController.swift */,
 				4FE6E4372256AFB00090EE41 /* TabController.swift */,
 				4FE6E4392256B14B0090EE41 /* NavigationController.swift */,
@@ -461,7 +458,6 @@
 				4FCF137322C3CA38008693CA /* WebPaymentViewController.swift in Sources */,
 				4FF318BE2253CF920079B1D3 /* ShopViewController.swift in Sources */,
 				4F9C3B96226912CF00EA3212 /* ClassCell.swift in Sources */,
-				4FF318C22253D2E60079B1D3 /* SignInViewController.swift in Sources */,
 				4FE6E4382256AFB00090EE41 /* TabController.swift in Sources */,
 				4F7C9D1E22A2D3FC0086F358 /* ShoppingCart.swift in Sources */,
 				4F21B0A022CFD0AE00931471 /* VideoPlayerViewController.swift in Sources */,
