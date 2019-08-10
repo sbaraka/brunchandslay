@@ -91,6 +91,8 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let authorizedUrlString = productUrlString + "?consumer_key=" + key + "&consumer_secret=" + pass
         
+        let authorizedTaxUrlString = taxUrlString + "?consumer_key=" + key + "&consumer_secret=" + pass
+        
         let credential = URLCredential(user: key, password: pass, persistence: .forSession)
         
         var headers: HTTPHeaders = [:]
@@ -131,7 +133,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
                 
-                Alamofire.request(taxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
+                Alamofire.request(authorizedTaxUrlString, headers: headers).authenticate(usingCredential: credential).responseJSON
                     {
                         response in debugPrint(response)
                         
@@ -140,7 +142,7 @@ class ShopViewController: UIViewController, UITableViewDelegate, UITableViewData
                             print("JSON: \(json)")
                             self.jsonValues = JSON(json)
                             
-                            let taxRate = (self.jsonValues?[0]["rate"].double ?? 0) / 100.0
+                            let taxRate: Double = Double(self.jsonValues![0]["rate"].stringValue)! / 100.0
                             
                             ShoppingCart.instance.taxRate = taxRate
                         }

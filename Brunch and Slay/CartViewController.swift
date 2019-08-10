@@ -202,7 +202,7 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("JSON: \(json)")
                     let jsonValues = JSON(json)
                     
-                    let taxRate = (jsonValues[0]["rate"].double ?? 0) / 100.0
+                    let taxRate: Double = Double(jsonValues[0]["rate"].stringValue)! / 100.0
                     
                     ShoppingCart.instance.taxRate = taxRate
                     
@@ -221,9 +221,6 @@ class CartViewController: UIViewController, UITableViewDelegate, UITableViewData
                         }
                     }
                     
-                   
-                        
-                        
                     DispatchQueue.main.async {
                         self.fullTotalLabel.text = "Total: $" + String(format:"%04.2f", self.fullTotal)
                         

@@ -56,7 +56,26 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         event.name = json["title"]["rendered"].stringValue
         
-        let contentStringArray = json["content"]["rendered"].stringValue.replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").split(separator: "\n")
+        let rawContentStringArray = json["content"]["rendered"].stringValue.replacingOccurrences(of: "<p>", with: "").replacingOccurrences(of: "</p>", with: "").split(separator: "\n")
+        
+        let encodedContent = json["content"]["rendered"].stringValue
+        
+        guard let data = encodedContent.data(using: .utf8) else
+        {
+             return event
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else
+        {
+            return event
+        }
+        
+        let contentStringArray = attributedString.string.split(separator: "\n")
         
         var locationArray = contentStringArray[0].components(separatedBy: ": ")
         
@@ -76,7 +95,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         event.description = descriptArray.joined(separator: ": ")
         
-        event.imageURLString = postImageXMLParser.getImageURLStringFromTag(tag: String(contentStringArray[3]))
+        event.imageURLString = postImageXMLParser.getImageURLStringFromTag(tag: String(rawContentStringArray[3]))
         return event
     }
     
@@ -123,7 +142,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         
                         if(isEvent)
                         {
-                            self.eventsTableData.append(self.buildEventFromJSON(json: jsonValues[i]))
+                            DispatchQueue.main.async {
+                                self.eventsTableData.append(self.buildEventFromJSON(json: jsonValues[i]))
+                            }
                         }
                     }
                 }
